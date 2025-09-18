@@ -1,8 +1,8 @@
 import openpyxl
-from app.core.config import Data_file
+from config import Data_file
 
 #file_path = "/home/niklas/Coding/klassenlisten-digitalisierung/src/app/data/Datenquelle.xlsx"
-df = data_file()
+df = Data_file()
 file_path = df.load_data_file_path()
 
 def read_excel_file():

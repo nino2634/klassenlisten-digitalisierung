@@ -1,2 +1,2 @@
-EXCEL_FILE=src/app/data/data.xlsx
+EXCEL_FILE=src/app/data/Datenquelle.xlsx
 Test=Test

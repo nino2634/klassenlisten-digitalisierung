@@ -17,6 +17,6 @@ class Data_file():
     def _create_settings_path(self) -> str:
         current_file = os.path.abspath(__file__)
         project_root = os.path.dirname(os.path.dirname(current_file))
-        config_file = os.path.join(project_root, "config", "settings.txt")
+        config_file = os.path.join(project_root, "app/config", "settings.txt")
 
         return config_file
