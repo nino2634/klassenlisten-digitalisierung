@@ -1,8 +1,11 @@
 import openpyxl
 
-file_path = "/home/niklas/Coding/klassenlisten-digitalisierung/src/app/data/Datenquelle.xlsx"
+from app.core.config import load_data_file_path
 
-def read_openpyxl():
+#file_path = "/home/niklas/Coding/klassenlisten-digitalisierung/src/app/data/Datenquelle.xlsx"
+file_path = load_data_file_path()
+
+def read_excel_file():
     wb = openpyxl.load_workbook(file_path)
     sheet = wb.active
 
@@ -14,4 +17,4 @@ def read_openpyxl():
 
             print(cell.value)
 
-read_openpyxl()
+read_excel_file()
