@@ -1,6 +1,6 @@
 class Lesson:
     # Constructor / initializer
-    def __init__(lv_id, subject, teacher, note, teacher_lessons, student_lessons, school_classes : list[str]):
+    def __init__(self,lv_id, subject, teacher, note, teacher_lessons, student_lessons, school_classes : list[str]):
         # Instance attributes
         self.lv_id = lv_id
         self.subject = subject
