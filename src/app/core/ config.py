@@ -1,17 +1,23 @@
 import os
 
 def load_data_file_path() -> str:
-    data_path = create_data_path()
-    with open(data_path) as f:
+    #Load the settings file path
+    settings_path = _create_settings_path()
+    with open(settings_path) as f:
         lines = f.readlines()
-    print(lines)
+    
+    #Load the Excel file path
+    for line in lines:
+        if line.startswith("EXCEL_FILE="):
+            excel_path = line.split('=', 1)[1].strip()
+        break
+    return excel_path
 
-def _create_data_path() -> str:
+
+def _create_settings_path() -> str:
     current_file = os.path.abspath(__file__)
     project_root = os.path.dirname(os.path.dirname(current_file))
     config_file = os.path.join(project_root, "config", "settings.txt")
 
-    print(config_file)
     return config_file
 
-load_data_file_path()

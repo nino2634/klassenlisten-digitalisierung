@@ -1,1 +1,2 @@
 EXCEL_FILE=src/app/data/data.xlsx
+Test=Test
