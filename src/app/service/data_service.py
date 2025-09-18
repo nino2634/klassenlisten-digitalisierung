@@ -1,5 +1,5 @@
 import openpyxl
-from app.core.config import data_file
+from app.core.config import Data_file
 
 #file_path = "/home/niklas/Coding/klassenlisten-digitalisierung/src/app/data/Datenquelle.xlsx"
 df = data_file()

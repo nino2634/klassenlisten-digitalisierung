@@ -1,5 +1,5 @@
 import os
-class data_file():
+class Data_file():
     def load_data_file_path(self) -> str:
         #Load the settings file path
         settings_path = self._create_settings_path()
