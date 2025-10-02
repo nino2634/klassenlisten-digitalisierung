@@ -1,5 +1,5 @@
 import openpyxl
-from config import Data_file
+from config_handler import Config_Handler
 
 ## ToDo
 ## please add "_" to private classes
@@ -7,7 +7,7 @@ from config import Data_file
 
 #gets and returns file path of excel file
 def initiate_file():
-    data_file = Data_file()
+    data_file = Config_Handler()
     file_path = data_file.load_data_file_path()
     return file_path
 
