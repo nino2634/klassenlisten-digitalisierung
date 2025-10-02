@@ -1,6 +1,6 @@
 import os
 
-class Data_file():
+class Config_Handler():
     #returns the path of the excel file
     def load_data_file_path(self) -> str:
         settings_path = self._create_settings_path()
