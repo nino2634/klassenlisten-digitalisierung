@@ -1,6 +1,10 @@
 import openpyxl
 from config import Data_file
 
+## ToDo
+## please add "_" to private classes
+## add descriptions for the other methods
+
 #gets and returns file path of excel file
 def initiate_file():
     data_file = Data_file()

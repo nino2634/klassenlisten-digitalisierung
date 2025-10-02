@@ -1,7 +1,8 @@
+## class to hold everything related to a single lesson
+
 class Lesson:
-    # Constructor / initializer
     def __init__(self,lv_id, subject, teacher, note, teacher_lessons, student_lessons, school_classes : list[str]):
-        # Instance attributes
+        # instance attributes
         self.lv_id = lv_id
         self.subject = subject
         self.teacher = teacher
@@ -10,7 +11,7 @@ class Lesson:
         self.student_lessons = student_lessons
         self.school_classes = school_classes
 
-    #Wie das dahstehen soll ist noch offen erstmal nur auflistung
+    #place holder method, call later in init to create notes automaticly upon creating the lesson
     def create_notes():
         for school_class in school_classes:
             note = note + "/" + school_class
