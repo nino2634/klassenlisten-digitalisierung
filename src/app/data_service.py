@@ -1,10 +1,12 @@
 import openpyxl
 from config_handler import Config_Handler
+import sys
 
 ## ToDo
 ## please add "_" to private classes
 ## add descriptions for the other methods
 
+classFilter = sys.argv(1)
 #gets and returns file path of excel file
 def initiate_file():
     data_file = Config_Handler()
@@ -30,7 +32,7 @@ def get_class_data(sheet, title_row):
     for header in headers:
         print(header)
 
-def read_excel_file(sheet, start_row):
+def read_excel_file(sheet, start_row): 
     row_count = sheet.max_row
     for row in range(start_row, row_count):
         cell = sheet.cell(row=row, column=1)
@@ -45,4 +47,4 @@ def run():
     sheet = workbook.active
     read_excel_file(sheet, start_row=1)
 
-run()
+
