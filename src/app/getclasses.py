@@ -14,7 +14,6 @@ def get_classes_from_file(sheet, start_row, class_filter):
     while end_row > row:
         cell = sheet.cell(row=row, column=1)
         if cell.value is not None:
-            print(cell.value)
             if(class_filter in cell.value):
                 classes.append(cell.value)
             if(row+spacer < end_row):
@@ -29,15 +28,12 @@ def get_classes_from_file(sheet, start_row, class_filter):
 def skip_lessons(sheet, start_row, end_row):
     spacer = 1 # empty rows between lessons and next class name
     for row in range(start_row, end_row):
-        print(row)
         cell = sheet.cell(row=row, column=1)
-        print(cell.value)
         if(cell.value is None and row != end_row):
             return (row + spacer)
     return end_row
 
 def run(class_filter = ""):
-    print(class_filter)
     filePath = init_file()
     workbook = openpyxl.load_workbook(filePath)
     sheet=workbook.active
