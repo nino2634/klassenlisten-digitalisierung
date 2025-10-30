@@ -1,9 +1,9 @@
 import json
 import os
 import sys
-from config_handler import create_path
+from .config_handler import create_path
 
-#Vvalidates users, returns simple or advanced if user is valid, 
+#validates users, returns simple or advanced if user is valid, 
 #otherwise returns error string
 
 def run(user,hash):
@@ -37,14 +37,6 @@ def run(user,hash):
         return
 
 
-#Only for testing
+#only for testing
 run("Fabian","passwort123hashed")
-
-
-#Called from JavaScript server
-if __name__ == "__main__":
-    if len(sys.argv) == 3:
-        run(sys.argv[1],sys.argv[2])
-    else:
-        print("Error: Wrong amount of arguments for authentication")
 
