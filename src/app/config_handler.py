@@ -21,5 +21,3 @@ def load_data_file_path() -> str:
         break
     print(excel_path)
     return excel_path
-
-load_data_file_path()
