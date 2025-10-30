@@ -1,18 +1,15 @@
 import getclasses
 import sys
+import json
 
 #Main method for doing shit
 def run(_filter):
     class_list = getclasses.run(_filter)
-    for class_i in class_list:
-        print(class_i)
+    print(json.dumps(class_list))
 
 #Only for testing
-result = subprocess.run(
-['python3', 'mein_script.py', arg],
-capture_output=True,
-text=True
-"""
+run("")
+
 
 #Called from flask server
 if __name__ == "__main__":
