@@ -1,18 +1,13 @@
 {
     "users": [
         {
-            "username": "Fabian",
-            "password": "passwort123hashed",
+            "username": "LUST",
+            "password": "test",
             "mode": "advanced"
         },
         {
-            "username": "teacher",
-            "password": "test123",
-            "mode": "simple"
-        },
-        {
-            "username": "lust",
-            "password": "test123",
+            "username": "Lehrer",
+            "password": "passwort123hashed",
             "mode": "simple"
         }
     ]

@@ -8,13 +8,13 @@ from .config_handler import create_path
 
 def run(user,hash):
     #open file path and verify data integrity
-    settings_path = create_path("app/data", "users.json")
+    user_path = create_path("app/data", "users.json")
     
-    if not os.path.exists(settings_path):
+    if not os.path.exists(user_path):
         print("Error: users.json not found.")
         return
     try:
-        with open(settings_path, "r") as f:
+        with open(user_path, "r") as f:
             data = json.load(f)
     except json.JSONDecodeError:
         print("Error: Failed to parse users.json.")
@@ -35,8 +35,4 @@ def run(user,hash):
     else:
         print("user is invalid: password wrong")
         return
-
-
-#only for testing
-run("Fabian","passwort123hashed")
 

@@ -1,6 +1,5 @@
 import os
 
-
 #puts together the absolute path of the a file file 
 def create_path(path, file_name) -> str:
     current_file = os.path.abspath(__file__)
@@ -12,8 +11,13 @@ def create_path(path, file_name) -> str:
 #returns the path of the excel file
 def load_data_file_path() -> str:
     settings_path = create_path("app/config", "settings.txt")
-    with open(settings_path) as f:
-        lines = f.readlines()
+    
+    if not os.path.exists(settings_path):
+        print("Error: users.json not found.")
+        return
+    else:
+        with open(settings_path) as f:
+            lines = f.readlines()
         
     for line in lines:
         if line.startswith("EXCEL_FILE="):
