@@ -1,5 +1,5 @@
 import openpyxl
-from config_handler import load_data_file_path
+from .config_handler import load_data_file_path
 
 # gets file path from config_handler
 # returns: file path as String

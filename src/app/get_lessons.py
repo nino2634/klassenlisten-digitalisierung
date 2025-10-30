@@ -1,6 +1,6 @@
 import json
 import openpyxl
-from config_handler import load_data_file_path
+from .config_handler import load_data_file_path
 
 def _initiate_file():
     filePath = load_data_file_path()

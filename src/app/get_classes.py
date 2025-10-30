@@ -1,4 +1,4 @@
-from config_handler import load_data_file_path
+from .config_handler import load_data_file_path
 import openpyxl
 
 # gets file path from config_handler
