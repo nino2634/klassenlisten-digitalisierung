@@ -46,7 +46,6 @@ def run(class_filter = ""):
     workbook = openpyxl.load_workbook(filePath)
     sheet=workbook.active
     classes = _get_classes_from_file(sheet=sheet, start_row=1, class_filter=class_filter)
-    #print(classes)
     return classes
 
 run()
