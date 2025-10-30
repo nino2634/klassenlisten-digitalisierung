@@ -25,12 +25,13 @@ def read_columns_in_row(sheet, row) -> list:
     return values
 
 # reads all data of one class from excel file
-def get_class_data(sheet, title_row):
+def get_class_data(sheet, title_row, headers):
     class_title = sheet.cell(row=title_row, column=1).value
     headers = read_columns_in_row(sheet=sheet, row=title_row + 3) # wir schauen hier nochmal in den großen Listen, was der Abstand ist, 3 Zielen im Testding
     print(class_title)
     for header in headers:
-        print(header)
+        #print(header)
+        headers.append(header)
 
 def read_excel_file(sheet, start_row): 
     row_count = sheet.max_row
@@ -38,13 +39,15 @@ def read_excel_file(sheet, start_row):
         cell = sheet.cell(row=row, column=1)
 
         if cell.value is not None:
-            get_class_data(sheet=sheet, title_row=row)
-            break;
+            headers = []
+            get_class_data(sheet=sheet, title_row=row, headers=headers)
+            return headers
 
 def run():
     file_path = initiate_file()
     workbook = openpyxl.load_workbook(file_path)
     sheet = workbook.active
-    read_excel_file(sheet, start_row=1)
+    headers = read_excel_file(sheet, start_row=1)
+    return headers
 
 
