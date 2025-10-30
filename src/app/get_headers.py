@@ -1,10 +1,10 @@
 import openpyxl
-import config_handler as ch
+from config_handler import load_data_file_path
 
 # gets file path from config_handler
 # returns: file path as String
 def _initiate_file():
-    file_path = ch.load_data_file_path()
+    file_path = load_data_file_path()
     return file_path
 
 # reads all consecutive not-empty cells in a row
