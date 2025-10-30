@@ -1,6 +1,9 @@
 import get_classes
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import get_headers
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 import sys
@@ -10,11 +13,14 @@ import json
 def run(_filter):
     class_list = get_classes.run(_filter)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     for class_i in class_list:
         print(class_i)
     class_json = json.dumps(class_list)
     return class_json
 =======
+=======
+>>>>>>> Stashed changes
     print(json.dumps(class_list))
 
 #Only for testing
