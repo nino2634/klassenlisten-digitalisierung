@@ -1,20 +1,18 @@
 import openpyxl
 from config_handler import Config_Handler
-import sys
-
 ## ToDo
 ## please add "_" to private classes
 ## add descriptions for the other methods
 
-classFilter = sys.argv(1)
-#gets and returns file path of excel file
-def initiate_file():
+# gets file path from config_handler
+# returns: String
+def _initiate_file():
     data_file = Config_Handler()
     file_path = data_file.load_data_file_path()
     return file_path
 
 #reads all consecutive not-empty cells in a row
-def read_columns_in_row(sheet, row) -> list:
+def _read_columns_in_row(sheet, row) -> list:
     values = []
     for column in range(1, 100):
         cell = sheet.cell(row=row, column=column)
@@ -24,30 +22,33 @@ def read_columns_in_row(sheet, row) -> list:
             break
     return values
 
-# reads all data of one class from excel file
-def get_class_data(sheet, title_row, headers):
-    class_title = sheet.cell(row=title_row, column=1).value
-    headers = read_columns_in_row(sheet=sheet, row=title_row + 3) # wir schauen hier nochmal in den großen Listen, was der Abstand ist, 3 Zielen im Testding
-    print(class_title)
+# reads all headers from excel file
+# returns: list 
+def _get_headers(sheet, title_row):
+    headers = _read_columns_in_row(sheet=sheet, row=title_row + 3) # wir schauen hier nochmal in den großen Listen, was der Abstand ist, 3 Zielen im Testding
+    list = []
     for header in headers:
         #print(header)
-        headers.append(header)
+        list.append(header)
+    return list
 
-def read_excel_file(sheet, start_row): 
+# gets first row with value out of the excel file
+# returns: list
+def _read_excel_file(sheet, start_row): 
     row_count = sheet.max_row
     for row in range(start_row, row_count):
         cell = sheet.cell(row=row, column=1)
-
         if cell.value is not None:
-            headers = []
-            get_class_data(sheet=sheet, title_row=row, headers=headers)
+            headers = _get_headers(sheet=sheet, title_row=row)
             return headers
 
+# executes functions
+# returns: list
 def run():
-    file_path = initiate_file()
+    file_path = _initiate_file()
     workbook = openpyxl.load_workbook(file_path)
     sheet = workbook.active
-    headers = read_excel_file(sheet, start_row=1)
+    headers = _read_excel_file(sheet, start_row=1)
+    for header in headers:
+        print(header)
     return headers
-
-
