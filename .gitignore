@@ -1,4 +1,3 @@
-/.vs
 .gitignore
 .venv
-./app/data/users.json
+src/app/data/users.json
