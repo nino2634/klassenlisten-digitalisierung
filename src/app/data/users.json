@@ -2,12 +2,12 @@
     "users": [
         {
             "username": "LUST",
-            "password": "test",
+            "password": "0d3253c203057b5728f73d7b28783ef55211511f4d190620204bccb8f7b59671",
             "mode": "advanced"
         },
         {
             "username": "Lehrer",
-            "password": "passwort123hashed",
+            "password": "aacd0ce351fe63eb9b4222b1d814a77f8dabbe302ee836894db6e0b069e80b86",
             "mode": "simple"
         }
     ]

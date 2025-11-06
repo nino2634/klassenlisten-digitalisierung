@@ -1,13 +1,18 @@
 import json
 import os
-from ..config_handler import create_path
+import hashlib
 
+def create_path(path, file_name) -> str:
+    current_file = os.path.abspath(__file__)
+    project_root = os.path.dirname(os.path.dirname(current_file))
+    file = os.path.join(project_root, path, file_name)
+    return file
 
 def change_password():
     # Check if file exists
-    user_path = create_path("app/data", "users.json")
+    user_path = create_path("data", "users.json")
     if not os.path.exists(user_path):
-        print("User file not found.")
+        print("User file not found./" + user_path)
         return
 
     # Load users
@@ -32,10 +37,11 @@ def change_password():
     for user in users:
         if user["username"] == choice:
             new_password = input(f"Enter new password for {choice}: ").strip()
-            user["password"] = new_password  # Replace with hash if needed
+            new_password = hashlib.sha256(new_password.encode('utf-8')).hexdigest()
+            user["password"] = new_password
             user_found = True
             break
-
+    
     if not user_found:
         print("User not found.")
         return
