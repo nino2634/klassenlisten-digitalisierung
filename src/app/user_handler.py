@@ -6,7 +6,7 @@ from .config_handler import create_path
 #validates users, returns simple or advanced if user is valid, 
 #otherwise returns error string
 
-def run(user,hash):
+def verify_user(user,hash):
     #open file path and verify data integrity
     user_path = create_path("app/data", "users.json")
     
