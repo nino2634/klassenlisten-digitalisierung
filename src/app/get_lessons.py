@@ -30,25 +30,27 @@ def _get_lessons_by_class(sheet, class_title, headers):
     end_row = _get_next_empty_row(sheet, start_row)
 
     start_col = 1
-    end_col = 13
+    end_col = 13    
     lesson_list = []
+    list = []
     for row in range(start_row, end_row):
         lesson = {}
         for col in range(start_col, end_col):
             cell = sheet.cell(row, col)
             header = headers[col-1]
-            lesson[header] = cell.value
-        lesson_list.append(lesson)
+            lesson[header] = f"{cell.value}"
+        list.append(lesson)
+    lesson_list.append({"class_name": f"{class_title}", "lessons": list})
     return lesson_list
 
 def run(class_title):
     filePath = _initiate_file()
     workbook = openpyxl.load_workbook(filePath)
     sheet = workbook.active
-    headers = get_headers()
+    headers = json.loads(get_headers())
     lesson_list = _get_lessons_by_class(sheet, class_title, headers)  
     lesson_json = json.dumps(lesson_list)  
-    #print(lesson_json)
+    #print(lesson_list[0])
     return lesson_json
 
 run("02TSBR")
