@@ -19,22 +19,23 @@ def verify_user(user,hash):
     except json.JSONDecodeError:
         print("Error: Failed to parse users.json.")
         return
-
+    
     target_user = ""
     #actual user verification
     for user_server in data["users"]:
         if user_server["username"] == user: 
             target_user = user_server
+        
+    try:
+        if target_user["password"] == hash:
+            print(target_user["mode"])
+            return
+        else:
+            print("user is invalid: password wrong")
+            return
 
-    if target_user["username"] == "":
+    except:
         print("user is invalid: no user found" + target_user)
-        return
-
-    if target_user["password"] == hash:
-        print(target_user["mode"])
-        return
-    else:
-        print("user is invalid: password wrong")
         return
 
 #Debug
