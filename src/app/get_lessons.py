@@ -26,7 +26,11 @@ def _get_lessons_by_class(sheet, class_title):
     title_row = _find_class_title_row(sheet, class_title)
     spacer:int = 3 # noch anpassen, wenn Liste von Landsiedel bekommen
     start_row = title_row + spacer
-    end_row = _get_
+    end_row = _get_next_empty_row(sheet=sheet, start_row=start_row)
+
+    lesson_list = []
+    for row in range():
+        print(x)
 
 def run(class_title):
     filePath = _initiate_file()
