@@ -1,3 +1,6 @@
 /.vs
 .gitignore
 .venv
+
+# Ignore user data file
+src/app/data/users.json
