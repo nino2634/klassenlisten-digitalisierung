@@ -25,5 +25,5 @@ def load_data_file_path() -> str:
         if line.startswith("EXCEL_FILE="):
             excel_path = line.split('=', 1)[1].strip()
         break
-    print(excel_path)
+    #print(excel_path)
     return excel_path

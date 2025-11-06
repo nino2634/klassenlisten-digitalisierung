@@ -51,7 +51,7 @@ def run():
     sheet = workbook.active
     headers = _read_excel_file(sheet, start_row=1)
     headers_json = json.dumps(headers)
-    print(headers)
+    #print(headers)
     return headers_json
 
 run()

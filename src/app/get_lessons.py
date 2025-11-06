@@ -50,7 +50,7 @@ def run(class_title):
     headers = json.loads(get_headers())
     lesson_list = _get_lessons_by_class(sheet, class_title, headers)  
     lesson_json = json.dumps(lesson_list)  
-    #print(lesson_list[0]['class_name'])
+    print(lesson_list[0]['class_name'])
     return lesson_json
 
 run("02TSBR")
