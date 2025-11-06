@@ -2,23 +2,16 @@ from .get_classes import run as get_classes
 import sys
 import json
 
-#Main method for doing shit
+#This can only be returned as a string, not as a json
+#means it has to be turned into a json in the flask server
+#using jsonify!! will be returned in list [,] format with "[]" though!
+
 def run(_filter):
     class_list = get_classes(_filter)
     for class_i in class_list:
         print(class_i)
     class_json = json.dumps(class_list)
-    return class_json
-    print(json.dumps(class_list))
-
+    print(class_json)
+ 
 #Only for testing
 run("")
-
-
-#Called from JavaScript server
-if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        run(sys.argv[1])
-    else:
-        print("No argument provided")
-
