@@ -1,5 +1,6 @@
 import json
 import openpyxl
+from .get_headers import run as get_headers
 from .config_handler import load_data_file_path
 
 def _initiate_file():
@@ -22,21 +23,32 @@ def _get_next_empty_row(sheet, start_row):
             return row
     return end_row + 1
 
-def _get_lessons_by_class(sheet, class_title):
+def _get_lessons_by_class(sheet, class_title, headers):
     title_row = _find_class_title_row(sheet, class_title)
-    spacer:int = 3 # noch anpassen, wenn Liste von Landsiedel bekommen
+    spacer:int = 4 # noch anpassen, wenn Liste von Landsiedel bekommen
     start_row = title_row + spacer
-    end_row = _get_next_empty_row(sheet=sheet, start_row=start_row)
+    end_row = _get_next_empty_row(sheet, start_row)
 
+    start_col = 1
+    end_col = 13
     lesson_list = []
-    for row in range():
-        print(x)
+    for row in range(start_row, end_row):
+        lesson = {}
+        for col in range(start_col, end_col):
+            cell = sheet.cell(row, col)
+            header = headers[col-1]
+            lesson[header] = cell.value
+        lesson_list.append(lesson)
+    return lesson_list
 
 def run(class_title):
     filePath = _initiate_file()
     workbook = openpyxl.load_workbook(filePath)
     sheet = workbook.active
-    lesson_list = _get_lessons_by_class(sheet, class_title)    
-
+    headers = get_headers()
+    lesson_list = _get_lessons_by_class(sheet, class_title, headers)  
+    lesson_json = json.dumps(lesson_list)  
+    #print(lesson_json)
+    return lesson_json
 
 run("02TSBR")
