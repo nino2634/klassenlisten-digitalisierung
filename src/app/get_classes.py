@@ -1,5 +1,6 @@
 from .config_handler import load_data_file_path
 import openpyxl
+import json
 
 # gets file path from config_handler
 # returns path of file as String
@@ -46,6 +47,7 @@ def run(class_filter = ""):
     workbook = openpyxl.load_workbook(filePath)
     sheet=workbook.active
     classes = _get_classes_from_file(sheet=sheet, start_row=1, class_filter=class_filter)
-    return classes
+    classes_json = json.dumps(classes)
+    return classes_json
 
 run()

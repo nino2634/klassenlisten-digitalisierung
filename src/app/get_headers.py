@@ -1,5 +1,6 @@
 import openpyxl
 from .config_handler import load_data_file_path
+import json
 
 # gets file path from config_handler
 # returns: file path as String
@@ -46,6 +47,5 @@ def run():
     workbook = openpyxl.load_workbook(file_path)
     sheet = workbook.active
     headers = _read_excel_file(sheet, start_row=1)
-    for header in headers:
-        print(header)
-    return headers
+    headers_json = json.dumps(headers)
+    return headers_json
