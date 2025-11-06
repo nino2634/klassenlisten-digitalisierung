@@ -1,5 +1,5 @@
 /.vs
-.gitignore
 .venv
-
+TO-DO
 # Ignore user data file
+.gitignore

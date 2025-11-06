@@ -14,8 +14,11 @@ def _read_columns_in_row(sheet, row) -> list:
     values = []
     for column in range(1, 100):
         cell = sheet.cell(row=row, column=column)
+        upperCell = ""
         if(cell.value is not None):
-            values.append(cell.value)
+            if cell.value == "WoStd":
+                upperCell = "_"+sheet.cell(row=row-1, column=column).value
+            values.append(cell.value+upperCell)
         else:
             break
     return values
@@ -48,4 +51,7 @@ def run():
     sheet = workbook.active
     headers = _read_excel_file(sheet, start_row=1)
     headers_json = json.dumps(headers)
+    print(headers)
     return headers_json
+
+run()
