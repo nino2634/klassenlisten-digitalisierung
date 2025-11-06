@@ -37,4 +37,4 @@ def verify_user(user,hash):
         return
 
 #Debug
-run("LUST","0d3253c203057b5728f73d7b28783ef55211511f4d190620204bccb8f7b59671")
+#run("LUST","0d3253c203057b5728f73d7b28783ef55211511f4d190620204bccb8f7b59671")
