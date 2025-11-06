@@ -23,34 +23,41 @@ def _get_next_empty_row(sheet, start_row):
             return row
     return end_row + 1
 
-def _get_lessons_by_class(sheet, class_title, headers):
+def _get_year_half_col(headers):
+    for i in range(0, headers.length):
+        if "HJ" in headers[i]:
+            return i
+
+def _get_lessons_by_class(sheet, class_title, year_half, headers):
     title_row = _find_class_title_row(sheet, class_title)
     spacer:int = 4 # noch anpassen, wenn Liste von Landsiedel bekommen
     start_row = title_row + spacer
     end_row = _get_next_empty_row(sheet, start_row)
 
+    year_half_col = _get_year_half_col(headers)
     start_col = 1
     end_col = 13    
     lesson_list = []
     list = []
     for row in range(start_row, end_row):
-        lesson = {}
-        for col in range(start_col, end_col):
-            cell = sheet.cell(row, col)
-            header = headers[col-1]
-            lesson[header] = f"{cell.value}"
-        list.append(lesson)
+        if year_half in sheet.cell(row=row, column=year_half_col).value :
+            lesson = {}
+            for col in range(start_col, end_col):
+                cell = sheet.cell(row, col)
+                header = headers[col-1]
+                lesson[header] = f"{cell.value}"
+            list.append(lesson)
     lesson_list.append({"class_name": f"{class_title}", "lessons": list})
     return lesson_list
 
-def run(class_title):
+def run(class_title, year_half):
     filePath = _initiate_file()
     workbook = openpyxl.load_workbook(filePath)
     sheet = workbook.active
     headers = json.loads(get_headers())
-    lesson_list = _get_lessons_by_class(sheet, class_title, headers)  
+    lesson_list = _get_lessons_by_class(sheet, class_title, year_half, headers)  
     lesson_json = json.dumps(lesson_list)  
-    print(lesson_list[0]['class_name'])
+    print(lesson_list[0]['lessons'])
     return lesson_json
 
-run("02TSBR")
+run("02TSBR", "1. HJ")
