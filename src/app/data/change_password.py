@@ -1,6 +1,7 @@
 import json
 import os
 import hashlib
+import maskpass
 
 def create_path(path, file_name) -> str:
     current_file = os.path.abspath(__file__)
@@ -36,7 +37,7 @@ def change_password():
     user_found = False
     for user in users:
         if user["username"] == choice:
-            new_password = input(f"Enter new password for {choice}: ").strip()
+            new_password = maskpass.advpass(f"Enter new password for {choice}: ").strip()
             new_password = hashlib.sha256(new_password.encode('utf-8')).hexdigest()
             user["password"] = new_password
             user_found = True
