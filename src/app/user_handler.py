@@ -1,6 +1,6 @@
 import json
 import os
-import sys
+import sys 
 from .config_handler import create_path
 
 #validates users, returns simple or advanced if user is valid, 
@@ -37,4 +37,4 @@ def verify_user(user,hash):
         return
 
 #Debug
-#run("LUST","0d3253c203057b5728f73d7b28783ef55211511f4d190620204bccb8f7b59671")
+verify_user("LUST","0d3253c203057b5728f73d7b28783ef55211511f4d190620204bccb8f7b59671")
