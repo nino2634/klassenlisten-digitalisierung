@@ -20,6 +20,7 @@ def verify_user(user,hash):
         print("Error: Failed to parse users.json.")
         return
 
+    target_user = ""
     #actual user verification
     for user_server in data["users"]:
         if user_server["username"] == user: 
