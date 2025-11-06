@@ -12,13 +12,13 @@ def verify_user(user,hash):
     
     if not os.path.exists(user_path):
         print("Error: users.json not found.")
-        return
+        return "Error: users.json not found."
     try:
         with open(user_path, "r") as f:
             data = json.load(f)
     except json.JSONDecodeError:
         print("Error: Failed to parse users.json.")
-        return
+        return "Error: Failed to parse users.json."
     
     target_user = ""
     #actual user verification
@@ -29,14 +29,14 @@ def verify_user(user,hash):
     try:
         if target_user["password"] == hash:
             print(target_user["mode"])
-            return
+            return target_user["mode"]
         else:
             print("user is invalid: password wrong")
-            return
+            return "user is invalid: password wrong"
 
     except:
         print("user is invalid: no user found" + target_user)
-        return
+        return "user is invalid: no user found" + target_user
 
 #Debug
 verify_user("LUST","0d3253c203057b5728f73d7b28783ef55211511f4d190620204bccb8f7b59671")
