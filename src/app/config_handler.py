@@ -15,7 +15,7 @@ def load_data_file_path() -> str:
     settings_path = create_path("app/config", "settings.txt")
     #WE STOPPED HERE!!!!!
     if not os.path.exists(settings_path):
-        print("Error: users.json not found.")
+        print("Error: settings.txt not found.")
         return
     else:
         with open(settings_path) as f:
