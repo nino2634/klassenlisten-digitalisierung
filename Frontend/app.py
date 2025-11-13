@@ -4,7 +4,7 @@ from flask_login import LoginManager,logout_user,login_required
 
 from src.app.user_handler import setup_user_loader
 from src.app.get_classes import run as get_classes
-from src.app.user_handler import verify_user
+from src.app.user_handler import verify_user, load_users_into_memory
 from src.app.get_lessons import run as get_lessons
 
 import json

@@ -17,6 +17,19 @@ class User(UserMixin):
         self.password = password
         self.mode = mode
 
+
+def load_users_into_memory():
+    users_by_id.clear()
+    data = _load_user_json()
+
+    for user_server in data["users"]:
+        user = User(user_server["username"],user_server["password"],user_server["mode"])
+        users_by_id[user.id] = user
+    
+    if len(users_by_id) == 0:
+        print("No user data found, check json file")
+
+
 # ---------------------------
 # User-Verification
 # ---------------------------
@@ -31,10 +44,6 @@ def verify_user(user_i, password_i):
     hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
     target_user = ""
 
-    if user.username == user_i: 
-        print("No user found: ", user_i)
-        return ("Authentication Failed")
- 
     if user.password == hashed_password:
         login_user(user)
         print("user:", user.username, " has a session in flask login")
@@ -42,8 +51,6 @@ def verify_user(user_i, password_i):
     else:
         print("user is invalid: password wrong")
         return "Authentication failed"
-    
-
 def setup_user_loader(login_manager):
     load_users_into_memory()
     @login_manager.user_loader
@@ -64,13 +71,6 @@ def _load_user_json():
         print("Error: Failed to parse users.json.")
         return "Error: Failed to parse users.json."
 
-def load_users_into_memory():
-    users_by_id.clear()
-    data = _load_user_json()
+load_users_into_memory()
 
-    for user_server in data["users"]:
-        user = User(user_server["username"],user_server["password"],user_server["mode"])
-        users_by_id[user.id] = user
-    
-    if len(users_by_id) == 0:
-        print("No user data found, check json file")
+verify_user("LUSD","minecraft")
