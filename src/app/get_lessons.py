@@ -24,9 +24,9 @@ def _get_next_empty_row(sheet, start_row):
     return end_row + 1
 
 def _get_year_half_col(headers):
-    for i in range(0, headers.length):
-        if "HJ" in headers[i]:
-            return i
+    for i in range(0, len(headers)):
+        if "Periodizität" in headers[i]:
+            return i + 1
 
 def _get_lessons_by_class(sheet, class_title, year_half, headers):
     title_row = _find_class_title_row(sheet, class_title)
@@ -40,12 +40,12 @@ def _get_lessons_by_class(sheet, class_title, year_half, headers):
     lesson_list = []
     list = []
     for row in range(start_row, end_row):
-        if year_half in sheet.cell(row=row, column=year_half_col).value :
-            lesson = {}
-            for col in range(start_col, end_col):
-                cell = sheet.cell(row, col)
-                header = headers[col-1]
-                lesson[header] = f"{cell.value}"
+        lesson = {}
+        for col in range(start_col, end_col):
+            cell = sheet.cell(row, col)
+            header = headers[col-1]
+            lesson[header] = f"{cell.value}"
+        if year_half in lesson["Periodizität"]:
             list.append(lesson)
     lesson_list.append({"class_name": f"{class_title}", "lessons": list})
     return lesson_list
@@ -60,4 +60,4 @@ def run(class_title, year_half):
     print(lesson_list[0]['lessons'])
     return lesson_json
 
-run("02TSBR", "1. HJ")
+run("02TSBR", "1.Hj")
