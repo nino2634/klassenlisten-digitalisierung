@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             console.log(data);
 
-            if (response.ok) {
+            if (response.ok && data.redirect_url) {
                 alert('✅ Erfolgreich eingeloggt!');
+                window.location.href = data.redirect_url;
             } else {
                 alert('❌ Login fehlgeschlagen: ' + (data.message || 'Unbekannter Fehler'));
             }

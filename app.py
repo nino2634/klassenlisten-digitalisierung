@@ -70,8 +70,7 @@ def get_authentification():
     mode = verify_user(user, password)
 
     if mode == "simple":
-        #return jsonify("/table_teacher")#Put URL here
-         return redirect(url_for('filter_teacher'))
+        return jsonify({"redirect_url": "/filter_teacher"})
     if mode == "advanced":
         return jsonify("auth")
     else:
