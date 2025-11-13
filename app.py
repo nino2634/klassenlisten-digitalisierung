@@ -50,13 +50,15 @@ def get_school_classes():
     return jsonify(data)
 
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
-@app.route("/api/verify_user",methods=["GET"])
+@app.route("/api/verify_user",methods=["POST"])
 def get_authentification():
-    user = request.args.get("user")
+    data = request.get_json()
+    user = data.get("user")
+    password = data.get("password")
+
     if not user:
        return jsonify("Error: Missing argument in authentification Code:Username")
 
-    password = request.args.get("password")
     if not password:
        return jsonify("Error: Missing argument in authentification Code:Password")
 
