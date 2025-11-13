@@ -74,7 +74,7 @@ def get_authentification():
     if mode == "advanced":
         return jsonify({"redirect_url": "/filter_teacher"})
     else:
-        return jsonify("failed")
+        return jsonify("status": "failed")
 
 @app.route("/logout")
 @login_required  # optional, nur für eingeloggte Benutzer
