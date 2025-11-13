@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(data);
 
             if (response.ok && data.redirect_url) {
+                console.log(data)
                 alert('✅ Erfolgreich eingeloggt!');
                 window.location.href = data.redirect_url;
             } else {
