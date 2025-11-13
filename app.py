@@ -27,10 +27,15 @@ setup_user_loader(login_manager)
 
 @app.route('/')
 def home():
-    print("Aktuelles Verzeichnis:", os.getcwd())
     return render_template('index.html')
 
+@app.route('/filter_teacher')
+@login_required
+def filter_teacher():
+    return render_template('filter_teacher.html')
+
 @app.route('/table_teacher')
+@login_required
 def table_teacher():
     json_data = get_lessons("02TSBR", "1.Hj")
     class_data = json.loads(json_data)
@@ -50,24 +55,26 @@ def get_school_classes():
     return jsonify(data)
 
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
-@app.route("/api/verify_user",methods=["GET"])
+@app.route("/api/verify_user",methods=["POST"])
 def get_authentification():
-    user = request.args.get("user")
+    data = request.get_json()
+    user = data.get("user")
+    password = data.get("password")
+
     if not user:
        return jsonify("Error: Missing argument in authentification Code:Username")
 
-    password = request.args.get("password")
     if not password:
        return jsonify("Error: Missing argument in authentification Code:Password")
 
     mode = verify_user(user, password)
-    print(mode)
+
     if mode == "simple":
-        return jsonify("auth")#Put URL here
+        return jsonify({"redirect_url": "/filter_teacher"})
     if mode == "advanced":
-        return jsonify("auth")
+        return jsonify({"redirect_url": "/filter_teacher"})
     else:
-        return jsonify("failed")
+        return jsonify({"status": "failed"})
 
 @app.route("/logout")
 @login_required  # optional, nur für eingeloggte Benutzer
