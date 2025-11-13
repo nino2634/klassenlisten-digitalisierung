@@ -51,6 +51,8 @@ def verify_user(user_i, password_i):
     else:
         print("user is invalid: password wrong")
         return "Authentication failed"
+
+
 def setup_user_loader(login_manager):
     load_users_into_memory()
     @login_manager.user_loader
@@ -70,7 +72,3 @@ def _load_user_json():
     except json.JSONDecodeError:
         print("Error: Failed to parse users.json.")
         return "Error: Failed to parse users.json."
-
-load_users_into_memory()
-
-verify_user("LUSD","minecraft")
