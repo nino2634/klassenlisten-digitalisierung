@@ -30,14 +30,13 @@ def change_password():
     for i, user in enumerate(users, start=1):
         print(f"{i}. {user['username']}")
 
-    # Ask which user
     choice = input("Enter the username whose password you want to change: ").strip()
-
-    # Find the user
     user_found = False
+
     for user in users:
         if user["username"] == choice:
             new_password = maskpass.advpass(f"Enter new password for {choice}: ").strip()
+            new_password = "#big" + new_password + "pp" #
             new_password = hashlib.sha256(new_password.encode('utf-8')).hexdigest()
             user["password"] = new_password
             user_found = True
