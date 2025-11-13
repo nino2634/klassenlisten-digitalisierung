@@ -12,6 +12,7 @@ try {
     +'&password='+ encodeURIComponent(password));
     const data = await response.text();
     console.log(data);
+    console.log('Erfolgreich eingeloggt')
 } catch (error) {
     console.error("Fehler beim Laden:", error);
 }

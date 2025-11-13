@@ -40,19 +40,6 @@
       </div>
     </div>
   </main>
-
-  <script>
-    function mockLogin(e){
-      if(e && e.preventDefault) e.preventDefault();
-      const u = document.getElementById('user').value.trim();
-      const p = document.getElementById('pass').value;
-      const msg = document.getElementById('msg');
-      msg.textContent = '';
-      if(!u || !p){ msg.textContent = 'Benutzername und Passwort erforderlich.'; return; }
-      msg.textContent = 'Erfolgreich eingeloggt (Demo).';
-      // TODO: echte Authentifizierung / Weiterleitung
-    }
-  </script>
 </body>
 
 
