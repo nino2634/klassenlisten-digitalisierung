@@ -20,10 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok && data.redirect_url) {
                 console.log(data)
-                alert('✅ Erfolgreich eingeloggt!');
                 window.location.href = data.redirect_url;
             } else {
-                alert('❌ Login fehlgeschlagen: ' + (data.message || 'Unbekannter Fehler'));
+                showAlert("❌ Login fehlgeschlagen: " + data.message + " - Unbekannter Fehler");
             }
 
         } catch (error) {
