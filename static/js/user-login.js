@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('login-form');
+    const form = document.getElementById('loginForm');
     form.addEventListener('submit', async (event) => {
         event.preventDefault(); // Verhindert das normale Neuladen der Seite
 

@@ -27,10 +27,15 @@ setup_user_loader(login_manager)
 
 @app.route('/')
 def home():
-    print("Aktuelles Verzeichnis:", os.getcwd())
     return render_template('index.html')
 
+@app.route('/filter_teacher')
+@login_required
+def filter_teacher():
+    return render_template('filter_teacher.html')
+
 @app.route('/table_teacher')
+@login_required
 def table_teacher():
     json_data = get_lessons("02TSBR", "1.Hj")
     class_data = json.loads(json_data)
@@ -65,7 +70,8 @@ def get_authentification():
     mode = verify_user(user, password)
 
     if mode == "simple":
-        return jsonify("auth")#Put URL here
+        #return jsonify("/table_teacher")#Put URL here
+         return redirect(url_for('filter_teacher'))
     if mode == "advanced":
         return jsonify("auth")
     else:
