@@ -63,7 +63,7 @@ def get_authentification():
        return jsonify("Error: Missing argument in authentification Code:Password")
 
     mode = verify_user(user, password)
-    print(mode)
+
     if mode == "simple":
         return jsonify("auth")#Put URL here
     if mode == "advanced":
