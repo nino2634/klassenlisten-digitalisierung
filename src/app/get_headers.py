@@ -12,12 +12,12 @@ def _initiate_file():
 # returns: column names as list
 def _read_columns_in_row(sheet, row) -> list:
     values = []
-    for column in range(1, 100):
+    for column in range(sheet.min_column, sheet.max_column):
         cell = sheet.cell(row=row, column=column)
         upperCell = ""
         if(cell.value is not None):
             if cell.value == "WoStd":
-                upperCell = "_"+sheet.cell(row=row-1, column=column).value
+                upperCell = "_"+sheet.cell(row=row-1, column=column).value # add _SuS or _KuK to WoStd
             values.append(cell.value+upperCell)
         else:
             break
@@ -38,7 +38,7 @@ def _get_headers(sheet, title_row):
 def _read_excel_file(sheet, start_row): 
     row_count = sheet.max_row
     for row in range(start_row, row_count):
-        cell = sheet.cell(row=row, column=1)
+        cell = sheet.cell(row=row, column=sheet.min_column)
         if cell.value is not None:
             headers = _get_headers(sheet=sheet, title_row=row)
             return headers
