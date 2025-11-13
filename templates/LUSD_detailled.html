@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LUSD-Ansicht Klassen detailliert</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../static/style/main.css">
+</head>
+<body class="bg-light">
+  <main class="container py-4">
+    <h4 class="mb-4 text-center">LUSD-Ansicht Klassen detailliert</h4>
+
+    <div class="card p-4 shadow-sm">
+      <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <div class="d-flex gap-2 flex-wrap">
+          <button id="cancelBtn" class="btn btn-orange">Abbrechen</button>
+          <button id="doneBtn" class="btn btn-orange px-4 py-2">Fertig</button>
+        </div>
+        <button id="exportBtn" class="btn btn-orange px-4 py-2">Export</button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Nr.</th>
+              <th>Fach/Lernfeld</th>
+              <th>Stunden/ Woche<br>Schüler</th>
+              <th>Lehrer</th>
+              <th>Stunden/ Woche<br>Lehrer</th>
+              <th>Form</th>
+              <th>Bemerkung</th>
+            </tr>
+          </thead>
+          <tbody id="detailBody">
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="sum-row fw-bold">
+              <td></td><td></td>
+              <td id="sumSchueler">Summe</td>
+              <td></td>
+              <td id="sumLehrer">Summe</td>
+              <td></td><td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center py-3 text-muted small">
+   Footer filler Text
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Export JS überprüfen und anpassen
+  <script src="js/script.js"></script>
+  --> 
+</body>
+</html>
