@@ -16,6 +16,9 @@ import hashlib
 app = Flask(__name__)
 CORS(app)
 
+# secret key for authentication
+app.secret_key = "supergeheim-und-einzigartig"  
+
 #For Flask Login
 login_manager = LoginManager()
 login_manager.init_app(app)
