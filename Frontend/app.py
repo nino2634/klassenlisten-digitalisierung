@@ -1,8 +1,11 @@
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS
-from scripts.klassenlisten_digitalisierung.src.app.get_classes import run as get_classes
-from scripts.klassenlisten_digitalisierung.src.app.user_handler import verify_user
-from scripts.klassenlisten_digitalisierung.src.app.get_lessons import run as get_lessons
+from flask_login import LoginManager,logout_user,login_required
+
+from src.app.user_handler import setup_user_loader
+from src.app.get_classes import run as get_classes
+from src.app.user_handler import verify_user
+from src.app.get_lessons import run as get_lessons
 
 import json
 import os
@@ -13,8 +16,13 @@ import hashlib
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/')
+#For Flask Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+setup_user_loader(login_manager)
 
+@app.route('/')
 def home():
     print("Aktuelles Verzeichnis:", os.getcwd())
     return render_template('index.html')
@@ -29,6 +37,7 @@ def table_teacher():
 
 #Methode gibt eine liste der angefragten klassen zurück
 @app.route("/api/classes",methods=["GET"])
+@login_required  
 def get_school_classes():
     filter = request.args.get("school_classes")
     if not filter:
@@ -48,10 +57,20 @@ def get_authentification():
     if not password:
        return jsonify("Error: Missing argument in authentification Code:Password")
 
-    auth = verify_user(user, password)
-    print(f"auth:{auth}")
+    mode = verify_user(user, password)
 
-    return jsonify(auth)
+    if mode == "simple":
+        return jsonify("auth")#Put URL here
+    if mode == "advanced":
+        return jsonify("auth")
+    else:
+        return jsonify("failed")
+
+@app.route("/logout")
+@login_required  # optional, nur für eingeloggte Benutzer
+def logout():
+    logout_user()
+    return jsonify("logged out")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

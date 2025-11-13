@@ -3,6 +3,8 @@ import os
 import hashlib
 import maskpass
 
+from src.app import user_handler
+from src.app.user_handler import load_users_into_memory
 def create_path(path, file_name) -> str:
     current_file = os.path.abspath(__file__)
     project_root = os.path.dirname(os.path.dirname(current_file))
@@ -50,6 +52,7 @@ def change_password():
     with open(user_path, "w") as f:
         json.dump(data, f, indent=4)
 
+    user_handler.load_users_into_memory()
     print(f"Password for {choice} has been updated.")
 
 # Example usage

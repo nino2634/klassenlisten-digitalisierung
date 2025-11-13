@@ -1,13 +1,56 @@
+from itertools import count
 import json
 import os
 import sys 
+import hashlib
+
 from .config_handler import create_path
+#from flask_login import UserMixin, LoginManager, login_user, logout_user, current_user
+from flask_login import UserMixin,login_user, LoginManager
 
-#validates users, returns simple or advanced if user is valid, 
-#otherwise returns error string
+users_by_id = {}
 
-def verify_user(user,hash):
-    #open file path and verify data integrity
+class User(UserMixin):
+    def __init__(self, username, password, mode):
+        self.id = username
+        self.username = username
+        self.password = password
+        self.mode = mode
+
+# ---------------------------
+# User-Verification
+# ---------------------------
+def verify_user(user_i, password_i):
+    user : User = users_by_id.get(user_i)
+
+    if user is None:
+        print("no user found")
+        return ("Authentication Failed")
+
+    password = "#big" + password_i + "pp"
+    hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    target_user = ""
+
+    if user.username == user_i: 
+        print("No user found: ", user_i)
+        return ("Authentication Failed")
+ 
+    if user.password == hashed_password:
+        login_user(user)
+        print("user:", user.username, " has a session in flask login")
+        return user.mode
+    else:
+        print("user is invalid: password wrong")
+        return "Authentication failed"
+    
+
+def setup_user_loader(login_manager):
+    load_users_into_memory()
+    @login_manager.user_loader
+    def load_user(user_id):
+        return users_by_id.get(user_id)
+
+def _load_user_json():
     user_path = create_path("app/data", "users.json")
     
     if not os.path.exists(user_path):
@@ -16,27 +59,18 @@ def verify_user(user,hash):
     try:
         with open(user_path, "r") as f:
             data = json.load(f)
+            return data
     except json.JSONDecodeError:
         print("Error: Failed to parse users.json.")
         return "Error: Failed to parse users.json."
-    
-    target_user = ""
-    #actual user verification
+
+def load_users_into_memory():
+    users_by_id.clear()
+    data = _load_user_json()
+
     for user_server in data["users"]:
-        if user_server["username"] == user: 
-            target_user = user_server
-        
-    try:
-        if target_user["password"] == hash:
-            print(target_user["mode"])
-            return target_user["mode"]
-        else:
-            print("user is invalid: password wrong")
-            return "user is invalid: password wrong"
-
-    except:
-        print("user is invalid: no user found" + target_user)
-        return "user is invalid: no user found" + target_user
-
-#Debug
-verify_user("LUST","0d3253c203057b5728f73d7b28783ef55211511f4d190620204bccb8f7b59671")
+        user = User(user_server["username"],user_server["password"],user_server["mode"])
+        users_by_id[user.id] = user
+    
+    if len(users_by_id) == 0:
+        print("No user data found, check json file")
