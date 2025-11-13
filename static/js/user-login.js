@@ -19,10 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(data);
 
             if (response.ok && data.redirect_url) {
-                console.log(data)
+                // Erfolgreich → Weiterleitung
                 window.location.href = data.redirect_url;
             } else {
-                showAlert("❌ Login fehlgeschlagen: " + data.message + " - Unbekannter Fehler");
+                // Login fehlgeschlagen
+                if (data.status === "failed") {
+                    showAlert("❌ Login fehlgeschlagen: Ungültige Zugangsdaten");
+                } else {
+                    showAlert("❌ Login fehlgeschlagen: Unbekannter Fehler");
+                }
             }
 
         } catch (error) {
