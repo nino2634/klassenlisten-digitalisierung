@@ -23,18 +23,12 @@ def _get_next_empty_row(sheet, start_row):
             return row
     return end_row + 1
 
-def _get_year_half_col(headers):
-    for i in range(0, len(headers)):
-        if "Periodizität" in headers[i]:
-            return i + 1
-
 def _get_lessons_by_class(sheet, class_title, year_half, headers):
     title_row = _find_class_title_row(sheet, class_title)
     spacer:int = 4 # noch anpassen, wenn Liste von Landsiedel bekommen
     start_row = title_row + spacer
     end_row = _get_next_empty_row(sheet, start_row)
 
-    year_half_col = _get_year_half_col(headers)
     start_col = 1
     end_col = 13    
     lesson_list = []
