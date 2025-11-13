@@ -10,7 +10,7 @@ def _initiate_file():
 def _find_class_title_row(sheet, class_filter):
     end_row = sheet.max_row
     for row in range(1, end_row):
-        cell = sheet.cell(row=row, column=1)
+        cell = sheet.cell(row=row, column=sheet.min_column)
         if cell.value == class_filter:
             return row
     raise Exception("Class not found")
@@ -18,19 +18,24 @@ def _find_class_title_row(sheet, class_filter):
 def _get_next_empty_row(sheet, start_row):
     end_row = sheet.max_row
     for row in range(start_row, end_row):
-        cell = sheet.cell(row=row, column=1)
+        cell = sheet.cell(row=row, column=sheet.min_column)
         if(cell.value is None):
             return row
-    return end_row + 1
+
+def _get_next_row_with_value(sheet, start_row):
+    end_row = sheet.max_row
+    for row in range(start_row, end_row):
+        cell=sheet.cell(row=row, column=sheet.min_column)
+        if(cell.value is not None):
+            return row
 
 def _get_lessons_by_class(sheet, class_title, year_half, headers):
     title_row = _find_class_title_row(sheet, class_title)
-    spacer:int = 4 # noch anpassen, wenn Liste von Landsiedel bekommen
-    start_row = title_row + spacer
+    start_row = _get_next_row_with_value(sheet, title_row + 1) + 1
     end_row = _get_next_empty_row(sheet, start_row)
 
-    start_col = 1
-    end_col = 13    
+    start_col = sheet.min_column
+    end_col = sheet.max_column
     lesson_list = []
     list = []
     for row in range(start_row, end_row):
