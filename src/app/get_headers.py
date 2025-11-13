@@ -1,12 +1,6 @@
 import openpyxl
-from .config_handler import load_data_file_path
 import json
-
-# gets file path from config_handler
-# returns: file path as String
-def _initiate_file():
-    file_path = load_data_file_path()
-    return file_path
+from file_handler import initiate_file
 
 # reads all consecutive not-empty cells in a row
 # returns: column names as list
@@ -46,8 +40,7 @@ def _read_excel_file(sheet, start_row):
 # executes functions
 # returns: header names as list
 def run():
-    file_path = _initiate_file()
-    workbook = openpyxl.load_workbook(file_path)
+    workbook = initiate_file()
     sheet = workbook.active
     headers = _read_excel_file(sheet, start_row=1)
     headers_json = json.dumps(headers)
