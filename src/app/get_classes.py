@@ -63,7 +63,7 @@ def run(class_filter = ""):
     sheet=workbook.active
     classes = _get_classes_from_file(sheet=sheet, start_row=1, class_filter=class_filter)
     if classes == []:
-        errormsg = "Class", class_filter, "not found"
+        errormsg = f"Class '{class_filter}' not found"
         return json.dumps(errormsg)
     classes_json = json.dumps(classes)
     return classes_json
