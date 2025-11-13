@@ -1,7 +1,7 @@
 import json
 import openpyxl
 from .get_headers import run as get_headers
-from file_handler import initiate_file, get_next_empty_row, get_next_row_with_value
+from .file_handler import initiate_file, get_next_empty_row, get_next_row_with_value
 
 def _find_class_title_row(sheet, class_filter):
     end_row = sheet.max_row

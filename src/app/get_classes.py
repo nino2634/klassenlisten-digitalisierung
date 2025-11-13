@@ -1,6 +1,6 @@
 import openpyxl
 import json
-from file_handler import initiate_file, get_next_row_with_value
+from .file_handler import initiate_file, get_next_row_with_value
 
 # searches all class names in excel file
 # if filter is set, searches classes with specific names

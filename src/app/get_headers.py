@@ -1,6 +1,6 @@
 import openpyxl
 import json
-from file_handler import initiate_file
+from .file_handler import initiate_file
 
 # reads all consecutive not-empty cells in a row
 # returns: column names as list
