@@ -72,7 +72,7 @@ def get_authentification():
     if mode == "simple":
         return jsonify({"redirect_url": "/filter_teacher"})
     if mode == "advanced":
-        return jsonify("auth")
+        return jsonify({"redirect_url": "/filter_teacher"})
     else:
         return jsonify("failed")
 
