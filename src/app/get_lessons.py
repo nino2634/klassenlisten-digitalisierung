@@ -1,11 +1,7 @@
 import json
 import openpyxl
 from .get_headers import run as get_headers
-from .config_handler import load_data_file_path
-
-def _initiate_file():
-    filePath = load_data_file_path()
-    return filePath
+from .file_handler import initiate_file, get_next_empty_row, get_next_row_with_value
 
 def _find_class_title_row(sheet, class_filter):
     end_row = sheet.max_row
@@ -15,24 +11,10 @@ def _find_class_title_row(sheet, class_filter):
             return row
     raise Exception("Class not found")
 
-def _get_next_empty_row(sheet, start_row):
-    end_row = sheet.max_row
-    for row in range(start_row, end_row):
-        cell = sheet.cell(row=row, column=sheet.min_column)
-        if(cell.value is None):
-            return row
-
-def _get_next_row_with_value(sheet, start_row):
-    end_row = sheet.max_row
-    for row in range(start_row, end_row):
-        cell=sheet.cell(row=row, column=sheet.min_column)
-        if(cell.value is not None):
-            return row
-
 def _get_lessons_by_class(sheet, class_title, year_half, headers):
     title_row = _find_class_title_row(sheet, class_title)
-    start_row = _get_next_row_with_value(sheet, title_row + 1) + 1
-    end_row = _get_next_empty_row(sheet, start_row)
+    start_row = get_next_row_with_value(sheet, title_row + 1) + 1
+    end_row = get_next_empty_row(sheet, start_row)
 
     start_col = sheet.min_column
     end_col = sheet.max_column
@@ -50,8 +32,7 @@ def _get_lessons_by_class(sheet, class_title, year_half, headers):
     return lesson_list
 
 def run(class_title, year_half):
-    filePath = _initiate_file()
-    workbook = openpyxl.load_workbook(filePath)
+    workbook = initiate_file()
     sheet = workbook.active
     headers = json.loads(get_headers())
     lesson_list = _get_lessons_by_class(sheet, class_title, year_half, headers)  

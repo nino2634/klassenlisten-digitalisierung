@@ -29,12 +29,12 @@ setup_user_loader(login_manager)
 def home():
     return render_template('index.html')
 
-@app.route('/filter_teacher')
+@app.route('/teacher_view')
 @login_required
 def filter_teacher():
-    return render_template('filter_teacher.html')
+    return render_template('teacher_view.html')
 
-@app.route('/table_teacher')
+@app.route('/teacher_detailled')
 @login_required
 def table_teacher():
     json_data = get_lessons("02TSBR", "1.Hj")
@@ -70,11 +70,11 @@ def get_authentification():
     mode = verify_user(user, password)
 
     if mode == "simple":
-        return jsonify({"redirect_url": "/filter_teacher"})
+        return jsonify({"redirect_url": "/teacher_view"})
     if mode == "advanced":
-        return jsonify({"redirect_url": "/filter_teacher"})
+        return jsonify({"redirect_url": "/teacher_view"})
     else:
-        return jsonify({"status": "failed"})
+        return jsonify({"status": "failed", "message": "Ungültige Zugangsdaten"}), 401
 
 @app.route("/logout")
 @login_required  # optional, nur für eingeloggte Benutzer
