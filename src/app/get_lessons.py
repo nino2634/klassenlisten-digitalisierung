@@ -27,7 +27,7 @@ def _get_lessons_by_class(sheet, class_title, year_half, headers):
             cell = sheet.cell(row, col)
             header = headers[col-1]
             lesson[header] = f"{cell.value}"
-        if year_half in lesson[load_config_data("half_year_name_column")]:
+        if year_half in lesson[load_config_data("half_year_column_name")]:
             list.append(lesson)
     lesson_list.append({"class_name": f"{class_title}", "lessons": list})
     return lesson_list
