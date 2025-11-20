@@ -1,6 +1,10 @@
 from openpyxl import Workbook
+import os
 
-def run(table, output_file="export.xlsx"):
+def export_file(table, output_file=None):
+    if output_file is None:
+        output_file = os.path.join(os.getcwd(), "export.xlsx")  # absoluter Pfad
+
     wb = Workbook()
     ws = wb.active
 

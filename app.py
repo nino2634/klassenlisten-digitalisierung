@@ -97,5 +97,9 @@ def export():
     return jsonify({"Status": "OK", "file":excel_file})
 
 @app.route("/download")
+@login_required
 def download():
-    return send_file("export.xlsx", as_attachment=True)
+    file_path = os.path.join(os.getcwd(), "export.xlsx")  # absoluter Pfad
+    if not os.path.exists(file_path):
+        return "Datei existiert nicht!", 404
+    return send_file(file_path, as_attachment=True)
