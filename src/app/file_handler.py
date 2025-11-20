@@ -1,8 +1,8 @@
-from .config_handler import load_data_file_path
+from .config.config_handler import load_config_data
 import openpyxl
 
 def initiate_file():
-    filePath = load_data_file_path()
+    filePath = load_config_data("excel_file")
     workbook = openpyxl.load_workbook(filePath)
     return workbook
 
