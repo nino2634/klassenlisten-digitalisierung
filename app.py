@@ -56,6 +56,7 @@ def get_school_classes():
 
     data = json.loads(data)
     return jsonify(data)
+
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
 @app.route("/api/verify_user",methods=["POST"])
 def get_authentification():
