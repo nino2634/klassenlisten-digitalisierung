@@ -9,7 +9,7 @@ def create_path(path, file_name) -> str:
 #-----------------------------------------------------------
 #Returns the matching value from the config
 #-----------------------------------------------------------
-def load_data_file_path(value_name : str) -> str:
+def load_config_data(value_name : str) -> str:
     settings_path = create_path("", "settings.txt")
 
     if not os.path.exists(settings_path):
@@ -18,11 +18,11 @@ def load_data_file_path(value_name : str) -> str:
     else:
         with open(settings_path) as f:
             lines = f.readlines()
-    print(lines)
+    #print(lines)
     value = ""
 
     for line in lines:
-        print(line)
+        #print(line)
         if line.startswith(value_name + "="):
             value = line.split('=', 1)[1].strip()
             break

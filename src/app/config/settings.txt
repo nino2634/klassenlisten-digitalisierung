@@ -1,4 +1,4 @@
-exel_file=src/app/data/Datenquelle.xlsx
+excel_file=src/app/data/Datenquelle.xlsx
 half_year_column_name=Periodizität
 weekly_hrs_column_name=WoStd
-row_diff_weely_hrs=1
+row_diff_weekly_hrs=1
