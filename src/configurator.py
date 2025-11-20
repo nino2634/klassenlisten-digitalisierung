@@ -14,7 +14,7 @@ def main_menu():
         print("4. App zuruecksetzen")
         print("5. Beenden")
         
-        choice = input("Geben Sie Ihre Wahl ein (1-4): ").strip()
+        choice = input("Geben Sie Ihre Wahl ein (1-5): ").strip()
         
         if choice == "1":
             password_manager.change_password()  # assuming your script has a callable function `run()`

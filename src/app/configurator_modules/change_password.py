@@ -1,3 +1,5 @@
+# -*- coding: cp1252 -*-
+
 import json
 import os
 import hashlib
@@ -25,7 +27,7 @@ def reset_password():
     users = data.get("users", [])
 
     for user in users:
-        user["password"] == "12345"
+        user["password"] == "7484c5f89d12d0f7fdb8b03ce72b4694d58f9da473d2009d57f67bf43f265857"
 
     # Save changes back to JSON
     with open(user_path, "w") as f:
@@ -37,7 +39,7 @@ def change_password():
     # Check if file exists
     user_path = create_path("data", "users.json")
     if not os.path.exists(user_path):
-        print("User file not found./" + user_path)
+        print("Benutzerdatei nicht gefunden:/" + user_path)
         return
 
     # Load users
@@ -46,7 +48,7 @@ def change_password():
 
     users = data.get("users", [])
     if not users:
-        print("Benutzer konnten nicht geladen werden")
+        print("Benutzer konnten nicht geladen werden.")
         return
 
     # List available usernames
@@ -57,7 +59,7 @@ def change_password():
     user_found = False
 
     while(user_found == False):
-        choice = input("Waehlen sie einen Benutzer: ").strip()
+        choice = input("Waehlen Sie einen Benutzer: ").strip()
 
         for i in range(len(users)):
             if str(i + 1) == choice or choice == users[i]["username"]:
@@ -69,14 +71,14 @@ def change_password():
                 user_found = True
                 break  
         if not user_found:
-            print("Benutzer konnte nicht gefuden werden.")
+            print("Benutzer konnte nicht gefunden werden.")
 
     # Save changes back to JSON
     with open(user_path, "w") as f:
         json.dump(data, f, indent=4)
 
     load_users_into_memory()
-    print(f"Passwort fuer {choice} wurde geandert.")
+    print(f"Passwort fuer {choice} wurde gaendert.")
 
 
 # Example usage

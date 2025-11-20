@@ -60,23 +60,24 @@ def fix_config():
     if not missing_keys:
         print("Status: Kein Fehler gefunden -> settings.txt")
     else:
-        print("Status: Fehler -> missing keys:", ", ".join(missing_keys))
+        print("Status: Fehler -> fehlende Schlüssel:", ", ".join(missing_keys))
         # Append missing keys with defaults
         with open(config_path, "a", encoding="utf-8") as f:
             for key in missing_keys:
                 f.write(f"{key}={DEFAULT_CONFIG[key]}\n")
-        print("Missing keys were added with default values")
+        print("Fehlende Schlüssel wurden mit Standardwerten hinzugefügt")
 
 def reset_users():
     users_path = create_path("data", "users.json")  # or use create_path if you want a folder
     with open(users_path, "w", encoding="utf-8") as f:
         json.dump(DEFAULT_USERS, f, indent=4, ensure_ascii=False)
     print(f"{users_path} created with default users")
+    print(f"Bitte setzen sie neue Passwoerter!")
 
 def fix_users():
     user_path = create_path("data", "users.json")
     if not os.path.exists(user_path):
-        print("Status: Fehler -> users.txt wurde nicht gefunden")
+        print("Status: Fehler -> users.json wurde nicht gefunden")
         reset_users()
         return
     print("Status: Kein Fehler gefunden -> users.txt")

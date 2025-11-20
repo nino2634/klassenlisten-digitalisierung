@@ -1,3 +1,5 @@
+# -*- coding: cp1252 -*-
+
 import os
 
 
@@ -14,7 +16,7 @@ def show_config():
         print("settings.txt does not exist.")
         return
 
-    print("\nCurrent settings:")
+    print("\nEinstellungen:")
     with open(config_path, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
@@ -23,14 +25,16 @@ def show_config():
     print()  # extra line for spacing
 
 def update_config(key: str, new_value: str):
-    """Update or add a key=value pair in settings.txt"""
+    """Update a key=value pair in settings.txt. Stops if key does not exist."""
     config_path = create_path("config", "settings.txt")
 
+    if not os.path.exists(config_path):
+        print("Fehler: settings.txt fehlt. Benutzen Sie die Fehlersuche.")
+        return
+
     # Read current settings
-    lines = []
-    if os.path.exists(config_path):
-        with open(config_path, "r", encoding="utf-8") as f:
-            lines = f.readlines()
+    with open(config_path, "r", encoding="utf-8") as f:
+        lines = f.readlines()
 
     key_found = False
     for i, line in enumerate(lines):
@@ -44,16 +48,17 @@ def update_config(key: str, new_value: str):
             break
 
     if not key_found:
-        lines.append(f"{key}={new_value}\n")
+        print(f"Fehler: Einstellung '{key}' ist nicht vorhanden.")
+        return
 
     # Write back the updated config
     with open(config_path, "w", encoding="utf-8") as f:
         f.writelines(lines)
 
-    print(f"Config updated: {key}={new_value}")
+    print(f"Einstellungen geaendert: {key}={new_value}")
 
 def change_settings():
     show_config()
-    choice = input("Welche einstellung?")
-    new_value = input("Geben sie einen neuen wert an.")
+    choice = input("Welche Einstellung?")
+    new_value = input("Geben Sie einen neuen Wert an.")
     update_config(choice,new_value)
