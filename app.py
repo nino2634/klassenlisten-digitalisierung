@@ -29,21 +29,21 @@ setup_user_loader(login_manager)
 def home():
     return render_template('index.html')
 
-@app.route('/teacher_view')
+@app.route('/teacherView')
 @login_required
 def filter_teacher():
-    return render_template('teacher_view.html')
+    return render_template('teacherView.html')
 
-@app.route('/teacher_detailled')
+@app.route('/teacherDetailed')
 @login_required
 def table_teacher():
     json_data = get_lessons("02TSBR", "1.Hj")
     class_data = json.loads(json_data)
     class_name = class_data[0]['class_name']
     lessons = class_data[0]['lessons']
-    return render_template('table_teacher.html', lesson_data=lessons, class_name=class_name)
+    return render_template('teacherView.html', lesson_data=lessons, class_name=class_name)
 
-#Methode gibt eine liste der angefragten klassen zurück
+#Methode gibt eine Liste der angefragten Klassen zurück
 @app.route("/api/classes",methods=["GET"])
 @login_required  
 def get_school_classes():
@@ -70,9 +70,9 @@ def get_authentification():
     mode = verify_user(user, password)
 
     if mode == "simple":
-        return jsonify({"redirect_url": "/teacher_view"})
+        return jsonify({"redirect_url": "/teacherView"})
     if mode == "advanced":
-        return jsonify({"redirect_url": "/teacher_view"})
+        return jsonify({"redirect_url": "/teacherView"})
     else:
         return jsonify({"status": "failed", "message": "Ungültige Zugangsdaten"}), 401
 
