@@ -5,13 +5,16 @@ import hashlib
 from itertools import count
 
 from flask_login import UserMixin, login_user, LoginManager
-from .config_handler import create_path
 
 # ---------------------------------------------------------
 # Globale Benutzer-Sammlung:
 # Enthält alle geladenen Benutzerobjekte, indexiert nach Benutzername.
 # ---------------------------------------------------------
 users_by_id = {}
+
+def create_path(path, file_name):
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(current_dir, path, file_name)
 
 
 # ---------------------------------------------------------
