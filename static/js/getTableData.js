@@ -22,8 +22,7 @@ function renderTable(data) {
     data.forEach(row => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td>${row.id}</td>
-            <td>${row.name}</td>
+            <td>${row}</td>
         `;
         tableBody.appendChild(tr);
     });
