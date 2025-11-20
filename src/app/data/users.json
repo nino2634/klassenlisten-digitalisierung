@@ -2,12 +2,12 @@
     "users": [
         {
             "username": "LUSD",
-            "password": "3f0da944ab70d49ec3609d072169cb96dbd85ec042bb5dcc4a5a19f02c248f38",
+            "password": "ce63be9d8906987d9dccd3587ebfb5d188038f752955e8b64783cb64c83cf5f6",
             "mode": "advanced"
         },
         {
             "username": "Lehrer",
-            "password": "aacd0ce351fe63eb9b4222b1d814a77f8dabbe302ee836894db6e0b069e80b86",
+            "password": "5ac2ab09ff6853f1fd792e6bdb3a05119308084a98fa633d23e4438647f0032c",
             "mode": "simple"
         }
     ]

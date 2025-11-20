@@ -72,7 +72,6 @@ def load_users_into_memory():
     """
     users_by_id.clear()
     data = _load_user_json()
-    print(data)
     # Benutzer aus der JSON-Struktur in Objekte umwandeln
     for user_data in data["users"]:
         user = User(user_data["username"], user_data["password"], user_data["mode"])
