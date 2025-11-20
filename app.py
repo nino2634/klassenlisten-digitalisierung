@@ -48,12 +48,14 @@ def table_teacher():
 @login_required  
 def get_school_classes():
     filter = request.args.get("school_classes")
-    if not filter:
-       return jsonify("Error: Missing argument in get_school_classes")
-    data = get_classes(filter)
-    data = json.loads(data)
-    return jsonify(data)
+        # Wenn kein Filter angegeben ist → alle Klassen liefern
+        if not filter:
+            data = get_classes("")  # oder get_classes(None)
+        else:
+            data = get_classes(filter)
 
+        data = json.loads(data)
+        return jsonify(data)
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
 @app.route("/api/verify_user",methods=["POST"])
 def get_authentification():
