@@ -47,4 +47,4 @@ def run(class_filter = ""):
     classes_json = json.dumps(classes)
     return classes_json
 
-run()
+#run()

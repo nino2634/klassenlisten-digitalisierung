@@ -41,4 +41,4 @@ def run(class_title, year_half):
     #print(lesson_list[0]['lessons'])
     return lesson_json
 
-run("02TSBR", "1.Hj")
+#run("02TSBR", "1.Hj")
