@@ -8,10 +8,23 @@ try {
     const param = "";
     const response = await fetch('http://10.49.128.174:5000/api/classes?school_classes='+ encodeURIComponent(param)); 
     const data = await response.json();
-    console.log(data);
+    renderTable(data);
 } catch (error) {
     console.error("Fehler beim Laden:", error);
 }
 }
 
+
+function renderTable(data) {
+    const tableBody = document.getElementById("tableBody");
+    tableBody.innerHTML = "";
+
+    data.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${row}</td>
+        `;
+        tableBody.appendChild(tr);
+    });
+}
       

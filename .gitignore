@@ -3,3 +3,7 @@
 TO-DO
 # Ignore user data file
 .gitignore
+/.idea/klassenlisten-digitalisierung.iml
+/.idea/modules.xml
+/.idea/php.xml
+/.idea/vcs.xml
