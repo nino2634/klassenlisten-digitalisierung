@@ -31,16 +31,18 @@
           </div>
         </div>
       </div>
- 
-      <div class="col-lg-4 col-12 d-flex flex-column gap-2">
-        <label for="halfYear">Halbjahr auswählen:</label>
-        <select id="halfYear" name="halfYear">
-          <option value="choose">bitte auswählen..</option>
-          <option value="1.Hj">1. Halbjahr</option>
-          <option value="2.Hj">2. Halbjahr</option>
-        </select>
-      <div>
-      
+
+      <div class="dropdown col-lg-4 col-12 d-flex flex-column gap-2">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Halbjahr auswählen:
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li><a class="dropdown-item active" >Bitte auswählen...</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item">1. Halbjahr</a></li>
+          <li><a class="dropdown-item">2. Halbjahr</a></li>
+        </ul>
+      </div>
           
       <div class="col-12 flex-column gap-2">
         <form id="searchForm">
