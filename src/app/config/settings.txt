@@ -1,6 +1,4 @@
-EXCEL_FILE=src/app/data/Datenquelle.xlsx
-Test=Test
-
-half_year_column_name = "Periodizität"
-weekly_hrs_column_name = "WoStd"
-row_diff_weely_hrs = 1
+exel_file=src/app/data/Datenquelle.xlsx
+half_year_column_name=Periodizität
+weekly_hrs_column_name=WoStd
+row_diff_weely_hrs=1
