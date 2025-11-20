@@ -32,4 +32,3 @@ def load_config_data(value_name : str) -> str:
         return
 
     return value
-

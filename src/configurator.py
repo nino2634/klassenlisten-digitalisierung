@@ -1,8 +1,9 @@
 # -*- coding: cp1252 -*-
 
 import sys
-import src.app.configurator_modules.change_password as password_manger
+import src.app.configurator_modules.change_password as password_manager
 import src.app.configurator_modules.errorfix as error_fixer
+import src.app.configurator_modules.change_settings as settings_manager
 
 def main_menu():
     while True:
@@ -16,9 +17,9 @@ def main_menu():
         choice = input("Geben Sie Ihre Wahl ein (1-4): ").strip()
         
         if choice == "1":
-            password_manger.change_password()  # assuming your script has a callable function `run()`
+            password_manager.change_password()  # assuming your script has a callable function `run()`
         elif choice == "2":
-            #errorcheck.run()
+            settings_manager.change_settings()
             pass
         elif choice == "3":
             error_fixer.fix()
