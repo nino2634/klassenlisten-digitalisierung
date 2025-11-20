@@ -45,7 +45,7 @@ def _load_user_json():
         ]
     }
     """
-    user_path = create_path("app/data", "users.json")
+    user_path = create_path("data", "users.json")
     
     # Prüfen, ob Datei existiert
     if not os.path.exists(user_path):
@@ -72,7 +72,7 @@ def load_users_into_memory():
     """
     users_by_id.clear()
     data = _load_user_json()
-
+    print(data)
     # Benutzer aus der JSON-Struktur in Objekte umwandeln
     for user_data in data["users"]:
         user = User(user_data["username"], user_data["password"], user_data["mode"])
@@ -102,7 +102,7 @@ def verify_user(username_input, password_input):
         return "Authentication Failed"
 
     # Passwort salzen und hashen
-    password = "#big" + password_input + "pp"
+    password = "sal" + password_input + "peper"
     hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
     # Passwortvergleich
@@ -129,3 +129,4 @@ def setup_user_loader(login_manager):
     def load_user(user_id):
         # Gibt das User-Objekt anhand der gespeicherten ID (Benutzername) zurück
         return users_by_id.get(user_id)
+
