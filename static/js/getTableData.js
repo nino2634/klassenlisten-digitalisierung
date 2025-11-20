@@ -16,7 +16,7 @@ try {
 
 
 function renderTable(data) {
-    const tableBody = document.getElementById("myTableBody");
+    const tableBody = document.getElementById("tableBody");
     tableBody.innerHTML = "";
 
     data.forEach(row => {
