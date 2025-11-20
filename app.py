@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, send_file
+from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS
 from flask_login import LoginManager,logout_user,login_required
 
@@ -6,7 +6,6 @@ from src.app.user_handler import setup_user_loader
 from src.app.get_classes import run as get_classes
 from src.app.user_handler import verify_user, load_users_into_memory
 from src.app.get_lessons import run as get_lessons
-from src.app.export_file import run as export_file
 
 import json
 import os
@@ -35,14 +34,16 @@ def home():
 def filter_teacher():
     return render_template('teacherView.html')
 
-@app.route('/teacherDetailed')
+@app.route('/api/teacherDetailed', methods=["GET"])
 @login_required
-def table_teacher():
-    json_data = get_lessons("02TSBR", "1.Hj")
+def table_teacher_detailed(class, half_year):
+    class_name_url_param = request.args.get("class_name")
+    half_year = request.args.get("half_year")
+    json_data = get_lessons(class_name_url_param, half_year)
     class_data = json.loads(json_data)
     class_name = class_data[0]['class_name']
     lessons = class_data[0]['lessons']
-    return render_template('teacherDetailed.html', lesson_data=lessons, class_name=class_name)
+    return render_template('teacherView.html')
 
 #Methode gibt eine Liste der angefragten Klassen zurück
 @app.route("/api/classes",methods=["GET"])
