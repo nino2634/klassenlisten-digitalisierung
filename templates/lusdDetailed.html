@@ -14,8 +14,10 @@
     <div class="card p-4 shadow-sm">
       <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
         <div class="d-flex gap-2 flex-wrap">
-          <button id="cancelBtn" class="btn btn-orange">Abbrechen</button>
-          <button id="doneBtn" class="btn btn-orange px-4 py-2">Fertig</button>
+          <a href="/teacherView">
+            <button id="backBtn" class="btn btn-orange text-black fw-semibold px-4 py-2">Zurück</button>
+          </a>
+          <button id="exportBtn" onclick="exportAndDownload()" class="btn btn-orange text-black fw-semibold px-4 py-2">Export</button>
         </div>
         <button id="exportBtn" class="btn btn-orange px-4 py-2">Export</button>
       </div>
@@ -113,3 +115,41 @@
   --> 
 </body>
 </html>
+
+<script>
+  async function exportAndDownload() {
+    let table = document.getElementById("lessons_table");
+    let rows = table.rows;
+    let data = [];
+
+    for (let i = 1; i < rows.length; i++) {
+        let cells = rows[i].cells;
+        data.push({
+            "Nr": cells[0].innerText,
+            "Fach": cells[1].innerText,
+            "WoStd_SuS": cells[2].innerText,
+            "Lehrer": cells[3].innerText,
+            "WoStd_KuK": cells[4].innerText,
+            "Form": cells[5].innerText,
+            "Bemerkung": cells[6].innerText
+        });
+    }
+
+    // 1) Daten an Flask senden
+    await fetch("/export", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    // 2) Download auslösen
+    const a = document.createElement("a");
+    a.href = "/download";
+    a.download = "";
+    a.style.display = "none";
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+</script>
