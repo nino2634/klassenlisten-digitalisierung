@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         
             try {
-            const response = await fetch('http://10.49.128.174:5000/api/verify_user', {
+            const response = await fetch('http://10.49.128.174:5000/api/placeholder', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
