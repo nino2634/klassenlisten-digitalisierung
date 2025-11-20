@@ -42,7 +42,7 @@ def table_teacher():
     class_data = json.loads(json_data)
     class_name = class_data[0]['class_name']
     lessons = class_data[0]['lessons']
-    return render_template('teacherView.html', lesson_data=lessons, class_name=class_name)
+    return render_template('teacherDetailed.html', lesson_data=lessons, class_name=class_name)
 
 #Methode gibt eine Liste der angefragten Klassen zurück
 @app.route("/api/classes",methods=["GET"])
