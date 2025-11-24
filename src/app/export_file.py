@@ -1,9 +1,9 @@
 from openpyxl import Workbook
-import os
+import json
+from .get_lessons import run as get_lessons 
 
-def export_file(table, output_file=None):
-    if output_file is None:
-        output_file = os.path.join(os.getcwd(), "export.xlsx")  # absoluter Pfad
+def export_file(table, class_name):
+    output_file = f"/tmp/{class_name}_klassenliste.xlsx"  # absoluter Pfad
 
     wb = Workbook()
     ws = wb.active
@@ -17,3 +17,5 @@ def export_file(table, output_file=None):
 
     wb.save(output_file)
     return output_file
+
+#export_file(json.loads(get_lessons("02TSFR", "1.Hj"))[0]['lessons'], "02TSFR")
