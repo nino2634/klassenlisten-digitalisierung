@@ -1,9 +1,15 @@
 # -*- coding: cp1252 -*-
 
 import sys
-import src.app.configurator_modules.change_password as password_manager
-import src.app.configurator_modules.errorfix as error_fixer
-import src.app.configurator_modules.change_settings as settings_manager
+
+try:
+    import app.configurator_modules.change_password as password_manager
+    import app.configurator_modules.errorfix as error_fixer
+    import app.configurator_modules.change_settings as settings_manager
+except:
+    import src.app.configurator_modules.change_password as password_manager
+    import src.app.configurator_modules.errorfix as error_fixer
+    import src.app.configurator_modules.change_settings as settings_manager
 
 def main_menu():
     while True:
