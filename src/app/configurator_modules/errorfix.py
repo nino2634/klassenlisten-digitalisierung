@@ -21,9 +21,12 @@ DEFAULT_USERS = {
 # Default config values
 DEFAULT_CONFIG = {
     "excel_file": "src/app/data/Datenquelle.xlsx",
-    "half_year_column_name": "Periodizität",
+    "row_diff_class_name_headers": "3",
+    "row_diff_weekly_hrs": "1",
+    "half_year_column_name": "PeriodizitÃ¤t",
     "weekly_hrs_column_name": "WoStd",
-    "row_diff_weekly_hrs": "1"
+    "subject_column_name": "Fach",
+    "teacher_column_name": "Lehrer"
 }
 
 def create_path(path, file_name):
@@ -60,12 +63,12 @@ def fix_config():
     if not missing_keys:
         print("Status: Kein Fehler gefunden -> settings.txt")
     else:
-        print("Status: Fehler -> fehlende Schlüssel:", ", ".join(missing_keys))
+        print("Status: Fehler -> fehlende Schlï¿½ssel:", ", ".join(missing_keys))
         # Append missing keys with defaults
         with open(config_path, "a", encoding="utf-8") as f:
             for key in missing_keys:
                 f.write(f"{key}={DEFAULT_CONFIG[key]}\n")
-        print("Fehlende Schlüssel wurden mit Standardwerten hinzugefügt")
+        print("Fehlende Schlï¿½ssel wurden mit Standardwerten hinzugefï¿½gt")
 
 def reset_users():
     users_path = create_path("data", "users.json")  # or use create_path if you want a folder

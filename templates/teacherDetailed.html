@@ -31,20 +31,31 @@
               <th>Stunden/Woche<br>Schüler</th>
               <th>Lehrer</th>
               <th>Stunden/Woche<br>Lehrer</th>
-              <th>Form</th>
+              <!-- <th>Form</th> -->
               <th>Bemerkung</th>
             </tr>
           </thead>
           <tbody id="detailBody">
-            
+            {% for lesson in lessons %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ lesson.Fach }}</td>
+              <td>{{ lesson.WoStd_SuS }}</td>
+              <td>{{ lesson.Lehrer }}</td>
+              <td>{{ lesson.WoStd_KuK }}</td>
+              <!-- <td>{{ lesson.form }}</td> -->
+              <td><!--{{  lesson.comment }}--></td>
+            </tr>
+
+            {% endfor %}
           </tbody>
           <tfoot>
             <tr class="table-sum text-white fw-bold">
               <td></td>
               <td></td>
-              <td id="sumSchueler">Summe</td>
+              <td id="sumSchueler">{{ sum_sus }}</td>
               <td></td>
-              <td id="sumLehrer">Summe</td>
+              <td id="sumLehrer">{{ sum_kuk }}</td>
               <td></td>
               <td></td>
             </tr>

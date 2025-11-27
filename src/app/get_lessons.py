@@ -12,6 +12,15 @@ def _find_class_title_row(sheet, class_filter):
             return row
     raise Exception("Class not found")
 
+def add_sums(lesson_list):
+    sum_sus = 0
+    sum_kuk = 0
+    
+    for lesson in lesson_list[0]['lessons']:
+        sum_sus += int(lesson['WoStd_SuS'])
+        sum_kuk += int(lesson['WoStd_KuK'])
+    
+    
 def _get_lessons_by_class(sheet, class_title, year_half, headers):
     title_row = _find_class_title_row(sheet, class_title)
     start_row = get_next_row_with_value(sheet, title_row + 1) + 1
@@ -29,7 +38,15 @@ def _get_lessons_by_class(sheet, class_title, year_half, headers):
             lesson[header] = f"{cell.value}"
         if year_half in lesson[load_config_data("half_year_column_name")]:
             list.append(lesson)
-    lesson_list.append({"class_name": f"{class_title}", "lessons": list})
+    
+    sum_sus = 0
+    sum_kuk = 0
+    
+    for lesson in lesson_list[0]['lessons']:
+        sum_sus += int(lesson['WoStd_SuS'])
+        sum_kuk += int(lesson['WoStd_KuK'])
+    
+    lesson_list.append({"class_name": f"{class_title}", "lessons": list, "Sum_SuS": sum_sus, "Sum_KuK": sum_kuk})
     return lesson_list
 
 def run(class_title, year_half):

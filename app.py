@@ -7,6 +7,7 @@ from src.app.get_classes import run as get_classes
 from src.app.user_handler import verify_user, load_users_into_memory
 from src.app.get_lessons import run as get_lessons
 from src.app.export_file import export_file
+from src.app.get_headers import get_effective_table_headers
 
 import json
 import os
@@ -36,16 +37,19 @@ def home():
 def filter_teacher():
     return render_template('teacherView.html')
 
-@app.route('/api/teacherDetailed', methods=["GET"])
+@app.route('/teacherDetailed', methods=["GET"])
 @login_required
 def table_teacher_detailed(class_name_url_param, half_year):
     class_name_url_param = request.args.get("class_name")
     half_year = request.args.get("half_year")
     json_data = get_lessons(class_name_url_param, half_year)
+    headers = json.loads(get_effective_table_headers())
     class_data = json.loads(json_data)
     class_name = class_data[0]['class_name']
     lessons = class_data[0]['lessons']
-    return render_template('teacherView.html')
+    Sum_SuS = class_data[0]['Sum_SuS']
+    Sum_KuK = class_data[0]['Sum_KuK']
+    return render_template('teacherDetailed.html', class_name=class_name, lessons=lessons, headers=headers, sum_SuS=Sum_SuS, sum_KuK=Sum_KuK)
 
 #Methode gibt eine Liste der angefragten Klassen zurück
 @app.route("/api/classes",methods=["GET"])
