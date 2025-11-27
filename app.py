@@ -6,12 +6,9 @@ from src.app.user_handler import setup_user_loader
 from src.app.get_classes import run as get_classes
 from src.app.user_handler import verify_user, load_users_into_memory
 from src.app.get_lessons import run as get_lessons
+from src.app.get_headers import run as get_headers
 from src.app.export_file import export_file
-<<<<<<< HEAD
-from src.app.get_headers import get_effective_table_headers
-=======
 from src.app.progress_handler import save,load_all
->>>>>>> 18aa913e65ba05bfdcaae8d7811087fd9aca676f
 
 import json
 import os
@@ -48,7 +45,7 @@ def table_teacher_detailed(class_name_url_param, half_year):
     class_name_url_param = request.args.get("class_name")
     half_year = request.args.get("half_year")
     json_data = get_lessons(class_name_url_param, half_year)
-    headers = json.loads(get_effective_table_headers())
+    headers = json.loads(get_headers())
     class_data = json.loads(json_data)
     class_name = class_data[0]['class_name']
     lessons = class_data[0]['lessons']
