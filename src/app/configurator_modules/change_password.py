@@ -9,7 +9,10 @@ current_file = os.path.abspath(__file__)
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(current_file)))
 sys.path.append(project_root)
 
-from src.app.user_handler import load_users_into_memory
+try:
+    from src.app.user_handler import load_users_into_memory
+except:
+    from app.user_handler import load_users_into_memory
 
 def create_path(path, file_name) -> str:
     current_file = os.path.abspath(__file__)

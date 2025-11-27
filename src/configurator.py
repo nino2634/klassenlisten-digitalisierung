@@ -23,7 +23,7 @@ def main_menu():
         choice = input("Geben Sie Ihre Wahl ein (1-5): ").strip()
         
         if choice == "1":
-            password_manager.change_password()  # assuming your script has a callable function `run()`
+            password_manager.change_password() 
         elif choice == "2":
             settings_manager.change_settings()
             pass
