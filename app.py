@@ -135,7 +135,7 @@ def logout():
     return jsonify("logged out")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=8443, debug=True)
     ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")  
 
 
