@@ -6,18 +6,33 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 path = os.path.join(current_dir, "data", "progress.json")
 
 def setup():
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+
     if not os.path.exists(path):
         with open(path, "w", encoding="utf-8") as f:
-            data = {}
-            json.dump(data, f, indent=4, ensure_ascii=False)
-   
+            json.dump({"class": []}, f, indent=4)
+        return
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
 
-#Data manegment
-def save(target_school_class: str, state: bool, term: int):
+        if not isinstance(data, dict) or "class" not in data or not isinstance(data["class"], list):
+            raise ValueError("Invalid structure")
+
+    except Exception:
+        # If JSON is corrupted, empty, or invalid. rewrite with safe default
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump({"class": []}, f, indent=4)
+
+def save(target_school_class: str, state: str, term: str):
     with open(path, "r") as f:
         data = json.load(f)
 
-    school_classes = data.get("class", [])
+    # ensure the key exists
+    if "class" not in data:
+        data["class"] = []
+
+    school_classes = data["class"]
 
     new_entry = {
         "class": target_school_class,
@@ -27,10 +42,8 @@ def save(target_school_class: str, state: bool, term: int):
 
     updated = False
     for school_class_json in school_classes:
-        is_rightclass = school_class_json["class"] == target_school_class
-        is_rightterm = school_class_json["term"] == term
-
-        if is_rightclass and is_rightterm:
+        if (school_class_json["class"] == target_school_class and
+            school_class_json["term"] == term):
             school_class_json["state"] = state
             updated = True
             break
@@ -41,9 +54,13 @@ def save(target_school_class: str, state: bool, term: int):
     with open(path, "w") as f:
         json.dump(data, f, indent=4)
 
-def load_all():
-	pass
+def load_all(term: str):
+    with open(path, "r") as f:
+        data = json.load(f)
 
+    school_classes = data.get("class", [])
+    result = [entry for entry in school_classes if entry.get("term") == term]
+
+    return result
 
 setup()
-save("11",False,1)

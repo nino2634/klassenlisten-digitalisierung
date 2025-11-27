@@ -1,1 +1,9 @@
-{}
+{
+    "class": [
+        {
+            "class": "11",
+            "state": "false",
+            "term": "10"
+        }
+    ]
+}
