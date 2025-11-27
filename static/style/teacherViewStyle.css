@@ -1,0 +1,52 @@
+html, body {
+    height: 100%;
+}
+
+.table-container{
+    max-height: 80vh;
+}
+
+.table tbody tr:nth-child(even) td{
+    background:transparent !important;
+}
+.table tbody tr:nth-child(odd) td{
+    background:transparent  !important;
+}
+
+#tableBody tr:nth-child(odd) button:hover {
+    background-color: #95c11f !important;
+    border-color: #95c11f !important;
+    color: white !important;
+}
+
+#tableBody tr:nth-child(even) button:hover{
+    background-color: #95c11f !important;
+    border-color: #95c11f !important;
+    color: white !important;
+}
+
+#tableBody tr:nth-child(odd) button:active{
+    background-color: #95c11f !important;
+    border-color: #95c11f !important;
+    color: white !important;
+}
+
+#tableBody tr:nth-child(even) button:active{
+    background-color: #29235c !important;
+    border-color: #29235c !important;
+    color: white !important;
+}
+
+
+
+#tableBody tr:nth-child(odd) button {
+    background: #ffffff !important;
+    color: #000000; /* damit der Text sichtbar bleibt */
+
+}
+
+#tableBody tr:nth-child(even) button {
+    background:#41a8db71 !important;
+    color: #000000; /* damit der Text sichtbar bleibt */
+
+}
