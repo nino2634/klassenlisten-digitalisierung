@@ -41,7 +41,7 @@ def filter_teacher():
 
 @app.route('/teacherDetailed', methods=["GET"])
 @login_required
-def table_teacher_detailed(class_name_url_param, half_year):
+def table_teacher_detailed():
     class_name_url_param = request.args.get("class_name")
     half_year = request.args.get("half_year")
     json_data = get_lessons(class_name_url_param, half_year)
