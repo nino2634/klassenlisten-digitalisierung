@@ -22,6 +22,7 @@ CORS(app)
 app.secret_key = "supergeheim-und-einzigartig"  
 classes = get_classes("")
 
+
 #For Flask Login
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -67,6 +68,7 @@ def get_school_classes():
 
 #Methode gibt allen Fortschrit für ein gegebenes Schuhljahr
 @app.route("/api/load_progress",methods=["POST"])
+@login_required  
 def load_progress():
     data = request.get_json()
     term = data.get("term")
@@ -105,6 +107,7 @@ def save_progress():
 
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
 @app.route("/api/verify_user",methods=["POST"])
+@login_required  
 def get_authentification():
     data = request.get_json()
     user = data.get("user")
