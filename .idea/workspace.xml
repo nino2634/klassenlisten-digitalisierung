@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="added dropdown">
-      <change afterPath="$PROJECT_DIR$/static/js/changeButtonTextOnSelection.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/getTeacherDetailedData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/style/teacherViewStyle.css" afterDir="false" />
+    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="added new teacher class view, added get detail teacher info function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/getTableData.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getTableData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/teacherView.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/teacherView.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +88,7 @@
       <updated>1763628876567</updated>
       <workItem from="1763732576807" duration="635000" />
       <workItem from="1763968067497" duration="3584000" />
-      <workItem from="1764227634257" duration="13898000" />
+      <workItem from="1764227634257" duration="14629000" />
     </task>
     <task id="LOCAL-00001" summary="show ClassList Table">
       <option name="closed" value="true" />
@@ -151,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763638474617</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added new teacher class view, added get detail teacher info function">
+      <option name="closed" value="true" />
+      <created>1764243003545</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1764243003545</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +177,7 @@
     <MESSAGE value="added table_teacher_detailed params" />
     <MESSAGE value="bugfix" />
     <MESSAGE value="added dropdown" />
-    <option name="LAST_COMMIT_MESSAGE" value="added dropdown" />
+    <MESSAGE value="added new teacher class view, added get detail teacher info function" />
+    <option name="LAST_COMMIT_MESSAGE" value="added new teacher class view, added get detail teacher info function" />
   </component>
 </project>
