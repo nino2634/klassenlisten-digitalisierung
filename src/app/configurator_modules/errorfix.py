@@ -83,6 +83,8 @@ def fix_users():
     print("Status: Kein Fehler gefunden -> users.txt")
 
 def fix():
+    print("------------- \n Suche nach Fehler... \n -------------")
+   
     fix_config()
     fix_users()
 
