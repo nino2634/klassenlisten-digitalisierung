@@ -7,6 +7,7 @@ from src.app.get_classes import run as get_classes
 from src.app.user_handler import verify_user, load_users_into_memory
 from src.app.get_lessons import run as get_lessons
 from src.app.export_file import export_file
+from src.app.progress_handler import save,load_all
 
 import json
 import os
@@ -63,6 +64,44 @@ def get_school_classes():
                 data.append(c)
         
     return jsonify(data)
+
+#Methode gibt allen Fortschrit für ein gegebenes Schuhljahr
+@app.route("/api/load_progress",methods=["POST"])
+def load_progress():
+    data = request.get_json()
+    term = data.get("term")
+
+    if not term:
+       return jsonify("Error: Missing argument in authentification Code:term")
+
+    try:
+        return jsonify(load_all(term))
+    except:
+        return jsonify("Error: something unexpected happend while loading progress")
+
+
+#Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
+@app.route("/api/save_progress",methods=["POST"])
+def save_progress():
+    data = request.get_json()
+    school_class = data.get("class")
+    term = data.get("term")
+    state = data.get("state")
+
+    if not school_class:
+       return jsonify("Error: Missing argument in authentification Code:school_class")
+
+    if not state:
+       return jsonify("Error: Missing argument in authentification Code:state")
+
+    if not term:
+       return jsonify("Error: Missing argument in authentification Code:term")
+
+    try:
+        save(school_class,state,term)
+        return jsonify("saved data succesfully")
+    except:
+        return jsonify("Error: something went wrong when saving")
 
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
 @app.route("/api/verify_user",methods=["POST"])

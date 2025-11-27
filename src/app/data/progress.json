@@ -2,18 +2,8 @@
     "class": [
         {
             "class": "11",
-            "state": true,
-            "term": 1
-        },
-        {
-            "class": "10",
-            "state": false,
-            "term": 1
-        },
-        {
-            "class": "11",
-            "state": true,
-            "term": 2
+            "state": "false",
+            "term": "10"
         }
     ]
 }

@@ -6,23 +6,25 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 path = os.path.join(current_dir, "data", "progress.json")
 
 def setup():
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+
     if not os.path.exists(path):
         with open(path, "w", encoding="utf-8") as f:
-            data = {}
-            json.dump(data, f, indent=4, ensure_ascii=False)
-   
-import json
-import os
+            json.dump({"class": []}, f, indent=4)
+        return
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-path = os.path.join(current_dir, "data", "progress.json")
+        if not isinstance(data, dict) or "class" not in data or not isinstance(data["class"], list):
+            raise ValueError("Invalid structure")
 
-def setup():
-    if not os.path.exists(path):
+    except Exception:
+        # If JSON is corrupted, empty, or invalid. rewrite with safe default
         with open(path, "w", encoding="utf-8") as f:
-            json.dump({"class": []}, f, indent=4, ensure_ascii=False)
+            json.dump({"class": []}, f, indent=4)
 
-def save(target_school_class: str, state: bool, term: int):
+def save(target_school_class: str, state: str, term: str):
     with open(path, "r") as f:
         data = json.load(f)
 
@@ -52,7 +54,7 @@ def save(target_school_class: str, state: bool, term: int):
     with open(path, "w") as f:
         json.dump(data, f, indent=4)
 
-def load_all(term: int):
+def load_all(term: str):
     with open(path, "r") as f:
         data = json.load(f)
 
