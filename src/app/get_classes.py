@@ -10,7 +10,7 @@ def run(class_filter=""):
     classes = []
     headers = json.loads(get_headers())
 
-    # Alle Zeilen der ersten Spalte sehr schnell durchlaufen
+    # Alle Zeilen der ersten Spalte durchlaufen
     for row in sheet.iter_rows(min_col=1, max_col=1, values_only=True):
         value = row[0]
 
