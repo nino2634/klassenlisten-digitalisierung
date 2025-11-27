@@ -19,6 +19,7 @@ CORS(app)
 
 # secret key for authentication
 app.secret_key = "supergeheim-und-einzigartig"  
+classes = get_classes("")
 
 #For Flask Login
 login_manager = LoginManager()
@@ -51,13 +52,16 @@ def table_teacher_detailed(class_name_url_param, half_year):
 @login_required  
 def get_school_classes():
     filter = request.args.get("school_classes")
-        # Wenn kein Filter angegeben ist → alle Klassen liefern
+    class_list = json.loads(classes) 
+    
     if not filter:
-        data = get_classes("")  # oder get_classes(None)
-    else:
-        data = get_classes(filter)
-
-    data = json.loads(data)
+        data = class_list
+    if filter:
+        data = []
+        for c in class_list:
+            if filter in c:
+                data.append(c)
+        
     return jsonify(data)
 
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
