@@ -136,6 +136,8 @@ def logout():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+    ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")  
+
 
 @app.route("/export", methods=["POST"])
 @login_required
