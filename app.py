@@ -33,7 +33,7 @@ def home():
     return render_template('index.html')
 
 @app.route('/teacherView')
-@login_required
+#@login_required
 def filter_teacher():
     return render_template('teacherView.html')
 
