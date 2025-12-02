@@ -1,4 +1,5 @@
-import openpyxl
+# -*- coding: utf-8 -*-
+
 import json
 from .file_handler import initiate_file
 from .config.config_handler import load_config_data
@@ -19,12 +20,24 @@ def _read_columns_in_row(sheet, row) -> list:
             break
     return values
 
+def get_html_headers():
+    return {
+        "Fach": load_config_data("subject_column_name"),
+        "WoStd_SuS": f'{load_config_data("weekly_hrs_column_name")}_SuS',
+        "Lehrer": load_config_data("teacher_column_name"),
+        "WoStd_KuK": f'{load_config_data("weekly_hrs_column_name")}_KuK'
+    }
+
 # reads all headers from excel file
 # returns: header names as list
 def _get_headers(sheet, title_row):
-    headers = _read_columns_in_row(sheet=sheet, row=title_row + 3) # wir schauen hier nochmal in den großen Listen, was der Abstand ist, 3 Zielen im Testding
+    headers = _read_columns_in_row(sheet=sheet, row=title_row + int(load_config_data("row_diff_class_name_headers")))
+    html_headers = get_html_headers()
+        
     list = []
     for header in headers:
+        if header in html_headers:
+            header = html_headers[header]
         #print(header)
         list.append(header)
     return list
@@ -49,4 +62,5 @@ def run():
     #print(headers)
     return headers_json
 
-#print(run())
+result = run()
+print(result)
