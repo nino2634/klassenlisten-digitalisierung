@@ -4,23 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="added new teacher class view, added get detail teacher info function">
+    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="comment certificate line">
+      <change afterPath="$PROJECT_DIR$/static/js/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-=======
-    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/app/progress_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/progress_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/user_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/configurator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/configurator.py" afterDir="false" />
->>>>>>> Stashed changes
+      <change beforePath="$PROJECT_DIR$/src/app/certificate/cert.pem" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/certificate/cert.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/certificate/key.pem" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/certificate/key.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/configurator_modules/change_password.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/configurator_modules/change_password.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/getClassList.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getClassList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/getTableData.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getTableData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/getTeacherDetailedData.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getTeacherDetailedData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/submitclass.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/submitclass.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/userLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/userLogin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/lusdView.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lusdView.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/teacherView.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/teacherView.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-<<<<<<< Updated upstream
   <component name="ComposerSettings">
     <execution />
   </component>
@@ -48,8 +52,6 @@
   }
 }</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
-=======
->>>>>>> Stashed changes
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 4
@@ -59,7 +61,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-<<<<<<< Updated upstream
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -79,13 +80,6 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;web.server&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-=======
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "kotlin-language-version-configured": "true"
->>>>>>> Stashed changes
   }
 }</component>
   <component name="SharedIndexes">
@@ -106,7 +100,9 @@
       <updated>1763628876567</updated>
       <workItem from="1763732576807" duration="635000" />
       <workItem from="1763968067497" duration="3584000" />
-      <workItem from="1764227634257" duration="14629000" />
+      <workItem from="1764227634257" duration="14676000" />
+      <workItem from="1764586377660" duration="15000" />
+      <workItem from="1764835467950" duration="5655000" />
     </task>
     <task id="LOCAL-00001" summary="show ClassList Table">
       <option name="closed" value="true" />
@@ -172,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764243003545</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="comment certificate line">
+      <option name="closed" value="true" />
+      <created>1764243603250</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1764243603250</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +200,7 @@
     <MESSAGE value="bugfix" />
     <MESSAGE value="added dropdown" />
     <MESSAGE value="added new teacher class view, added get detail teacher info function" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new teacher class view, added get detail teacher info function" />
+    <MESSAGE value="comment certificate line" />
+    <option name="LAST_COMMIT_MESSAGE" value="comment certificate line" />
   </component>
 </project>

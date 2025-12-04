@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 document.addEventListener('DOMContentLoaded', function() {
     const dropdownItems = document.querySelectorAll('#halfYearDropdown .dropdown-item');
 
@@ -11,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
             async function getTeacherDetailedData(class_name, half_year){
                 try{
-                    const response = await fetch('http://10.49.128.174:5000//api/teacherDetailed='+ encodeURIComponent(class_name) + encodeURIComponent(half_year));
+                    const response = await fetch(`${API_BASE_URL}/api/teacherDetailed=`+ encodeURIComponent(class_name) + encodeURIComponent(half_year));
                     const data = await response.json();
                     renderTableDetailed(data);
                 } catch (error) {

@@ -67,7 +67,7 @@ def change_password():
         for i in range(len(users)):
             if str(i + 1) == choice or choice == users[i]["username"]:
                 selected_user_name = users[i]
-                new_password = input(f"Neues Passwort fuer {selected_user_name["username"]}: ").strip()
+                new_password = input(f"Neues Passwort fuer {selected_user_name['username']}: ").strip()
                 new_password = "sal" + new_password + "peper" 
                 new_password = hashlib.sha256(new_password.encode('utf-8')).hexdigest()
                 selected_user_name["password"] = new_password

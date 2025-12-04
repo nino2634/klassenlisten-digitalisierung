@@ -1,3 +1,4 @@
+import { API_BASE_URL } from './config.js';
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('loginForm');
     form.addEventListener('submit', async (event) => {
@@ -7,11 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('pass').value;
 
         try {
-            const response = await fetch('http://10.49.128.174:5000/api/verify_user', {
+            const response = await fetch(`${API_BASE_URL}/api/verify_user`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({ user, password })
             });
 

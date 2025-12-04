@@ -17,7 +17,7 @@ import logging
 import hashlib
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
 
 # secret key for authentication
 app.secret_key = "supergeheim-und-einzigartig"  
@@ -111,7 +111,6 @@ def save_progress():
 
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
 @app.route("/api/verify_user",methods=["POST"])
-@login_required  
 def get_authentification():
     data = request.get_json()
     user = data.get("user")
@@ -139,8 +138,8 @@ def logout():
     return jsonify("logged out")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8443, debug=True)
-    # ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
+    app.run(host='0.0.0.0', port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
+    )
 
 
 @app.route("/export", methods=["POST"])
