@@ -1,7 +1,7 @@
 import os
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-settings_path = os.path.join(current_dir, "path", "settings.txt")
+settings_path = os.path.join(current_dir, "settings.txt")
 
 #Returns the matching value from the config
 def load_config_data(value_name : str) -> str:
