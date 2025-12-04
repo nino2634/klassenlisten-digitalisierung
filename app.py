@@ -3,9 +3,8 @@ from flask import Flask, render_template, jsonify, request, send_file
 from flask_cors import CORS
 from flask_login import LoginManager,logout_user,login_required
 
-from src.app.user_handler import setup_user_loader
+from src.app.user_handler import setup_user_loader,verify_user, load_users_into_memory
 from src.app.get_classes import run as get_classes
-from src.app.user_handler import verify_user, load_users_into_memory
 from src.app.get_lessons import run as get_lessons
 from src.app.get_headers import run as get_headers
 from src.app.export_file import export_file
@@ -113,6 +112,8 @@ def save_progress():
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
 @app.route("/api/verify_user",methods=["POST"])
 def get_authentification():
+    load_users_into_memory()
+
     data = request.get_json()
     user = data.get("user")
     password = data.get("password")
