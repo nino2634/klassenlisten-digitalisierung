@@ -1,3 +1,4 @@
+from pathlib import Path
 from flask import Flask, render_template, jsonify, request, send_file
 from flask_cors import CORS
 from flask_login import LoginManager,logout_user,login_required
@@ -143,16 +144,30 @@ if __name__ == '__main__':
 
 
 @app.route("/export", methods=["POST"])
-@login_required
 def export():
-    table_data = request.get_json()
-    excel_file = export_file(table=table_data)
-    return jsonify({"Status": "OK", "file":excel_file})
+    data = request.get_json()
+
+    # Klasse aus Query oder Default
+    class_name = request.args.get("class", "Unbenannt")
+
+    file_path = export_file(data, class_name)
+    print(file_path)
+
+    return jsonify({
+        "status": "ok",
+        "file": file_path
+    })
 
 @app.route("/download")
-@login_required
 def download():
-    file_path = os.path.join(os.getcwd(), "export.xlsx")  # absoluter Pfad
-    if not os.path.exists(file_path):
-        return "Datei existiert nicht!", 404
-    return send_file(file_path, as_attachment=True)
+    file_path = request.args.get("file")
+
+    if not file_path:
+        return "No file specified", 400
+
+    p = Path(file_path)
+    
+    if not p.exists():
+        return "File not found", 404
+
+    return send_file(p, as_attachment=True)

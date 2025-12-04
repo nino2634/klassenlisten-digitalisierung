@@ -5,11 +5,8 @@ from .file_handler import initiate_file, get_next_empty_row, get_next_row_with_v
 from .config.config_handler import load_config_data
 
 # variables
-half_year_column_name = load_config_data("half_year_column_name")
 classes_column_name = load_config_data("classes_column_name")
 weekly_hrs_column_name = load_config_data("weekly_hrs_column_name")
-odd_week_value = load_config_data("odd_week_value")
-even_week_value= load_config_data("even_week_value")
 
 def _find_class_title_row(sheet, class_filter):
     end_row = sheet.max_row
@@ -27,32 +24,6 @@ def add_sums(lesson_list):
         sum_sus += int(lesson['WoStd_SuS'])
         sum_kuk += int(lesson['WoStd_KuK'])
     
-def check_split_of_class(lesson1, lesson2):
-    return True
-    
-def generate_comments(lesson):
-    comments={
-        "split":"Die Klasse wird aufgeteilt.\n",
-        "merge":"Die Klassen werden zusammengeführt.\n",
-        "odd_week":"Die Stunde findet in der ungeraden Woche statt.\n",
-        "even_week":"Die Stunde findet in der geraden Woche statt.\n"
-    }
-    
-    comment = ""
-    
-    if even_week_value in lesson[half_year_column_name]:
-        comment += comments["even_week"]
-    if odd_week_value in lesson[half_year_column_name]:
-        comment += comments["odd_week"]
-    if "," in lesson[classes_column_name]:
-        comment += comments["merge"]
-        
-    return comment
-    #elif check_split_of_class(lesson, nextLesson):
-    #    return comments["split"]
-    
-    # elif: multiple lessons of same LV-Id with different classes = split
-    
 def _get_lessons_by_class(sheet, class_title, year_half, headers):
     title_row = _find_class_title_row(sheet, class_title)
     start_row = get_next_row_with_value(sheet, title_row + 1) + 1
@@ -68,8 +39,15 @@ def _get_lessons_by_class(sheet, class_title, year_half, headers):
             cell = sheet.cell(row, col)
             header = headers[col-1]
             lesson[header] = f"{cell.value}"
+            
+        if "," in lesson[classes_column_name]:
+            classes = str.split(lesson[classes_column_name], ",")
+            comment = "gekoppelt mit"
+            for class_name in classes:
+                if class_name != class_title:
+                    comment += f" {class_name},"
+            lesson['comment'] = comment[:len(comment) - 1]
         if year_half in lesson[load_config_data("half_year_column_name")]:
-            lesson['comment'] = generate_comments(lesson)
             list.append(lesson)
     
     sum_sus = 0
@@ -82,6 +60,9 @@ def _get_lessons_by_class(sheet, class_title, year_half, headers):
         if lesson[f"{weekly_hrs_column_name}_KuK"] != 'None':
             sum_kuk += float(lesson[f"{weekly_hrs_column_name}_KuK"])
     
+    sum_sus = round(sum_sus*100)/100
+    sum_kuk = round(sum_kuk*100)/100
+    
     lesson_list.append({"class_name": f"{class_title}", "lessons": list, "Sum_SuS": sum_sus, "Sum_KuK": sum_kuk})
     return lesson_list
 
@@ -91,7 +72,6 @@ def run(class_title, year_half):
     headers = json.loads(get_headers())
     lesson_list = _get_lessons_by_class(sheet, class_title, year_half, headers)  
     lesson_json = json.dumps(lesson_list)  
-    #print(lesson_list[0]['lessons'])
     return lesson_json
 
 run("02TSFR", "1.Hj")

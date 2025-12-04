@@ -44,29 +44,21 @@
               <td>{{ lesson.Lehrer }}</td>
               <td>{{ lesson.WoStd_KuK }}</td>
               <!-- <td>{{ lesson.form }}</td> -->
-              <td>{{  lesson.comment }}/td>
+              <td><input type="text" value="{{ lesson.comment }}"></td>
             </tr>
             {% endfor %}
-          </tbody>
-          <tfoot>
-            <tr class="table-sum text-white fw-bold">
+            <tr>
               <td></td>
-              <td></td>
-              <td id="sumSchueler">{{ sum_sus }}</td>
-              <td></td>
-              <td id="sumLehrer">{{ sum_kuk }}</td>
-              <td></td>
+              <td>Summe:</td>
+              <td id="sumSchueler">{{ sum_SuS }}</td>
+              <td>Summe:</td>
+              <td id="sumLehrer">{{ sum_KuK }}</td>
               <td></td>
             </tr>
-          </tfoot>
+          </tbody>
         </table>
       </div>
     </div>
-  </main>
-
-  <footer class="text-center py-3 text-muted small">
-    Footer filler Text
-  </footer>
 
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -81,38 +73,41 @@
 
 <script>
   async function exportAndDownload() {
-    let table = document.getElementById("lessons_table");
-    let rows = table.rows;
-    let data = [];
+    const table = document.getElementById("lessons_table");
+    const rows = table.rows;
+    const headers = [];
+    const jsonData = [];
 
-    for (let i = 1; i < rows.length; i++) {
-        let cells = rows[i].cells;
-        data.push({
-            "Nr": cells[0].innerText,
-            "Fach": cells[1].innerText,
-            "WoStd_SuS": cells[2].innerText,
-            "Lehrer": cells[3].innerText,
-            "WoStd_KuK": cells[4].innerText,
-            "Form": cells[5].innerText,
-            "Bemerkung": cells[6].innerText
-        });
+    for (let i = 0; i < rows[0].cells.length; i++) {
+        headers.push(rows[0].cells[i].innerText);
     }
 
-    // 1) Daten an Flask senden
-    await fetch("/export", {
+    for (let i = 1; i < rows.length; i++) {
+        const rowObject = {};
+        const cells = rows[i].cells;
+        for (let j = 0; j < cells.length; j++) {
+            rowObject[headers[j]] = cells[j].innerText;
+        }
+        jsonData.push(rowObject);
+    }
+    
+    // 1. Export anstoßen
+    let response = await fetch("https://localhost:8443/export?class=02TSFR", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data, null, 2)
     });
 
-    // 2) Download auslösen
-    const a = document.createElement("a");
-    a.href = "/download";
-    a.download = "";
-    a.style.display = "none";
+    let json = await response.json();
+    let file = json.file;
 
+    // 2. Download starten
+    const a = document.createElement("a");
+    a.href = "https://localhost:8443/download?file=" + encodeURIComponent(file);
+    console.log(encodeURIComponent(file))
+    a.style.display = "none";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-  }
+}
 </script>

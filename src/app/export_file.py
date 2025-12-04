@@ -1,14 +1,18 @@
 from openpyxl import Workbook
-import json
-from .get_lessons import run as get_lessons 
+from pathlib import Path
+import tempfile
 
 def export_file(table, class_name):
-    output_file = f"/tmp/{class_name}_klassenliste.xlsx"  # absoluter Pfad
+    # OS-unabhängiges temp-Verzeichnis
+    temp_dir = Path(tempfile.gettempdir())
+
+    # Speicherdatei (z.B. /tmp/02TSFR_klassenliste.xlsx)
+    output_file = temp_dir / f"{class_name}_klassenliste.xlsx"
 
     wb = Workbook()
     ws = wb.active
 
-    # Header aus Keys
+    # Header
     ws.append(list(table[0].keys()))
 
     # Rows
@@ -16,6 +20,6 @@ def export_file(table, class_name):
         ws.append(list(row.values()))
 
     wb.save(output_file)
-    return output_file
 
-#export_file(json.loads(get_lessons("02TSFR", "1.Hj"))[0]['lessons'], "02TSFR")
+    # Rückgabe: absoluter Pfad als String
+    return str(output_file)
