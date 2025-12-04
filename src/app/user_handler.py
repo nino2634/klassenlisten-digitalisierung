@@ -2,57 +2,29 @@ import os
 import sys
 import json
 import hashlib
-from itertools import count
 
+from itertools import count
 from flask_login import UserMixin, login_user, LoginManager
 
-# ---------------------------------------------------------
-# Globale Benutzer-Sammlung:
-# Enthält alle geladenen Benutzerobjekte, indexiert nach Benutzername.
-# ---------------------------------------------------------
 users_by_id = {}
 
-def create_path(path, file_name):
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(current_dir, path, file_name)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+user_path = os.path.join(current_dir, "data", "users.json")
 
-
-# ---------------------------------------------------------
-# Benutzerklasse
-# ---------------------------------------------------------
+#pre-made user class from flask
 class User(UserMixin):
-    """
-    Repräsentiert einen Benutzer des Systems.
-    Erbt von Flask-Login's UserMixin, um Sitzungsmanagement zu ermöglichen.
-    """
     def __init__(self, username, password, mode):
-        self.id = username                 # Flask-Login erwartet eine ID-Property
-        self.username = username           # Benutzername (gleichzeitig Primärschlüssel)
-        self.password = password           # Gespeichertes Passwort (gehasht)
-        self.mode = mode                   # Zugriffsmodus/Rolle (z.B. admin, user, etc.)
+        self.id = username                
+        self.username = username           
+        self.password = password           
+        self.mode = mode                  
 
-
-# ---------------------------------------------------------
-# Lädt Benutzerdaten aus der JSON-Datei.
-# ---------------------------------------------------------
+#loads json of all users
 def _load_user_json():
-    """
-    Liest die Datei 'users.json' ein und gibt die Daten als Python-Objekt zurück.
-    Erwartet ein Format wie:
-    {
-        "users": [
-            {"username": "...", "password": "...", "mode": "..."}
-        ]
-    }
-    """
-    user_path = create_path("data", "users.json")
-    
-    # Prüfen, ob Datei existiert
     if not os.path.exists(user_path):
         print("Error: users.json not found.")
         return "Error: users.json not found."
     
-    # JSON-Daten einlesen
     try:
         with open(user_path, "r") as f:
             data = json.load(f)
@@ -62,17 +34,12 @@ def _load_user_json():
         return "Error: Failed to parse users.json."
 
 
-# ---------------------------------------------------------
-# Lädt alle Benutzer aus der JSON-Datei in den Speicher.
-# ---------------------------------------------------------
+#Caches all users into memory
 def load_users_into_memory():
-    """
-    Lädt alle Benutzer aus der JSON-Datei in das globale Dictionary 'users_by_id'.
-    Jeder Benutzer wird als User-Objekt gespeichert.
-    """
+
     users_by_id.clear()
     data = _load_user_json()
-    # Benutzer aus der JSON-Struktur in Objekte umwandeln
+
     for user_data in data["users"]:
         user = User(user_data["username"], user_data["password"], user_data["mode"])
         users_by_id[user.id] = user
@@ -81,30 +48,21 @@ def load_users_into_memory():
         print("No user data found, check json file")
 
 
-# ---------------------------------------------------------
-# Verifiziert einen Benutzer bei der Anmeldung.
-# ---------------------------------------------------------
+#verify a user, rutruns mode on sucsses
 def verify_user(username_input, password_input):
-    """
-    Überprüft Benutzername und Passwort.
-    Falls gültig, wird der Benutzer über Flask-Login eingeloggt.
 
-    Rückgabewerte:
-        - Benutzerrolle (mode), falls Authentifizierung erfolgreich.
-        - "Authentication failed" bei Fehlern.
-    """
     user: User = users_by_id.get(username_input)
 
-    # Benutzer existiert nicht
+    # user does not exsist
     if user is None:
         print("no user found")
         return "Authentication Failed"
 
-    # Passwort salzen und hashen
+    #salt and peper
     password = "sal" + password_input + "peper"
     hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
-    # Passwortvergleich
+    #check password
     if user.password == hashed_password:
         login_user(user)
         print("user:", user.username, "has a session in flask login")
@@ -114,18 +72,11 @@ def verify_user(username_input, password_input):
         return "Authentication failed"
 
 
-# ---------------------------------------------------------
-# Flask-Login User-Loader konfigurieren.
-# ---------------------------------------------------------
+#registers flask login session
 def setup_user_loader(login_manager):
-    """
-    Registriert die Flask-Login-Funktion zum Laden eines Benutzers aus der Sitzung.
-    Muss beim Start der App einmal aufgerufen werden.
-    """
     load_users_into_memory()
 
     @login_manager.user_loader
     def load_user(user_id):
-        # Gibt das User-Objekt anhand der gespeicherten ID (Benutzername) zurück
         return users_by_id.get(user_id)
 
