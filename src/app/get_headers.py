@@ -61,6 +61,3 @@ def run():
     headers_json = json.dumps(headers)
     #print(headers)
     return headers_json
-
-result = run()
-print(result)

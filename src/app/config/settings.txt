@@ -5,3 +5,6 @@ half_year_column_name=Periodizität
 weekly_hrs_column_name=WoStd
 subject_column_name=Fach
 teacher_column_name=Lehrer
+classes_column_name=Klasse(n)
+odd_week_value=u-Wo
+even_week_value=g-Wo

@@ -26,6 +26,3 @@ def run(class_filter=""):
         return json.dumps(f"Class '{class_filter}' not found")
 
     return json.dumps(classes)
-
-result = run("") 
-print(result)
