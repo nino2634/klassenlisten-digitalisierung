@@ -52,7 +52,6 @@ def table_teacher_detailed():
     Sum_SuS = class_data[0]['Sum_SuS']
     Sum_KuK = class_data[0]['Sum_KuK']
     return render_template('teacherDetailed.html', class_name=class_name, lessons=lessons, headers=headers, sum_SuS=Sum_SuS, sum_KuK=Sum_KuK)
-
 #Methode gibt eine Liste der angefragten Klassen zurück
 @app.route("/api/classes",methods=["GET"])
 @login_required  

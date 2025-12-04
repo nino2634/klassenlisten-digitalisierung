@@ -1,4 +1,5 @@
 import { API_BASE_URL } from './config.js';
+import { getTeacherDetailedData } from './getTeacherDetailedData.js';
 document.addEventListener('DOMContentLoaded', async function() {
     await getTableData();
 }
@@ -15,18 +16,35 @@ try {
 }
 }
 
-let half_year = ""
 function renderTable(data) {
     const tableBody = document.getElementById("tableBody");
     tableBody.innerHTML = "";
 
     data.forEach(row => {
         const tr = document.createElement("tr");
-        tr.className = "border-0"
-        tr.innerHTML = `
-            <td class="p-0 m-1 border-0"><button class="w-100 btn btn-primary tableButton rounded-0 m-0 border-0" onclick="getTeacherDetailedData(${row},half_year)">${row}</button></td>
-        `;
+        tr.className = "border-0";
+
+        const td = document.createElement("td");
+        td.className = "p-0 m-1 border-0";
+
+        const btn = document.createElement("button");
+        btn.className = "w-100 btn btn-primary tableButton rounded-0 m-0 border-0 classList";
+        btn.textContent = row;
+
+        // Event Listener direkt hier setzen
+        btn.addEventListener("click", function() {
+            const class_name = this.textContent.trim();
+            console.log("ok " + class_name);
+            const half_year = document.getElementById('halfYearButton').dataset.value;
+            getTeacherDetailedData(class_name, half_year);
+
+        });
+
+
+        td.appendChild(btn);
+        tr.appendChild(td);
         tableBody.appendChild(tr);
     });
 }
+
       
