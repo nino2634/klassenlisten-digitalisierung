@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="diff changes on ui">
-      <change afterPath="$PROJECT_DIR$/static/js/teacherDetailed.js" afterDir="false" />
+    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="changed teacherDetailed logic and ui, api switch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/get_lessons.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/get_lessons.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/getClassList.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getClassList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/getTeacherDetailedData.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getTeacherDetailedData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/teacherDetailed.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/teacherDetailed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/teacherView.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/teacherView.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/teacherDetailed.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/teacherDetailed.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +96,7 @@
       <workItem from="1764835467950" duration="13907000" />
       <workItem from="1765179739903" duration="12000" />
       <workItem from="1765357930275" duration="390000" />
-      <workItem from="1765436783751" duration="8071000" />
+      <workItem from="1765436783751" duration="12723000" />
     </task>
     <task id="LOCAL-00001" summary="show ClassList Table">
       <option name="closed" value="true" />
@@ -203,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765440806914</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="changed teacherDetailed logic and ui, api switch">
+      <option name="closed" value="true" />
+      <created>1765445141391</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1765445141391</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +238,8 @@
     <MESSAGE value="changed certificate logic, added config js for ip, added type module for js imports" />
     <MESSAGE value="added redirect to detailed view" />
     <MESSAGE value="diff changes on ui" />
-    <option name="LAST_COMMIT_MESSAGE" value="diff changes on ui" />
+    <MESSAGE value="changed teacherDetailed logic and ui, api switch" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed teacherDetailed logic and ui, api switch" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
