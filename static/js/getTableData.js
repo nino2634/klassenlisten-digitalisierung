@@ -34,7 +34,6 @@ function renderTable(data) {
         // Event Listener direkt hier setzen
         btn.addEventListener("click", function() {
             const class_name = this.textContent.trim();
-            console.log("ok " + class_name);
             const half_year = document.getElementById('halfYearButton').dataset.value;
             getTeacherDetailedData(class_name, half_year);
 

@@ -73,5 +73,3 @@ def run(class_title, year_half):
     lesson_list = _get_lessons_by_class(sheet, class_title, year_half, headers)  
     lesson_json = json.dumps(lesson_list)  
     return lesson_json
-
-run("02TSFR", "1.Hj")
