@@ -23,13 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok && data.redirect_url) {
                 // Erfolgreich → Weiterleitung
                 window.location.href = data.redirect_url;
+
             } else {
-                // Login fehlgeschlagen
-                if (data.status === "failed") {
-                    showAlert("❌ Login fehlgeschlagen: Ungültige Zugangsdaten");
-                } else {
-                    showAlert("❌ Login fehlgeschlagen: Unbekannter Fehler");
-                }
+                console.log("Fehler")
             }
 
         } catch (error) {

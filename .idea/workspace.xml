@@ -4,20 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="comment certificate line">
-      <change afterPath="$PROJECT_DIR$/static/js/config.js" afterDir="false" />
+    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="added redirect to detailed view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/certificate/cert.pem" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/certificate/cert.pem" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/certificate/key.pem" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/certificate/key.pem" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/configurator_modules/change_password.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/configurator_modules/change_password.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/getClassList.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getClassList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/bootstrap/bootstrap.bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/bootstrap/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/config/settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/config/settings.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/configurator_modules/errorfix.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/configurator_modules/errorfix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/get_lessons.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/get_lessons.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/getTableData.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getTableData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/getTeacherDetailedData.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getTeacherDetailedData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/submitclass.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/submitclass.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/userLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/userLogin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/style/sytle.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/searchClass.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/style/teacherViewStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style/teacherViewStyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/lusdView.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lusdView.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/teacherDetailed.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/teacherDetailed.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/teacherView.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/teacherView.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +103,9 @@
       <workItem from="1763968067497" duration="3584000" />
       <workItem from="1764227634257" duration="14676000" />
       <workItem from="1764586377660" duration="15000" />
-      <workItem from="1764835467950" duration="5655000" />
+      <workItem from="1764835467950" duration="13907000" />
+      <workItem from="1765179739903" duration="12000" />
+      <workItem from="1765357930275" duration="390000" />
     </task>
     <task id="LOCAL-00001" summary="show ClassList Table">
       <option name="closed" value="true" />
@@ -176,7 +179,23 @@
       <option name="project" value="LOCAL" />
       <updated>1764243603250</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="changed certificate logic, added config js for ip, added type module for js imports">
+      <option name="closed" value="true" />
+      <created>1764841938179</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1764841938179</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added redirect to detailed view">
+      <option name="closed" value="true" />
+      <created>1764850159663</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1764850159663</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,6 +220,8 @@
     <MESSAGE value="added dropdown" />
     <MESSAGE value="added new teacher class view, added get detail teacher info function" />
     <MESSAGE value="comment certificate line" />
-    <option name="LAST_COMMIT_MESSAGE" value="comment certificate line" />
+    <MESSAGE value="changed certificate logic, added config js for ip, added type module for js imports" />
+    <MESSAGE value="added redirect to detailed view" />
+    <option name="LAST_COMMIT_MESSAGE" value="added redirect to detailed view" />
   </component>
 </project>

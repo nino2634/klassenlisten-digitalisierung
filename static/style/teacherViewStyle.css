@@ -2,51 +2,59 @@ html, body {
     height: 100%;
 }
 
+/* Tabelle */
+
 .table-container{
     max-height: 80vh;
 }
 
+.table thead th{
+    background-color: #29235c ;
+    color: white;
+    font-size: 1.5rem;
+}
+
 .table tbody tr:nth-child(even) td{
-    background:transparent !important;
+    background:transparent ;
 }
 .table tbody tr:nth-child(odd) td{
-    background:transparent  !important;
+    background:transparent  ;
 }
 
 #tableBody tr:nth-child(odd) button:hover {
-    background-color: #95c11f !important;
-    border-color: #95c11f !important;
-    color: white !important;
+    background-color: #95c11f ;
+    border-color: #95c11f ;
+    color: white ;
 }
 
 #tableBody tr:nth-child(even) button:hover{
-    background-color: #95c11f !important;
-    border-color: #95c11f !important;
-    color: white !important;
+    background-color: #95c11f ;
+    border-color: #95c11f ;
+    color: white ;
 }
 
 #tableBody tr:nth-child(odd) button:active{
-    background-color: #95c11f !important;
-    border-color: #95c11f !important;
-    color: white !important;
+    background-color: #95c11f ;
+    border-color: #95c11f ;
+    color: white ;
 }
 
 #tableBody tr:nth-child(even) button:active{
-    background-color: #29235c !important;
-    border-color: #29235c !important;
-    color: white !important;
+    background-color: #29235c ;
+    border-color: #29235c ;
+    color: white ;
 }
 
 
 
 #tableBody tr:nth-child(odd) button {
-    background: #ffffff !important;
+    background: #ffffff ;
     color: #000000; /* damit der Text sichtbar bleibt */
 
 }
 
 #tableBody tr:nth-child(even) button {
-    background:#41a8db71 !important;
+    background:#41a8db71 ;
     color: #000000; /* damit der Text sichtbar bleibt */
 
 }

@@ -42,17 +42,21 @@ def filter_teacher():
 @app.route('/teacherDetailed', methods=["GET"])
 @login_required
 def table_teacher_detailed():
-    class_name_url_param = request.args.get("class_name")
-    half_year = request.args.get("half_year")
+    class_name_url_param = request.args.get("class_name", "").strip()
+    half_year = request.args.get("half_year", "").strip()
+
     json_data = get_lessons(class_name_url_param, half_year)
     headers = json.loads(get_headers())
-    class_data = json.loads(json_data)
+    class_data = json.loads(json_data or "[]")
+
+    if not class_data:
+        return "No data found for class: " + class_name_url_param, 404
+
     class_name = class_data[0]['class_name']
     lessons = class_data[0]['lessons']
     Sum_SuS = class_data[0]['Sum_SuS']
     Sum_KuK = class_data[0]['Sum_KuK']
     return render_template('teacherDetailed.html', class_name=class_name, lessons=lessons, headers=headers, sum_SuS=Sum_SuS, sum_KuK=Sum_KuK)
-
 #Methode gibt eine Liste der angefragten Klassen zurück
 @app.route("/api/classes",methods=["GET"])
 @login_required  
@@ -140,7 +144,7 @@ def logout():
     return jsonify("logged out")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
+    app.run(host='0.0.0.0', debug=True, port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
     )
 
 
