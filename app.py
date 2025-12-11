@@ -46,7 +46,9 @@ def filter_teacher():
 def table_teacher_detailed():
     class_name_url_param = request.args.get("class_name", "").strip()
     half_year = request.args.get("half_year", "").strip()
-
+    
+    print(class_name_url_param, " | ", half_year)
+    
     json_data = get_lessons(class_name_url_param, half_year)
     headers = json.loads(get_headers())
     class_data = json.loads(json_data or "[]")
