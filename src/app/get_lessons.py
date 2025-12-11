@@ -8,6 +8,7 @@ from .config.config_handler import load_config_data
 # variables
 classes_column_name = load_config_data("classes_column_name")
 weekly_hrs_column_name = load_config_data("weekly_hrs_column_name")
+half_year_column_name = load_config_data("half_year_column_name").encode("latin-1").decode("utf-8")
 
 def _find_class_title_row(sheet, class_filter):
     end_row = sheet.max_row
@@ -48,7 +49,7 @@ def _get_lessons_by_class(sheet, class_title, year_half, headers):
                 if class_name != class_title:
                     comment += f" {class_name},"
             lesson['comment'] = comment[:len(comment) - 1]
-        if year_half in lesson[load_config_data("half_year_column_name")]:
+        if year_half in lesson[half_year_column_name]:
             list.append(lesson)
     
     sum_sus = 0
