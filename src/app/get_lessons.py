@@ -74,4 +74,5 @@ def run(class_title, year_half):
     lesson_json = json.dumps(lesson_list)  
     return lesson_json
 
-run("02TSFR", "1.Hj")
+result = run("02TSFR", "1.Hj")
+print(result)

@@ -90,6 +90,8 @@
         }
         jsonData.push(rowObject);
     }
+
+    console.log(jsonData)
     
     // 1. Export anstoßen
     let response = await fetch("https://localhost:8443/export?class=02TSFR", {
@@ -104,7 +106,7 @@
     // 2. Download starten
     const a = document.createElement("a");
     a.href = "https://localhost:8443/download?file=" + encodeURIComponent(file);
-    console.log(encodeURIComponent(file))
+
     a.style.display = "none";
     document.body.appendChild(a);
     a.click();
