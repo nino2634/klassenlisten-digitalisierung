@@ -1,7 +1,7 @@
 excel_file=src/app/data/Datenquelle.xlsx
 row_diff_class_name_headers=3
 row_diff_weekly_hrs=1
-half_year_column_name=Periodizitaet
+half_year_column_name=Periodizität
 weekly_hrs_column_name=WoStd
 subject_column_name=Fach
 teacher_column_name=Lehrer
