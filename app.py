@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from pathlib import Path
 from flask import Flask, render_template, jsonify, request, send_file
 from flask_cors import CORS
