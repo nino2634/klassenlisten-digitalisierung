@@ -35,8 +35,9 @@ export async function getTeacherDetailedData(class_name, half_year){
         const response = await fetch(
             `${API_BASE_URL}/teacherDetailed?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`
         );
+        console.log(response.json())
         if(response.json){
-            window.location.href = "/teacherDetailed";
+            window.location.href = `/teacherDetailed?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`;
             return await response.json(); // <-- hier zurückgeben
         } else{
             showAlert("❌ Fehler, kein JSON wird zurückgegeben.");

@@ -8,7 +8,7 @@ from .config.config_handler import load_config_data
 # variables
 classes_column_name = load_config_data("classes_column_name")
 weekly_hrs_column_name = load_config_data("weekly_hrs_column_name")
-half_year_column_name = load_config_data("half_year_column_name").encode("latin-1").decode("utf-8")
+half_year_column_name = load_config_data("half_year_column_name")#.encode("latin-1").decode("utf-8")
 
 def _find_class_title_row(sheet, class_filter):
     end_row = sheet.max_row
