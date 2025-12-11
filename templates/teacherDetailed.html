@@ -7,10 +7,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="../static/bootstrap/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <link rel="stylesheet" href="../static/style/teacherViewStyle.css">
-
+  <script src="../static/js/config.js">import { API_BASE_URL } from './config.js';</script>
 </head>
 <body class="bg-light">
   <main class="container py-4">
+    <form action='${API_BASE_URL}/api/export' method="post" encoding="multipart/formdata">
     <h4 class="mb-4 text-center">Lehrer-Ansicht Klassen detailliert</h4>
 
     <div class="card shadow-sm p-4 border-0">
@@ -18,7 +19,7 @@
         <a href="/teacherView">
           <button id="backBtn" class="btn btn-orange text-black fw-semibold px-4 py-2">Zurück</button>
         </a>
-        <button id="exportBtn" onclick="exportAndDownload()" class="btn btn-orange text-black fw-semibold px-4 py-2">Export</button>
+        <button id="exportBtn" type="submit" class="btn btn-orange text-black fw-semibold px-4 py-2">Export</button>
       </div>
 
       <div class="table-responsive">
@@ -66,6 +67,8 @@
   <!-- Export JS überprüfen und anpassen
   <script src="js/script.js"></script>
   --> 
+  </form>
+  </main>
 </body>
 </html>
 

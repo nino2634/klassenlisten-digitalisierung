@@ -3,3 +3,4 @@ pandas
 flask
 flask-login
 flask-cors
+html2excel

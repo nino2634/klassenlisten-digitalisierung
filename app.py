@@ -8,11 +8,12 @@ from src.app.user_handler import setup_user_loader,verify_user, load_users_into_
 from src.app.get_classes import run as get_classes
 from src.app.get_lessons import run as get_lessons
 from src.app.get_headers import run as get_headers
-from src.app.export_file import export_file
+#from src.app.export_file import export_file
 from src.app.progress_handler import save,load_all
 
 import json
 import os
+from html2excel import ExcelParser
 import subprocess
 import logging
 import hashlib
@@ -148,32 +149,17 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
     )
 
-
-@app.route("/export", methods=["POST"])
-def export():
-    data = request.get_json()
-
-    # Klasse aus Query oder Default
-    class_name = request.args.get("class", "Unbenannt")
-
-    file_path = export_file(data, class_name)
-    print(file_path)
-
-    return jsonify({
-        "status": "ok",
-        "file": file_path
-    })
-
-@app.route("/download")
-def download():
-    file_path = request.args.get("file")
-
-    if not file_path:
-        return "No file specified", 400
-
-    p = Path(file_path)
-    
-    if not p.exists():
-        return "File not found", 404
-
-    return send_file(p, as_attachment=True)
+@app.route("/api/export", methods=["POST"])
+def post():
+    save_dir = "./tmp"
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+    res = request.files.get('lessons_table')
+    file_path = os.path.join(save_dir, 'teacherDetailed.html')
+    if res is None:
+        return "No file selected"
+    res.save(file_path)
+    parser = ExcelParser(file_path)
+    save_path = os.path.join(save_dir, "converted.xlsx")
+    parser.to_excel(save_path)
+    return send_file(save_path)
