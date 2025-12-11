@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     dropdownItems.forEach(item => {
         item.addEventListener('click', function() {
-            const half_year = this.dataset.value; // "1" oder "2"
+            const half_year = this.dataset.value;
             const btn = document.getElementById('halfYearButton');
             btn.textContent = this.textContent;
             btn.dataset.value = half_year;
@@ -22,8 +22,10 @@ export async function getTeacherDetailedData(class_name, half_year){
             const response = await fetch(
                 `${API_BASE_URL}/teacherDetailed?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`);
             const data = await response.json();
-            renderTableDetailed(response, data);
-
+            console.log("Response OK:", response.ok);
+            console.log("Response status:", response.status);
+            console.log("Received data:", data);
+            renderTableDetailed(data);
         } catch (error) {
             console.error("Fehler beim Laden:", error);
         }
@@ -38,28 +40,66 @@ document.addEventListener('DOMContentLoaded', function() {
     classList.forEach(item => {
         item.addEventListener("click", function() {
             const class_name = this.textContent.trim();
-            console.log(typeof class_name)
             const half_year = document.getElementById('halfYearButton').dataset.value;
-            if (half_year === '1.Hj' || half_year === '2.Hj'){
-                getTeacherDetailedData(class_name, half_year);
-            } else{
+
+            if (half_year === '1.Hj' || half_year === '2.Hj') {
+
+                // Speichern für Detailseite
+                sessionStorage.setItem("class_name", class_name);
+                sessionStorage.setItem("half_year", half_year);
+
+                // Seitenwechsel
+                window.location.href = "/teacherDetailed";
+
+            } else {
                 showAlert("❌ Bitte zuerst das Halbjahr auswählen.");
             }
-
         });
     });
 });
 
-function renderTableDetailed(response, data) {
-    if(response.ok){
-
-    } else{
-        showAlert("❌ Serverfehler - Daten konnten nicht abgerufen werden");
+function renderTableDetailed(data) {
+    const tbody = document.getElementById("detailBody");
+    if (!tbody) {
+        console.error("❌ Element #detailBody nicht gefunden.");
+        return;
     }
-        // // Erfolgreich → Weiterleitung
-        // window.location.href = `/teacherDetailed?class_name=${class_name}&half_year=${half_year}`;
+    tbody.innerHTML = ""; // reset table
 
 
-        // Login fehlgeschlagen
+    const lessons = data.lessons || [];
+    let sumSuS = 0;
+    let sumKuk = 0;
+
+    lessons.forEach((lesson, index) => {
+        sumSuS += Number(lesson.WoStd_SuS);
+        sumKuk += Number(lesson.WoStd_KuK);
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${lesson.Fach}</td>
+            <td>${lesson.WoStd_SuS}</td>
+            <td>${lesson.Lehrer}</td>
+            <td>${lesson.WoStd_KuK}</td>
+            <td><input type="text" value="${lesson.comment || ""}"></td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    // Summenzeile
+    const sumRow = document.createElement("tr");
+    sumRow.innerHTML = `
+        <td></td>
+        <td>Summe:</td>
+        <td id="sumSchueler">${sumSuS}</td>
+        <td>Summe:</td>
+        <td id="sumLehrer">${sumKuk}</td>
+        <td></td>
+    `;
+    tbody.appendChild(sumRow);
+
+    console.log("Tabelle erfolgreich aktualisiert.");
 }
+
 
