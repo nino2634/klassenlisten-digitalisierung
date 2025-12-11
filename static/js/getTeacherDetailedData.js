@@ -14,17 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
 });
-
 
 export async function getTeacherDetailedData(class_name, half_year){
     if (half_year === '1.Hj' || half_year === '2.Hj'){
         try{
             const response = await fetch(
                 `${API_BASE_URL}/teacherDetailed?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`);
-
-            renderTableDetailed(response, class_name, half_year);
+            const data = await response.json();
+            renderTableDetailed(response, data);
 
         } catch (error) {
             console.error("Fehler beim Laden:", error);
@@ -52,13 +50,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function renderTableDetailed(response, class_name, half_year) {
-    if ((half_year === '1.Hj' || half_year === '2.Hj')) {
-        // Erfolgreich → Weiterleitung
-        window.location.href = `/teacherDetailed?class_name=${class_name}&half_year=${half_year}`;
-    } else {
-        // Login fehlgeschlagen
+function renderTableDetailed(response, data) {
+    if(response.ok){
+
+    } else{
         showAlert("❌ Serverfehler - Daten konnten nicht abgerufen werden");
-        }
+    }
+        // // Erfolgreich → Weiterleitung
+        // window.location.href = `/teacherDetailed?class_name=${class_name}&half_year=${half_year}`;
+
+
+        // Login fehlgeschlagen
 }
 

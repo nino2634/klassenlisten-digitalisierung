@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import openpyxl
 from .get_headers import run as get_headers
