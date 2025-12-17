@@ -22,15 +22,15 @@ html, body {
 }
 
 #tableBody tr:nth-child(odd) button:hover {
-    background-color: #95c11f ;
-    border-color: #95c11f ;
-    color: white ;
+    background-color: rgba(203, 203, 206, 0.44) ;
+    border-color: rgba(203, 203, 206, 0.44) ;
+    color: black ;
 }
 
 #tableBody tr:nth-child(even) button:hover{
-    background-color: #95c11f ;
-    border-color: #95c11f ;
-    color: white ;
+    background-color: rgba(203, 203, 206, 0.44) ;
+    border-color: rgba(203, 203, 206, 0.44) ;
+    color: black ;
 }
 
 #tableBody tr:nth-child(odd) button:active{
@@ -54,7 +54,7 @@ html, body {
 }
 
 #tableBody tr:nth-child(even) button {
-    background:#41a8db71 ;
+    background: #f3f5f7;
     color: #000000; /* damit der Text sichtbar bleibt */
 
 }

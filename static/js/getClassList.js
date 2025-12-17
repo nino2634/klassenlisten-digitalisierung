@@ -1,5 +1,4 @@
 import { API_BASE_URL } from './config.js';
-import { getTeacherDetailedData } from './getTeacherDetailedData.js';
 document.addEventListener('DOMContentLoaded', async function() {
     await getClassList();
 }
@@ -30,15 +29,6 @@ function renderTable(data) {
         const btn = document.createElement("button");
         btn.className = "w-100 btn btn-primary tableButton rounded-0 m-0 border-0 classList";
         btn.textContent = row;
-
-        // Event Listener direkt hier setzen
-        btn.addEventListener("click", function() {
-            const class_name = this.textContent.trim();
-            const half_year = document.getElementById('halfYearButton').dataset.value;
-            getTeacherDetailedData(class_name, half_year);
-
-        });
-
 
         td.appendChild(btn);
         tr.appendChild(td);

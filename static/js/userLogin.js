@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             } else {
                 console.log("Fehler")
+                showAlert("Fehlerhafte Login Daten")
             }
 
         } catch (error) {

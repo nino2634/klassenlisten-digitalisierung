@@ -15,37 +15,41 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Klassenliste Listener
-document.addEventListener('DOMContentLoaded', function() {
-    const classList = document.querySelectorAll(".classList");
-    classList.forEach(item => {
-        item.addEventListener("click", function() {
-            const class_name = this.textContent.trim();
-            const half_year = document.getElementById('halfYearButton').dataset.value;
-            if (half_year === '1.Hj' || half_year === '2.Hj') {
-
-            } else {
-                showAlert("❌ Bitte zuerst das Halbjahr auswählen.");
-            }
-        });
-    });
-});
-export async function getTeacherDetailedData(class_name, half_year){
-    console.log("klasse: " +class_name + "halbjahr: " + half_year)
-    try{
-        const response = await fetch(
-            `${API_BASE_URL}/teacherDetailed?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`
-        );
-        if(response.json){
-            window.location.href = "/teacherDetailed";
-            return await response.json(); // <-- hier zurückgeben
-        } else{
-            showAlert("❌ Fehler, kein JSON wird zurückgegeben.");
+document.addEventListener("click", function(e) {
+    if (e.target.classList.contains("classList")) {
+        const class_name = e.target.textContent.trim();
+        const half_year = document.getElementById('halfYearButton').dataset.value;
+        console.log("Weitergeleitet!", class_name, half_year);
+        if(half_year === "1.Hj" || half_year === "2.Hj"){
+            window.location.href = `/teacherDetailedView?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`;
+        }else{
+            showAlert("❌ Bitte zuerst das Halbjahr auswählen!")
         }
+
+    }
+});
+
+export async function getTeacherDetailedData(class_name, half_year) {
+    console.log("klasse: " + class_name + " halbjahr: " + half_year);
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/teacherDetailed?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`
+        );
+
+        if (!response.ok) {
+            // HTTP-Fehler behandeln
+            throw new Error(`Fehler beim Laden: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json(); // immer JSON parsen
+        return data;
+
     } catch (error) {
         console.error("Fehler beim Laden:", error);
         throw error; // damit der Aufrufer weiß, dass etwas schiefging
     }
 }
+
 
 
 

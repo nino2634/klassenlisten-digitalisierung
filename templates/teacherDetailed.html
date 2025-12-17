@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lehrer-Ansicht Klassen detailliert</title>
   <link href="../static/bootstrap/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-  <link rel="stylesheet" href="../static/style/teacherViewStyle.css">
-  <script src="../static/js/config.js">import { API_BASE_URL } from './config.js';</script>
+  <link rel="stylesheet" href="../static/style/main.css">
 </head>
 <body class="bg-light">
   <main class="container py-4">
@@ -16,14 +15,14 @@
     <div class="card shadow-sm p-4 border-0">
       <div class="d-flex justify-content-between mb-3">
         <a href="/teacherView">
-          <button id="backBtn" class="btn btn-orange text-black fw-semibold px-4 py-2">Zurück</button>
+          <button id="backBtn" class="btn btn-orange text-black fw-semibold px-4 py-2" href="/teacherView">Zurück</button>
         </a>
         <button id="exportBtn" type="submit" class="btn btn-orange text-black fw-semibold px-4 py-2">Export</button>
       </div>
 
       <div class="table-responsive">
         <table id="lessons_table" class="table table-bordered text-center align-middle mb-0">
-          <thead class="table-header text-white">
+          <thead class="table-header text-white text-center align-middle">
             <tr>
               <th>Nr.</th>
               <th>Fach/Lernfeld</th>

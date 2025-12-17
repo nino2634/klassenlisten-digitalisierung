@@ -41,7 +41,7 @@ def home():
 def filter_teacher():
     return render_template('teacherView.html')
 
-@app.route('/teacherDetailed', methods=["GET"])
+@app.route('/api/teacherDetailed', methods=["GET"])
 @login_required
 def table_teacher_detailed():
     class_name_url_param = request.args.get("class_name", "").strip()
@@ -60,7 +60,7 @@ def table_teacher_detailed():
     lessons = class_data[0]['lessons']
     Sum_SuS = class_data[0]['Sum_SuS']
     Sum_KuK = class_data[0]['Sum_KuK']
-#     return render_template('teacherDetailed.html', class_name=class_name, lessons=lessons, headers=headers, sum_SuS=Sum_SuS, sum_KuK=Sum_KuK)
+
     return jsonify({
         "class_name": class_name,
         "headers": headers,
@@ -68,6 +68,12 @@ def table_teacher_detailed():
         "Sum_SuS": Sum_SuS,
         "Sum_KuK": Sum_KuK
     })
+
+@app.route("/teacherDetailedView")
+@login_required
+def teacher_detailed_view():
+    return render_template("teacherDetailed.html")
+
 #Methode gibt eine Liste der angefragten Klassen zurück
 @app.route("/api/classes",methods=["GET"])
 @login_required  
