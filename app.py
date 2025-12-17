@@ -13,7 +13,7 @@ from src.app.progress_handler import save,load_all
 
 import json
 import os
-from html2excel import ExcelParser
+#from html2excel import ExcelParser
 import subprocess
 import logging
 import hashlib
@@ -44,10 +44,8 @@ def filter_teacher():
 @app.route('/api/teacherDetailed', methods=["GET"])
 @login_required
 def table_teacher_detailed():
-    class_name_url_param = request.args.get("class_name", "").strip()
-    half_year = request.args.get("half_year", "").strip()
-    
-    print(class_name_url_param, " | ", half_year)
+    class_name_url_param = request.args.get("class_name")
+    half_year = request.args.get("half_year")
     
     json_data = get_lessons(class_name_url_param, half_year)
     headers = json.loads(get_headers())
@@ -164,6 +162,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
     )
 
+"""
 @app.route("/api/export", methods=["POST"])
 def post():
     save_dir = "./tmp"
@@ -178,3 +177,4 @@ def post():
     save_path = os.path.join(save_dir, "converted.xlsx")
     parser.to_excel(save_path)
     return send_file(save_path)
+    """
