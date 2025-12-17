@@ -7,6 +7,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+    // URL-Parameter holen
+    const params = new URLSearchParams(window.location.search);
+    const class_name = params.get("class_name");
+    const half_year = params.get("half_year");
+
+    if (!class_name || !half_year) {
+        console.error("❌ Fehlende Parameter in der URL.");
+        return;
+    }
+
     try {
         const data = await getTeacherDetailedData(class_name, half_year);
         renderTableDetailed(data);
