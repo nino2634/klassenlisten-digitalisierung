@@ -58,10 +58,10 @@ def table_teacher_detailed():
     if not class_data:
         return "No data found for class: " + class_name_url_param, 404
 
-    class_name = class_data[0]['class_name']
-    lessons = class_data[0]['lessons']
-    Sum_SuS = class_data[0]['Sum_SuS']
-    Sum_KuK = class_data[0]['Sum_KuK']
+    class_name = class_data['class_name']
+    lessons = class_data['lessons']
+    Sum_SuS = class_data['Sum_SuS']
+    Sum_KuK = class_data['Sum_KuK']
 
     return jsonify({
         "class_name": class_name,
