@@ -1,6 +1,8 @@
 import json
 import os
 
+from .config.config_handler import load_config_data
+
 #loads the of the current progress
 current_dir = os.path.dirname(os.path.abspath(__file__))
 path = os.path.join(current_dir, "data", "progress.json")
@@ -71,6 +73,31 @@ def load_all(term: str):
     school_classes = data.get("class", [])
     result = [entry for entry in school_classes if entry.get("term") == term]
     return result
+
+import os, hashlib
+
+def file_hash(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+def check_and_reset():
+    data_path = load_config_data("excel_file")
+    current_hash = file_hash(data_path)
+    meta_path = "src/app/data/"
+
+    if os.path.exists(meta_path):
+        with open(meta_path, "r") as f:
+            saved_hash = f.read().strip()
+        if saved_hash == current_hash:
+            return False  # no reset
+
+    # reset progress
+    reset()
+    return True
+
 
 #resets all progress
 def reset():

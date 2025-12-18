@@ -4,6 +4,7 @@ from flask import Flask, render_template, jsonify, request, send_file,redirect, 
 from flask_cors import CORS
 from flask_login import LoginManager,logout_user,login_required,current_user
 
+from src.app import progress_handler
 from src.app.user_handler import setup_user_loader,verify_user, load_users_into_memory
 from src.app.get_classes import run as get_classes
 from src.app.get_lessons import run as get_lessons
@@ -103,6 +104,8 @@ def get_school_classes():
 @app.route("/api/load_progress",methods=["POST"])
 @login_required  
 def load_progress():
+    progress_handler.check_and_reset()
+
     data = request.get_json()
     term = data.get("term")
 
