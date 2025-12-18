@@ -24,7 +24,7 @@ function renderTable(data) {
         tr.className = "border-0";
 
         const td = document.createElement("td");
-        td.className = "p-0 m-1 border-0";
+        td.className = "p-0 m-1 border-0 tdBtn";
 
         const btn = document.createElement("button");
         btn.className = "w-100 btn btn-primary tableButton rounded-0 m-0 border-0 classList";
