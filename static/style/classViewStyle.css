@@ -5,7 +5,7 @@ html, body {
 /* Tabelle */
 
 .table-container{
-    max-height: 80vh;
+    max-height: 70vh;
 }
 
 .table thead th{
@@ -57,4 +57,22 @@ html, body {
     background: #f3f5f7;
     color: #000000; /* damit der Text sichtbar bleibt */
 
+}
+
+/* Logo */
+.logo{
+    width: 22%;
+}
+
+
+@media (max-width: 768px) {
+    .logo {
+        width: 25%;
+    }
+}
+
+@media (min-width: 769px) {
+    .logo {
+        width: 15%;
+    }
 }

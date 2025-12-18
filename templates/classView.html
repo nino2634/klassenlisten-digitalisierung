@@ -6,26 +6,36 @@
   <title>Lehrer-Ansicht Klassenauswahl</title>
 
   <link href="../static/bootstrap/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-  <link rel="stylesheet" href="../static/style/teacherViewStyle.css">
+  <link rel="stylesheet" href="../static/style/classViewStyle.css">
 </head>
 
-<body class="bg-light">
-  <main class="container-fluid py-4 vh-100">
-    <h3 class="mb-4 text-center">Lehrer-Ansicht Klassenauswahl</h3>
+<body class="bg-light m-0">
+
+  <main class="container-fluid py-2 vh-100">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="d-flex">
+        <img src="../static/images/logo-bso.svg" class="logo mt-0" alt="bso logo"></img>
+        <div class="justify-content-center">
+          <h2 class="text-center">Klassenauswahl</h2>
+        </div>
+      </div>
+
+    </nav>
+
     <div class="row d-flex justify-content-center">
-      <div class="col-2 table-responsive table-container">
-        <table class="table table-bordered mb-0 text-center align-middle border-0 shadow">
+      <div class="col-12 col-sm-5 col-md-4 col-lg-4 col-xl-3 col-xxl-2 table-responsive table-container">
+        <table class="table mb-0 text-center align-middle shadow">
           <thead class="table-header text-white sticky-top border-0">
             <tr>
               <th>Klasse</th>
             </tr>
           </thead>
-          <tbody id="tableBody" class="overflow-y-scroll table-group-divider">
+          <tbody id="tableBody" class="overflow-y-scroll">
           </tbody>
         </table>
       </div>
 
-      <div class="dropdown col-2">
+      <div class="dropdown col-12 col-sm-7 col-md-5 col-lg-3 col-xl-2">
 
         <button id="halfYearButton" class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           Halbjahr auswählen:
@@ -41,11 +51,9 @@
         <div class="col-12 flex-column gap-2">
           <form id="searchForm">
             <input id="searchInput" class="mt-2 form-control py-3 text-center" placeholder="Suche Klassen..." />
-            <button id="searchBtn" type="submit" class="btn btn-primary py-3 w-100 fw-semibold mt-2">Suchen</button>
           </form>
         </div>
       </div>
-
     </div>
   </main>
   <!-- Skripte -->
@@ -57,6 +65,8 @@
   <script type="module" src="../static/js/searchClass.js" defer></script>
   <script type="module" src="../static/js/changeButtonTextOnSelection.js" defer></script>
   <script type="module" src="../static/js/getTeacherDetailedData.js" defer></script>
+  <script type="module" src="../static/js/classView.js" defer></script>
+
 
 </body>
 </html>

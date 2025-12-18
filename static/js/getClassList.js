@@ -121,6 +121,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // 👇 Live-Suche: wird bei JEDER Eingabe ausgelöst
     searchInput.addEventListener("input", filterRows);
 });

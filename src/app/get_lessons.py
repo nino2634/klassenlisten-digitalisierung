@@ -8,7 +8,7 @@ from .config.config_handler import load_config_data
 # variables
 classes_column_name = load_config_data("classes_column_name")
 weekly_hrs_column_name = load_config_data("weekly_hrs_column_name")
-half_year_column_name = load_config_data("half_year_column_name")#.encode("latin-1").decode("utf-8")
+half_year_column_name = load_config_data("half_year_column_name").encode("latin-1").decode("utf-8")
 subject_column_name = load_config_data("subject_column_name")
 teacher_column_name = load_config_data("teacher_column_name")
 
@@ -125,5 +125,5 @@ def run(class_title, year_half):
     lesson_json = json.dumps(lesson_list)  
     return lesson_json
 
-result = run("02TSBR", "1.Hj")
+#result = run("02TSBR", "1.Hj")
 #print(result)
