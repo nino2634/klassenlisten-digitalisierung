@@ -1,18 +1,14 @@
 import { API_BASE_URL } from './config.js';
-document.addEventListener('DOMContentLoaded', async function() {
-    await getClassList();
-}
-);
 
-async function getClassList() {
-try {
-    const param = "";
-    const response = await fetch(`${API_BASE_URL}/api/classes?school_classes=`+ encodeURIComponent(param));
-    const data = await response.json();
-    renderTable(data);
-} catch (error) {
-    console.error("Fehler beim Laden:", error);
-}
+export async function getClassList() {
+    try {
+        const param = "";
+        const response = await fetch(`${API_BASE_URL}/api/classes?school_classes=`+ encodeURIComponent(param));
+        const data = await response.json();
+        renderTable(data);
+    } catch (error) {
+        console.error("Fehler beim Laden:", error);
+    }
 }
 
 function renderTable(data) {
@@ -24,13 +20,18 @@ function renderTable(data) {
         tr.className = "border-0";
 
         const td = document.createElement("td");
-        td.className = "p-0 m-1 border-0 tdBtn";
+        td.className = "p-0 m-1 border-0";
+
+        const div = document.createElement("div");
+        div.classList = "row tdBtn px-0 mx-0";
+        const divBtn = document.createElement("div");
 
         const btn = document.createElement("button");
         btn.className = "w-100 btn btn-primary tableButton rounded-0 m-0 border-0 classList";
         btn.textContent = row;
-
-        td.appendChild(btn);
+        divBtn.appendChild(btn);
+        div.appendChild(divBtn)
+        td.appendChild(div);
         tr.appendChild(td);
         tableBody.appendChild(tr);
     });
@@ -79,10 +80,9 @@ document.addEventListener("DOMContentLoaded", function () {
             tableBody.appendChild(tr);
         }
     });
-}); 
+});
 */
-
-document.addEventListener("DOMContentLoaded", function () {
+export function searchClass(){
     const searchInput = document.querySelector("#searchForm #searchInput");
     const tableBody = document.getElementById("tableBody");
 
@@ -122,4 +122,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     searchInput.addEventListener("input", filterRows);
-});
+}
+
