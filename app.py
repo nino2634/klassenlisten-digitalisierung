@@ -26,22 +26,24 @@ CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
 app.secret_key = "supergeheim-und-einzigartig"  
 classes = get_classes("")
 
+
 #For Flask Login
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "home"  # Changed to route name
+login_manager.login_view = "/"
 setup_user_loader(login_manager)
 
 @app.route('/')
 def home():
-    if current_user.is_authenticated:
-        return redirect(url_for('filter_teacher'))
-    return render_template('index.html')
+    if (current_user.is_authenticated):
+        return render_template('index.html')
+    else:
+        return render_template('classView.html')
 
-@app.route('/teacherView')
-@login_required  # Uncomment this!
+@app.route('/classView')
+#@login_required
 def filter_teacher():
-    return render_template('teacherView.html')
+    return render_template('classView.html')
 
 @app.route('/api/teacherDetailed', methods=["GET"])
 @login_required
