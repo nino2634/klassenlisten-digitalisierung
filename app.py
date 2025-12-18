@@ -35,7 +35,7 @@ setup_user_loader(login_manager)
 @app.route('/')
 def home():
     user_mode = current_user.mode
-    if (current_user.is_authenticated):
+    if (not current_user.is_authenticated):
         return render_template('index.html');
     else:   
         return redirect(url_for('teacherView'))
