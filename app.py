@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from pathlib import Path
-from flask import Flask, render_template, jsonify, request, send_file
+from flask import Flask, render_template, jsonify, request, send_file,redirect, url_for
 from flask_cors import CORS
-from flask_login import LoginManager,logout_user,login_required
+from flask_login import LoginManager,logout_user,login_required,current_user
 
 from src.app.user_handler import setup_user_loader,verify_user, load_users_into_memory
 from src.app.get_classes import run as get_classes
@@ -34,7 +34,11 @@ setup_user_loader(login_manager)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    user_mode = current_user.mode
+    if (not current_user.is_authenticated):
+        return render_template('index.html');
+    else:   
+        return redirect(url_for('teacherView'))
 
 @app.route('/teacherView')
 #@login_required
