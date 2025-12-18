@@ -38,12 +38,7 @@ def home():
     if (current_user.is_authenticated):
         return render_template('index.html');
     else:   
-        if user_mode == "simple":
-            return redirect(url_for('filter_teacher'))
-        elif user_mode == "advanced":
-            return redirect(url_for('filter_teacher'))
-
-    return render_template('index.html')
+        return redirect(url_for('teacherView'))
 
 @app.route('/teacherView')
 #@login_required
