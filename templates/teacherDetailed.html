@@ -13,7 +13,27 @@
       <div class="d-flex justify-content-between mb-3">
         <a href="/classView"><button id="backBtn" class="btn btn-orange text-black fw-semibold px-4 py-2">Zurück</button></a>
         <h4 class="d-flex align-items-center">Detailansicht</h4>
-        <button id="exportBtn" type="submit" action="sendTable()" class="btn btn-orange text-black fw-semibold px-4 py-2">Export</button>
+        <!--<button id="exportBtn" class="btn btn-orange text-black fw-semibold px-4 py-2">Export</button>-->
+        <button class="btn btn-orange text-black fw-semibold px-4 py-2" data-bs-toggle="modal" data-bs-target="#exportModal">Export</button>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exportModalLabel">Export</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
+      </div>
+      <div class="modal-body">
+        Wähle das Dateiformat:
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-orange text-black fw-semibold px-4 py-2 me-3" onclick="exportExcel()" id="exportExcelBtn">Excel</button>
+        <button type="button" class="btn btn-orange text-black fw-semibold px-4 py-2 ms-3" onclick="exportPDF()" id="exportPdfBtn">PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
       </div>
 
       <div class="table-responsive">
@@ -35,7 +55,8 @@
       </div>
     </div>
 
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="../static/js/buildtable.js" defer></script>
   <script  type="module" src="../static/js/getTeacherDetailedData.js" defer></script>
@@ -44,21 +65,79 @@
 </body>
 </html>
 
-
 <script>
-async function sendTable() {
+async function exportExcel() {
   const table = document.getElementById("lessons_table");
-  const rows = Array.from(table.rows).slice(1);
+  const rows = Array.from(table.tBodies[0].rows);
 
   const data = rows.map(row => ({
-    name: row.cells[0].innerText,
-    age: row.cells[1].innerText
+    nr: row.cells[0].innerText,
+    fach: row.cells[1].innerText,
+    stunden_schueler: row.cells[2].innerText,
+    lehrer: row.cells[3].innerText,
+    stunden_lehrer: row.cells[4].innerText,
+    bemerkung: row.cells[5].querySelector('input')?.value || ''
   }));
 
-  fetch("/api/export", {
+  const response = await fetch("/api/export", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   });
+
+  if (!response.ok) {
+    alert("Export fehlgeschlagen");
+    return;
+  }
+
+  // 🔽 Datei-Download erzwingen
+  const blob = await response.blob();
+  const url = window.URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "export.xlsx";
+  document.body.appendChild(a);
+  a.click();
+
+  a.remove();
+  window.URL.revokeObjectURL(url);
+
+  // Modal schließen
+  const modalEl = document.getElementById('exportModal');
+  const modal = bootstrap.Modal.getInstance(modalEl);
+  if (modal) modal.hide();
+}
+
+async function exportPDF() {
+  const table = document.getElementById("lessons_table");
+  const canvas = await html2canvas(table);
+  const imgData = canvas.toDataURL("image/png");
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({
+      orientation: 'landscape', // <-- quer
+      unit: 'mm',
+      format: 'a4'
+  });
+
+  const imgProps = pdf.getImageProperties(imgData);
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = pdf.internal.pageSize.getHeight();
+
+  const imgWidth = pdfWidth * 0.95; // Bildbreite auf 80% der Seite
+  const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+
+  // Zentrieren
+  const x = (pdfWidth - imgWidth) / 2;
+  const y = (pdfHeight - imgHeight) / 2;
+
+  pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
+  pdf.save("export.pdf");
+
+  // Modal schließen
+  const modalEl = document.getElementById('exportModal');
+  const modal = bootstrap.Modal.getInstance(modalEl);
+  if (modal) modal.hide();
 }
 </script>
