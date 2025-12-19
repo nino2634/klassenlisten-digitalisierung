@@ -111,7 +111,7 @@ def _get_lessons_by_class(sheet, class_title, con_year_half, headers):
             sum_sus += float(lesson[f"{weekly_hrs_column_name}_SuS"])
             if "," in str(lesson[f"{weekly_hrs_column_name}_KuK"]):
                 # Mehrere Lehrer, Stunden aufsplitten und addieren
-                kuk_hours = [float(x.strip()) for x in lesson[f"{weekly_hrs_column_name}_KuK"].split(",")]
+                kuk_hours = [float(x.strip()) for x in lesson[f"{weekly_hrs_column_name}_KuK"].split("-")]
                 sum_kuk += sum(kuk_hours)
             else:
                 sum_kuk += float(lesson[f"{weekly_hrs_column_name}_KuK"])
