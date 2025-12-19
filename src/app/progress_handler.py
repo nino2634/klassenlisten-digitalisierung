@@ -14,7 +14,7 @@ def setup():
     #Create file if not found in path
     if not os.path.exists(path):
         with open(path, "w", encoding="utf-8") as f:
-            json.dump({"class": []}, f, indent=4)
+            json.dump({"className": []}, f, indent=4)
         return
 
     #Attempts to open the json to check the sturcture for errors
@@ -22,13 +22,13 @@ def setup():
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        if not isinstance(data, dict) or "class" not in data or not isinstance(data["class"], list):
+        if not isinstance(data, dict) or "className" not in data or not isinstance(data["className"], list):
             raise ValueError("Invalid structure")
 
     #error for handling corrupted json
     except Exception:
         with open(path, "w", encoding="utf-8") as f:
-            json.dump({"class": []}, f, indent=4)
+            json.dump({"className": []}, f, indent=4)
 
 #Method to change state of a class, states are stored as a string, true = done, false = not done
 def save(target_school_class: str, state: str, term: str):
@@ -36,25 +36,27 @@ def save(target_school_class: str, state: str, term: str):
         data = json.load(f)
 
     #ensure the key exists in json
-    if "class" not in data:
-        data["class"] = []
+    if "className" not in data:
+        data["className"] = []
 
-    school_classes = data["class"]
+    school_classes = data["className"]
+    print(school_classes)
 
     #structure for new entry
     new_entry = {
-        "class": target_school_class,
-        "state": state,
-        "term": term
+        "className": target_school_class,
+        "checkboxState": state,
+        "savedHalfYear": term
     }
 
     updated = False
 
     #changes entry if one exsists
     for school_class_json in school_classes:
-        if (school_class_json["class"] == target_school_class and
-            school_class_json["term"] == term):
-            school_class_json["state"] = state
+        print(school_class_json["className"])
+        if (school_class_json["className"] == target_school_class and
+            school_class_json["savedHalfYear"] == term):
+            school_class_json["checkboxState"] = state
             updated = True
             break
 
@@ -70,8 +72,8 @@ def load_all(term: str):
     with open(path, "r") as f:
         data = json.load(f)
 
-    school_classes = data.get("class", [])
-    result = [entry for entry in school_classes if entry.get("term") == term]
+    school_classes = data.get("className", [])
+    result = [entry for entry in school_classes if entry.get("savedHalfYear") == term]
     return result
 
 import os, hashlib
@@ -103,7 +105,7 @@ def check_and_reset():
 def reset():
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
-        json.dump({"class": []}, f, indent=4)
+        json.dump({"className": []}, f, indent=4)
 
 #do setup on initialization
 setup()
