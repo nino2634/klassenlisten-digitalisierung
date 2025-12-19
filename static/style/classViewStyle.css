@@ -8,12 +8,13 @@ html, body {
     max-height: 70vh;
 }
 
-/*.table thead th{
+.table thead th{
     background-color: #29235c ;
     color: white;
     font-size: 1.5rem;
 }
 
+/*
 .table tbody tr:nth-child(even) td{
     background:transparent;
 }
@@ -87,6 +88,6 @@ html, body {
 
 @media (min-width: 769px) {
     .logo {
-        width: 15%;
+        width: 30%;
     }
 }

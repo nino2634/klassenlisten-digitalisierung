@@ -2,6 +2,20 @@ import {API_BASE_URL} from './config.js';
 //Halbjahr Dropdown Listener
 document.addEventListener('DOMContentLoaded', function() {
     const dropdownItems = document.querySelectorAll('#halfYearDropdown .dropdown-item');
+
+    // Gespeicherten Wert wiederherstellen, falls vorhanden
+    const savedHalfYear = sessionStorage.getItem('selectedHalfYear');
+    if (savedHalfYear) {
+        const btn = document.getElementById('halfYearButton');
+        const matchingItem = Array.from(dropdownItems).find(item => item.dataset.value === savedHalfYear);
+        if (matchingItem) {
+            btn.textContent = matchingItem.textContent;
+            btn.dataset.value = savedHalfYear;
+            dropdownItems.forEach(i => i.classList.remove('active'));
+            matchingItem.classList.add('active');
+        }
+    }
+
     dropdownItems.forEach(item => {
         item.addEventListener('click', function() {
             const half_year = this.dataset.value;
@@ -10,6 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.dataset.value = half_year;
             dropdownItems.forEach(i => i.classList.remove('active'));
             this.classList.add('active');
+
+            // In Session speichern
+            sessionStorage.setItem('selectedHalfYear', half_year);
         });
     });
 });
@@ -25,7 +42,6 @@ document.addEventListener("click", function(e) {
         }else{
             showAlert("❌ Bitte zuerst das Halbjahr auswählen!")
         }
-
     }
 });
 
