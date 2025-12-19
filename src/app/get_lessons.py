@@ -120,13 +120,15 @@ def _get_lessons_by_class(sheet, class_title, con_year_half, headers):
 
 def run(class_title, year_half):
     """
-    Docstring for run
+    Methode zum Ausführen der Logik zum Abrufen der Schulstunden einer Klasse.
     
     :param class_title: String, Name der Klasse
     :param year_half: String, Halbjahr, nach dem gesucht wird
     
     returns: Liste mit Klassennamen, Liste der Stunden und Summe der Wochenstunden als json-Objekt
     """
+    # Halbjahr tauschen
+    # benötigt, da Stunden, die in beiden Halbjahren stattfinden, gar kein Halbjahr in der Spalte stehen haben
     con_year_half = year_half
     if "1.Hj" in year_half:
         con_year_half = str.replace(con_year_half, "1.Hj", "2.Hj")

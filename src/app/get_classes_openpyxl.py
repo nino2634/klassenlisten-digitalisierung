@@ -3,6 +3,13 @@ from .file_handler import initiate_file
 from .get_headers import run as get_headers
 
 def run(class_filter=""):
+    """
+    Sucht in Spalte 1 des Worksheets nach Klassennamen, die den class_filter enthalten
+    
+    :param class_filter: String, Filter für Klassennamen
+    
+    returns: JSON-encoded Liste der gefundenen Klassennamen oder eine Fehlermeldung
+    """
     workbook = initiate_file()
     sheet = workbook.active
 
