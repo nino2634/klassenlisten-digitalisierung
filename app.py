@@ -39,7 +39,7 @@ def home():
     if (not current_user.is_authenticated):
         return render_template('index.html');
     else:   
-        return redirect(url_for('teacherView'))
+        return render_template('teacherView.html')
 
 @app.route('/teacherView')
 #@login_required

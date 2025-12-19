@@ -54,9 +54,9 @@ function renderTableDetailed(data) {
     sumRow.innerHTML = `
         <td></td>
         <td>Summe:</td>
-        <td id="sumSchueler">${sumSuS}</td>
+        <td id="sumSchueler">${data.Sum_SuS}</td>
         <td>Summe:</td>
-        <td id="sumLehrer">${sumKuk}</td>
+        <td id="sumLehrer">${data.Sum_KuK}</td>
         <td></td>
     `;
     tbody.appendChild(sumRow);

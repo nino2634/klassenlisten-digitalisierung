@@ -48,7 +48,9 @@ def _get_lessons_by_class(sheet, class_title, con_year_half, headers):
 
                 if weekly_hrs_column_name in header and (cell.value is None or cell.value == 'None'):
                     lesson[header] = 0
-
+                elif weekly_hrs_column_name in header and (cell.value is not None or cell.value != 'None'):
+                    lesson[header] = round(float(cell.value), 2)
+                    
                 if headers[col - 1] == subject_column_name:
                     next_cell = sheet.cell(row + 1, col)
                     if cell.value == next_cell.value:
@@ -100,15 +102,11 @@ def _get_lessons_by_class(sheet, class_title, con_year_half, headers):
             # Halbjahr passt nicht, einfach zur nächsten Zeile
             row += 1
 
-    # Runden
-    sum_sus = round(sum_sus, 2)
-    sum_kuk = round(sum_kuk, 2)
-
     return {
         "class_name": f"{class_title}",
         "lessons": lessons_list,
-        "Sum_SuS": sum_sus,
-        "Sum_KuK": sum_kuk
+        "Sum_SuS": round(sum_sus*100)/100,
+        "Sum_KuK": round(sum_kuk*100)/100
     }
 
 def run(class_title, year_half):
@@ -125,5 +123,5 @@ def run(class_title, year_half):
     lesson_json = json.dumps(lesson_list)  
     return lesson_json
 
-result = run("02TSBR", "1.Hj")
+#result = run("02TSBR", "1.Hj")
 #print(result)
