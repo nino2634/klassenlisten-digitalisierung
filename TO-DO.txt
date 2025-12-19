@@ -1,0 +1,3 @@
+TO DO
+
+Klassen mit nur stunden in einem HJ, im jeweils anderem HJ ausblenden

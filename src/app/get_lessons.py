@@ -68,7 +68,7 @@ def _get_lessons_by_class(sheet, class_title, con_year_half, headers):
                 if weekly_hrs_column_name in header and (cell.value is None or cell.value == 'None'):
                     lesson[header] = 0
                 elif weekly_hrs_column_name in header and (cell.value is not None or cell.value != 'None'):
-                    lesson[header] = round(float(cell.value), 3)
+                    lesson[header] = str(cell.value)
                     
                 # Wenn aktuelles Fach mehrfach in Liste vorkommt, dann Mergen aktivieren
                 if headers[col - 1] == subject_column_name:
@@ -92,7 +92,7 @@ def _get_lessons_by_class(sheet, class_title, con_year_half, headers):
                 if sheet.cell(nextRow, headers.index(teacher_column_name) + 1).value not in lesson[teacher_column_name]:
                     lesson[teacher_column_name] += f", {sheet.cell(nextRow, headers.index(teacher_column_name) + 1).value}"
                     lesson[f"{weekly_hrs_column_name}_KuK"] = str(lesson[f"{weekly_hrs_column_name}_KuK"])
-                    lesson[f"{weekly_hrs_column_name}_KuK"] += ", " + str(sheet.cell(nextRow, headers.index(f"{weekly_hrs_column_name}_KuK") + 1).value)
+                    lesson[f"{weekly_hrs_column_name}_KuK"] += " - " + str(sheet.cell(nextRow, headers.index(f"{weekly_hrs_column_name}_KuK") + 1).value)
                 
                 # Nächste Zeile
                 nextRow += 1
