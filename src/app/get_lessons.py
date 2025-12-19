@@ -5,6 +5,7 @@ from .file_handler import initiate_file, get_next_empty_row, get_next_row_with_v
 from .config.config_handler import load_config_data
 
 # Spaltennamen aus settings.txt laden
+# encode ist für Windows Kompatibilität notwendig, ansonsten gibt es Probleme mit Umlauten
 classes_column_name = load_config_data("classes_column_name")
 weekly_hrs_column_name = load_config_data("weekly_hrs_column_name")
 half_year_column_name = load_config_data("half_year_column_name")#.encode("latin-1").decode("utf-8")
@@ -90,7 +91,9 @@ def _get_lessons_by_class(sheet, class_title, con_year_half, headers):
                 # Lehrer zusammenführen
                 if sheet.cell(nextRow, headers.index(teacher_column_name) + 1).value not in lesson[teacher_column_name]:
                     lesson[teacher_column_name] += f", {sheet.cell(nextRow, headers.index(teacher_column_name) + 1).value}"
-
+                    lesson[f"{weekly_hrs_column_name}_KuK"] = str(lesson[f"{weekly_hrs_column_name}_KuK"])
+                    lesson[f"{weekly_hrs_column_name}_KuK"] += ", " + str(sheet.cell(nextRow, headers.index(f"{weekly_hrs_column_name}_KuK") + 1).value)
+                
                 # Nächste Zeile
                 nextRow += 1
 
@@ -106,7 +109,12 @@ def _get_lessons_by_class(sheet, class_title, con_year_half, headers):
 
             # Wochenstunden zu Summen addieren
             sum_sus += float(lesson[f"{weekly_hrs_column_name}_SuS"])
-            sum_kuk += float(lesson[f"{weekly_hrs_column_name}_KuK"])
+            if "," in str(lesson[f"{weekly_hrs_column_name}_KuK"]):
+                # Mehrere Lehrer, Stunden aufsplitten und addieren
+                kuk_hours = [float(x.strip()) for x in lesson[f"{weekly_hrs_column_name}_KuK"].split(",")]
+                sum_kuk += sum(kuk_hours)
+            else:
+                sum_kuk += float(lesson[f"{weekly_hrs_column_name}_KuK"])
         else:
             # Halbjahr passt nicht, einfach zur nächsten Zeile
             row += 1

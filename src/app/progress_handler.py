@@ -7,8 +7,12 @@ from .config.config_handler import load_config_data
 current_dir = os.path.dirname(os.path.abspath(__file__))
 path = os.path.join(current_dir, "data", "progress.json")
 
-#Called on Initilistion of class
+#Called on initialization of class
 def setup():
+    """
+    Stellt sicher, dass die JSON-Datei existiert und die richtige Struktur hat.
+    Wirft Exception bei Fehlern, sonst kein return-Wert.
+    """
     os.makedirs(os.path.dirname(path), exist_ok=True)
 
     #Create file if not found in path
@@ -17,7 +21,7 @@ def setup():
             json.dump({"className": []}, f, indent=4)
         return
 
-    #Attempts to open the json to check the sturcture for errors
+    #Attempts to open the json to check the structure for errors
     try:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -32,6 +36,14 @@ def setup():
 
 #Method to change state of a class, states are stored as a string, true = done, false = not done
 def save(target_school_class: str, state: str, term: str):
+    """
+    Speichert den Fortschritt einer Schulklasse in der JSON-Datei.
+    Fortschritt == Eingetragen in DB oder nicht
+    
+    :param target_school_class: String, Name der Schulklasse
+    :param state: String, "true" or "false"
+    :param term: String, Halbjahr der Schulklasse
+    """
     with open(path, "r") as f:
         data = json.load(f)
 
