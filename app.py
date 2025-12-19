@@ -4,6 +4,9 @@ from flask import Flask, render_template, jsonify, request, send_file,redirect, 
 from flask_cors import CORS
 from flask_login import LoginManager,logout_user,login_required,current_user
 
+import pandas as pd
+from io import BytesIO
+
 from src.app import progress_handler
 from src.app.user_handler import setup_user_loader,verify_user, load_users_into_memory
 from src.app.get_classes import run as get_classes
@@ -162,13 +165,36 @@ def logout():
     logout_user()
     return jsonify("logged out")
 
-if __name__ == '__main__':
-#     app.run(host='0.0.0.0', debug=True, port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
-#     )
-    app.run(host='0.0.0.0', debug=True, port=8443)
-
 @app.route("/api/export", methods=["POST"])
 def export():
     table = request.get_json()
     print(table)
-    print("OK")
+
+    #create a random Pandas dataframe
+    df_1 = pd.DataFrame(table)
+
+    #create an output stream
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+
+    #create the workbook and the worksheet
+    df_1.to_excel(writer, startrow = 0, merge_cells = False, sheet_name = "Sheet_1", index=False)
+    workbook = writer.book
+    worksheet = writer.sheets["Sheet_1"]
+    format = workbook.add_format()
+    format.set_bg_color('#eeeeee')
+    worksheet.set_column(0,9,28)
+
+    #the writer has done its job
+    writer.close()
+
+    #go back to the beginning of the stream
+    output.seek(0)
+
+    #finally return the file
+    return send_file(output, download_name="export.xlsx", as_attachment=True)
+
+if __name__ == '__main__':
+#     app.run(host='0.0.0.0', debug=True, port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
+#     )
+    app.run(host='0.0.0.0', debug=True, port=8443)
