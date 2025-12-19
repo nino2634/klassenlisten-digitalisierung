@@ -36,7 +36,7 @@ setup_user_loader(login_manager)
 
 @app.route('/')
 def home():
-    if (current_user.is_authenticated):
+    if not current_user.is_authenticated:
         return redirect(url_for('filter_teacher'))
     else:
         return render_template('index.html')
@@ -128,21 +128,21 @@ def load_progress():
 @app.route("/api/save_progress",methods=["POST"])
 def save_progress():
     data = request.get_json()
-    school_class = data.get("class")
-    term = data.get("term")
-    state = data.get("state")
-
+    school_class = data.get("className")
+    half_year = data.get("savedHalfYear")
+    state = data.get("checkboxState")
+    print(data)
     if not school_class:
        return jsonify("Error: Missing argument in authentification Code:school_class")
 
     if not state:
        return jsonify("Error: Missing argument in authentification Code:state")
 
-    if not term:
+    if not half_year:
        return jsonify("Error: Missing argument in authentification Code:term")
 
     try:
-        save(school_class,state,term)
+        save(school_class, state, half_year)
         return jsonify("saved data succesfully")
     except:
         return jsonify("Error: something went wrong when saving")

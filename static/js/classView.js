@@ -1,4 +1,5 @@
 import {getClassList, searchClass} from "./getClassList.js";
+import {API_BASE_URL} from "./config.js";
 
 const userData = JSON.parse(sessionStorage.getItem('userData')).state
 
@@ -13,16 +14,47 @@ document.addEventListener('DOMContentLoaded', async function () {
             const checkbox = document.createElement('input')
 
             el.firstElementChild.classList.add('col-10')
-            /*el.classList.add('row')*/
+
 
             div.className = 'form-check col-2 d-flex align-items-center justify-content-center';
 
-            checkbox.classList.add('form-check-input')
+            checkbox.className = 'form-check-input checkbox-item'
             checkbox.setAttribute('type','checkbox')
             checkbox.setAttribute('disabled','disabled')
+
+            // Listener direkt hinzufügen
+            checkbox.addEventListener('change', () => {
+                const checkboxState = checkbox.checked;
+                const className = el.firstElementChild.innerText
+                const savedHalfYear = sessionStorage.getItem('selectedHalfYear');
+                saveProgressState(checkboxState, className, savedHalfYear)
+            })
             div.appendChild(checkbox)
             el.appendChild(div)
-        })
+            async function saveProgressState(checkboxState, className, savedHalfYear) {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/api/save_progress`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({checkboxState, className, savedHalfYear})
+                    });
+
+                    if (!response.ok) {
+                        // Erfolgreich → Weiterleitung
+                        console.error('Fehler bei der Speicherung des Checkbox Status')
+
+                    }
+
+                } catch(error){
+                    console.error(error)
+                }
+            }
+
+        });
+
     }
 });
 if (userData === 'teacher') {
@@ -44,31 +76,6 @@ if (userData === 'teacher') {
             });
         });
     });
+
+
 }
-
-
-/*<div className="form-check">
-    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-    <label className="form-check-label" htmlFor="flexCheckDefault">
-        Default checkbox
-    </label>
-</div>*/
-
-/*
-    const observer = new MutationObserver((mutationsList) => {
-        mutationsList.forEach(mutation => {
-            mutation.addedNodes.forEach(node => {
-                console.log(node.querySelector('.tdBtn'))
-                const nodeElements = node.querySelector('.tdBtn')
-                nodeElements.classList.add('row')
-                nodeElements.firstElementChild.classList.add('col-9')
-                const div = document.createElement('div')
-                div.classList.add('col-3')
-                nodeElements.appendChild(div)
-
-            });
-        });
-    });
-
-    observer.observe(tableBody, { childList: true, subtree: true });*/
-/*}*/
