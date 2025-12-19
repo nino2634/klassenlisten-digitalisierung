@@ -36,7 +36,7 @@ setup_user_loader(login_manager)
 
 @app.route('/')
 def home():
-    if not current_user.is_authenticated:
+    if current_user.is_authenticated:
         return redirect(url_for('filter_teacher'))
     else:
         return render_template('index.html')
@@ -130,7 +130,7 @@ def save_progress():
     data = request.get_json()
     school_class = data.get("className")
     half_year = data.get("savedHalfYear")
-    state = data.get("checkboxState")
+    state = str(data.get("checkboxState"))
     print(data)
     if not school_class:
        return jsonify("Error: Missing argument in authentification Code:school_class")
