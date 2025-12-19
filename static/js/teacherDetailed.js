@@ -27,16 +27,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function renderTableDetailed(data) {
     const tbody = document.getElementById("detailBody");
-    if (!tbody) return; // <--- Prüft, ob DOM existiert
+    if (!tbody) return;
 
     tbody.innerHTML = "";
 
-    let sumSuS = 0;
-    let sumKuk = 0;
-
     (data.lessons || []).forEach((lesson, index) => {
-        sumSuS += Number(lesson.WoStd_SuS);
-        sumKuk += Number(lesson.WoStd_KuK);
 
         const tr = document.createElement("tr");
         tr.innerHTML = `

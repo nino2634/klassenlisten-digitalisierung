@@ -1,4 +1,5 @@
 import { API_BASE_URL } from './config.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('loginForm');
     form.addEventListener('submit', async (event) => {
@@ -18,11 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const data = await response.json();
-            console.log(data);
 
-            if (response.ok && data.redirect_url) {
+            if (response.ok) {
                 // Erfolgreich → Weiterleitung
-                window.location.href = data.redirect_url;
+                sessionStorage.setItem('userData', JSON.stringify(data));
+                window.location.href = "/classView";
 
             } else {
                 console.log("Fehler")

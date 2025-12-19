@@ -19,7 +19,7 @@ import subprocess
 import logging
 import hashlib
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="/static", static_folder="static")
 CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
 
 # secret key for authentication
@@ -35,16 +35,23 @@ setup_user_loader(login_manager)
 
 @app.route('/')
 def home():
+<<<<<<< HEAD
     user_mode = current_user.mode
     if (not current_user.is_authenticated):
         return render_template('index.html');
     else:   
         return render_template('teacherView.html')
+=======
+    if (current_user.is_authenticated):
+        return render_template('index.html')
+    else:
+        return render_template('classView.html')
+>>>>>>> 3fb082bf34006b15f3361bc8933cd9fe32ff88e6
 
-@app.route('/teacherView')
+@app.route('/classView')
 #@login_required
 def filter_teacher():
-    return render_template('teacherView.html')
+    return render_template('classView.html')
 
 @app.route('/api/teacherDetailed', methods=["GET"])
 @login_required
@@ -159,9 +166,9 @@ def get_authentification():
     mode = verify_user(user, password)
 
     if mode == "simple":
-        return jsonify({"redirect_url": "/teacherView"})
+        return jsonify({"state": "teacher"})
     if mode == "advanced":
-        return jsonify({"redirect_url": "/teacherView"})
+        return jsonify({"state": "lusd"})
     else:
         return jsonify({"status": "failed", "message": "Ungültige Zugangsdaten"}), 401
 
@@ -172,9 +179,9 @@ def logout():
     return jsonify("logged out")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
-    )
-
+#     app.run(host='0.0.0.0', debug=True, port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
+#     )
+    app.run(host='0.0.0.0', debug=True, port=8443)
 """
 @app.route("/api/export", methods=["POST"])
 def post():
