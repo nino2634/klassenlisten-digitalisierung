@@ -35,18 +35,10 @@ setup_user_loader(login_manager)
 
 @app.route('/')
 def home():
-<<<<<<< HEAD
-    user_mode = current_user.mode
-    if (not current_user.is_authenticated):
-        return render_template('index.html');
-    else:   
-        return render_template('teacherView.html')
-=======
     if (current_user.is_authenticated):
         return render_template('index.html')
     else:
         return render_template('classView.html')
->>>>>>> 3fb082bf34006b15f3361bc8933cd9fe32ff88e6
 
 @app.route('/classView')
 #@login_required
