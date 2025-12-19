@@ -49,16 +49,23 @@ def filter_teacher():
 @app.route('/api/teacherDetailed', methods=["GET"])
 @login_required
 def table_teacher_detailed():
+    """
+    Liefert die detaillierten Daten für eine bestimmte Klasse zurück.
+    Parameter: "class_name": string
+               "half_year": string
+    Gibt zurück: JSON-Objekt mit den Details der Klasse
+    """
     class_name_url_param = request.args.get("class_name")
     half_year = request.args.get("half_year")
     
+    #Python Funktion aufrufen, um Daten aus Excel Liste auszulesen
     json_data = get_lessons(class_name_url_param, half_year)
     headers = json.loads(get_headers())
     class_data = json.loads(json_data or "[]")
 
     if not class_data:
         return "No data found for class: " + class_name_url_param, 404
-
+    
     class_name = class_data['class_name']
     lessons = class_data['lessons']
     Sum_SuS = class_data['Sum_SuS']
@@ -81,6 +88,11 @@ def teacher_detailed_view():
 @app.route("/api/classes",methods=["GET"])
 @login_required  
 def get_school_classes():
+    """
+    führt einen Filter auf die Klassenliste aus und gibt die gefilterte Liste zurück.
+    Erwartet: String oder nichts als Query-Parameter "school_classes"
+    Gibt zurück: JSON-Array der gefilterten Klassenliste
+    """
     filter = request.args.get("school_classes")
     class_list = json.loads(classes) 
     
@@ -165,33 +177,38 @@ def logout():
     logout_user()
     return jsonify("logged out")
 
+
 @app.route("/api/export", methods=["POST"])
 def export():
+    """
+    Nimmt eine JSON-Tabelle entgegen und exportiert diese als Excel-Datei.
+    Erwartet: JSON-Array von Objekten, wobei jedes Objekt eine Zeile in der Tabelle darstellt.
+    Gibt zurück: Excel-Datei
+    """
     table = request.get_json()
     print(table)
 
-    #create a random Pandas dataframe
+    #Pandas Dataframe aus der Tabelle erstellen
     df_1 = pd.DataFrame(table)
 
-    #create an output stream
+    #Output Stream erstellen
     output = BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
 
-    #create the workbook and the worksheet
+    #Workbook und Worksheet erstellen
     df_1.to_excel(writer, startrow = 0, merge_cells = False, sheet_name = "Sheet_1", index=False)
     workbook = writer.book
     worksheet = writer.sheets["Sheet_1"]
     format = workbook.add_format()
     format.set_bg_color('#eeeeee')
-    worksheet.set_column(0,9,28)
 
-    #the writer has done its job
+    #Writer wieder schließen
     writer.close()
 
-    #go back to the beginning of the stream
+    #Stream zurücksetzen
     output.seek(0)
 
-    #finally return the file
+    #Datei als "export.xlsx" zurückgeben
     return send_file(output, download_name="export.xlsx", as_attachment=True)
 
 if __name__ == '__main__':
