@@ -13,7 +13,7 @@
       <div class="d-flex justify-content-between mb-3">
         <a href="/classView"><button id="backBtn" class="btn btn-orange text-black fw-semibold px-4 py-2">Zurück</button></a>
         <h4 class="d-flex align-items-center">Detailansicht</h4>
-        <button id="exportBtn" type="submit" class="btn btn-orange text-black fw-semibold px-4 py-2">Export</button>
+        <button id="exportBtn" type="submit" action="sendTable()" class="btn btn-orange text-black fw-semibold px-4 py-2">Export</button>
       </div>
 
       <div class="table-responsive">
@@ -46,44 +46,19 @@
 
 
 <script>
-  async function exportAndDownload() {
-    const table = document.getElementById("lessons_table");
-    const rows = table.rows;
-    const headers = [];
-    const jsonData = [];
+async function sendTable() {
+  const table = document.getElementById("lessons_table");
+  const rows = Array.from(table.rows).slice(1);
 
-    for (let i = 0; i < rows[0].cells.length; i++) {
-        headers.push(rows[0].cells[i].innerText);
-    }
+  const data = rows.map(row => ({
+    name: row.cells[0].innerText,
+    age: row.cells[1].innerText
+  }));
 
-    for (let i = 1; i < rows.length; i++) {
-        const rowObject = {};
-        const cells = rows[i].cells;
-        for (let j = 0; j < cells.length; j++) {
-            rowObject[headers[j]] = cells[j].innerText;
-        }
-        jsonData.push(rowObject);
-    }
-
-    console.log(jsonData)
-    
-    // 1. Export anstoßen
-    let response = await fetch("https://localhost:8443/export?class=02TSFR", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data, null, 2)
-    });
-
-    let json = await response.json();
-    let file = json.file;
-
-    // 2. Download starten
-    const a = document.createElement("a");
-    a.href = "https://localhost:8443/download?file=" + encodeURIComponent(file);
-
-    a.style.display = "none";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+  fetch("/api/export", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
 }
 </script>
