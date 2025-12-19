@@ -28,18 +28,18 @@ classes = get_classes("")
 #For Flask Login
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "/"
+login_manager.login_view = "home"
 setup_user_loader(login_manager)
 
 @app.route('/')
 def home():
     if (current_user.is_authenticated):
-        return render_template('index.html')
+        return redirect(url_for('filter_teacher'))
     else:
-        return render_template('classView.html')
+        return render_template('index.html')
 
 @app.route('/classView')
-#@login_required
+@login_required
 def filter_teacher():
     return render_template('classView.html')
 
