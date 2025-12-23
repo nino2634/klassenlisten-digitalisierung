@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const className = el.firstElementChild.innerText
                 const savedHalfYear = sessionStorage.getItem('selectedHalfYear');
                 saveProgressState(checkboxState, className, savedHalfYear)
+                getProgressState(savedHalfYear)
             })
             div.appendChild(checkbox)
             el.appendChild(div)
@@ -50,6 +51,32 @@ document.addEventListener('DOMContentLoaded', async function () {
 
                 } catch(error){
                     console.error(error)
+                }
+            }
+            async function getProgressState(savedHalfYear) {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/api/load_progress`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({ savedHalfYear })
+                    });
+
+                    if (!response.ok) {
+                        console.error('Fehler bei der Speicherung des Checkbox-Status');
+                        return; // Beende die Funktion, wenn ein Fehler auftritt
+                    }
+
+                    const data = await response.json();
+                    console.log('Erfolg:', data);
+
+                    // Hier kannst du bei Erfolg weiterleiten oder andere Aktionen ausführen
+                    // z.B.: window.location.href = '/next-page';
+
+                } catch (error) {
+                    console.error('Netzwerk- oder Parsing-Fehler:', error);
                 }
             }
 

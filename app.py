@@ -113,7 +113,7 @@ def load_progress():
     progress_handler.check_and_reset()
 
     data = request.get_json()
-    term = data.get("term")
+    term = data.get("half_year")
 
     if not term:
        return jsonify("Error: Missing argument in authentification Code:term")
