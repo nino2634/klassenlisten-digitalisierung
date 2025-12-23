@@ -2,6 +2,56 @@ html, body {
     height: 100%;
 }
 
+/* Logo */
+
+@media (max-width: 575px) {
+    .logo {
+        width: 35%;
+    }
+}
+
+@media (min-width: 576px) {
+    .logo {
+        width: 25%;
+    }
+}
+
+@media (min-width: 768px) {
+    .logo {
+        width: 40%;
+    }
+}
+
+@media (min-width: 1080px) {
+    .logo {
+        width: 20%;
+    }
+}
+
+/* Text */
+
+.my-fs {
+    font-size: 1.1rem; /* Mobile */
+}
+
+@media (min-width: 1200px) {
+    .my-fs {
+        font-size: 1.2rem; /* ab md */
+    }
+}
+
+@media (min-width: 1900px) {
+    .my-fs {
+        font-size: 1.4rem; /* ab md */
+    }
+}
+
+@media (min-width: 2200px) {
+    .my-fs {
+        font-size: 1.7rem; /* ab md */
+    }
+}
+
 /* Tabelle */
 
 .table-container{
@@ -13,38 +63,6 @@ html, body {
     color: white;
     font-size: 1.5rem;
 }
-
-/*
-.table tbody tr:nth-child(even) td{
-    background:transparent;
-}
-.table tbody tr:nth-child(odd) td{
-    background:transparent;
-}
-
-#tableBody tr:nth-child(odd) button:hover {
-    background-color: rgba(203, 203, 206, 0.44) ;
-    border-color: rgba(203, 203, 206, 0.44) ;
-    color: black ;
-}
-
-#tableBody tr:nth-child(even) button:hover{
-    background-color: rgba(203, 203, 206, 0.44) ;
-    border-color: rgba(203, 203, 206, 0.44) ;
-    color: black ;
-}
-
-#tableBody tr:nth-child(odd) button:active{
-    background-color: #95c11f ;
-    border-color: #95c11f ;
-    color: white ;
-}
-
-#tableBody tr:nth-child(even) button:active{
-    background-color: #29235c ;
-    border-color: #29235c ;
-    color: white ;
-}*/
 
 #tableBody tr:nth-child(odd) td {
     background-color: #f5f5f5 !important;
@@ -72,22 +90,4 @@ html, body {
     background: transparent;
     color: #000000; /* damit der Text sichtbar bleibt */
 
-}
-
-/* Logo */
-.logo{
-    width: 22%;
-}
-
-
-@media (max-width: 768px) {
-    .logo {
-        width: 25%;
-    }
-}
-
-@media (min-width: 769px) {
-    .logo {
-        width: 30%;
-    }
 }

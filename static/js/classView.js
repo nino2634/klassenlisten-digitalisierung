@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             const div = document.createElement('div')
             const checkbox = document.createElement('input')
 
-            el.firstElementChild.classList.add('col-10')
+            el.firstElementChild.className = 'col-12 col-sm-12 col-md-8 col-lg-10'
 
 
-            div.className = 'form-check col-2 d-flex align-items-center justify-content-center';
+            div.className = 'form-check col-12 col-sm-12 col-md-4 col-lg-2 d-flex align-items-center justify-content-center';
 
             checkbox.className = 'form-check-input checkbox-item'
             checkbox.setAttribute('type','checkbox')

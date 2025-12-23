@@ -1,3 +1,19 @@
 {
-    "className": []
+    "className": [
+        {
+            "className": "01AFSPa",
+            "checkboxState": "False",
+            "savedHalfYear": "1.Hj"
+        },
+        {
+            "className": "10ABT",
+            "checkboxState": "False",
+            "savedHalfYear": "1.Hj"
+        },
+        {
+            "className": "02TSAP",
+            "checkboxState": "False",
+            "savedHalfYear": "1.Hj"
+        }
+    ]
 }

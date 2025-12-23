@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="changed teacherDetailed logic and ui, api switch">
+    <list default="true" id="5ac78bbc-ce1b-46d3-aaa6-d2e9315a2e81" name="Changes" comment="added checkboxes for lusd view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/get_lessons.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/get_lessons.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/data/progress.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/data/progress.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/classView.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/classView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/getClassList.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getClassList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/getTeacherDetailedData.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/getTeacherDetailedData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/teacherDetailed.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/teacherDetailed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/style/classViewStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style/classViewStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/classView.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/classView.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/teacherDetailed.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/teacherDetailed.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +43,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/nino2634/klassenlisten-digitalisierung.git&quot;,
-    &quot;accountId&quot;: &quot;3c1d0d8b-12e7-427f-b490-bab3ef2576a3&quot;
+    &quot;accountId&quot;: &quot;acf09248-5b40-4b22-b8b5-a8c65d228f0e&quot;
   }
 }</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
@@ -55,29 +59,33 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
     "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
     "WebServerToolWindowPanel.toolwindow.show.date": "false",
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/ahmad.zeidan/OneDrive - AEM August Elektrotechnik GmbH/Desktop/Schule/Schulprojekt/klassenlisten-digitalisierung",
+    "last_opened_file_path": "C:/Users/derni/Desktop/Schulprojekt/klassenlisten-digitalisierung",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.keymap",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-PS-251.26927.60" />
-        <option value="bundled-php-predefined-a98d8de5180a-e5747d4f5a45-com.jetbrains.php.sharedIndexes-PS-251.26927.60" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.143" />
       </set>
     </attachedChunks>
   </component>
@@ -97,6 +105,9 @@
       <workItem from="1765179739903" duration="12000" />
       <workItem from="1765357930275" duration="390000" />
       <workItem from="1765436783751" duration="12723000" />
+      <workItem from="1766080343531" duration="209000" />
+      <workItem from="1766080570954" duration="5182000" />
+      <workItem from="1766490557049" duration="10263000" />
     </task>
     <task id="LOCAL-00001" summary="show ClassList Table">
       <option name="closed" value="true" />
@@ -210,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765445141391</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added checkboxes for lusd view">
+      <option name="closed" value="true" />
+      <created>1766085730186</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1766085730187</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,7 +258,8 @@
     <MESSAGE value="added redirect to detailed view" />
     <MESSAGE value="diff changes on ui" />
     <MESSAGE value="changed teacherDetailed logic and ui, api switch" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed teacherDetailed logic and ui, api switch" />
+    <MESSAGE value="added checkboxes for lusd view" />
+    <option name="LAST_COMMIT_MESSAGE" value="added checkboxes for lusd view" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

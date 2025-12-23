@@ -27,7 +27,7 @@ function renderTable(data) {
         const divBtn = document.createElement("div");
 
         const btn = document.createElement("button");
-        btn.className = "w-100 btn btn-primary tableButton rounded-0 m-0 border-0 classList";
+        btn.className = "w-100 btn btn-primary tableButton rounded-0 m-0 border-0 classList my-fs";
         btn.textContent = row;
         divBtn.appendChild(btn);
         div.appendChild(divBtn)

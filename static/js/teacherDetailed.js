@@ -32,7 +32,6 @@ function renderTableDetailed(data) {
     tbody.innerHTML = "";
 
     (data.lessons || []).forEach((lesson, index) => {
-
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${index + 1}</td>
@@ -40,7 +39,12 @@ function renderTableDetailed(data) {
             <td>${lesson.WoStd_SuS}</td>
             <td>${lesson.Lehrer}</td>
             <td>${lesson.WoStd_KuK}</td>
-            <td><input type="text" value="${lesson.comment || ""}"></td>
+            <td class="text-wrap overflow-auto">
+              <textarea class="auto-grow"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        rows="1">${lesson.comment || ""}</textarea>
+            </td>
         `;
         tbody.appendChild(tr);
     });
@@ -56,5 +60,20 @@ function renderTableDetailed(data) {
     `;
     tbody.appendChild(sumRow);
 
+    // Auto-Grow für alle gerade erzeugten Textareas aktivieren
+    tbody.querySelectorAll('.auto-grow').forEach(function(textarea) {
+        textarea.style.overflow = 'hidden';
+        textarea.style.resize = 'none';
+
+        const adjustHeight = (el) => {
+            el.style.height = 'auto';
+            el.style.height = el.scrollHeight + 'px';
+        }
+
+        adjustHeight(textarea);
+        textarea.addEventListener('input', () => adjustHeight(textarea));
+    });
+
     console.log("Tabelle erfolgreich aktualisiert.");
 }
+

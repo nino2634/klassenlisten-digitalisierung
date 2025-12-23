@@ -9,52 +9,63 @@
   <link rel="stylesheet" href="../static/style/classViewStyle.css">
 </head>
 
-<body class="bg-light m-0">
+<body class="bg-body-secondary m-0">
 
   <main class="container-fluid py-2 vh-100">
-    <div class="row">
-      <div class="col-5">
+    <div class="row d-flex">
+      <div class="col-12 col-md-5 d-flex justify-content-md-start justify-content-center">
         <img src="../static/images/logo-bso.svg" class="logo" alt="bso logo">
       </div>
-      <div class="col-7 d-flex align-items-center"><h2 >Klassenauswahl</h2></div>
     </div>
+    <div class="row d-flex justify-content-center mt-3">
+      <div class="col-6">
+        <div class="card shadow">
+          <div class="card-header text-center">
+            <h2 class="d-none d-sm-block">Klassenauswahl</h2>
+            <h2 class="d-block d-sm-none">Klassen-<br>auswahl</h2>
+          </div>
+          <div class="card-body">
+            <div class="row d-flex justify-content-center">
+              <div class="p-0 px-sm-2 col-12 col-sm-10 col-md-8 col-lg-7 col-xl-5 col-xxl-5 table-responsive table-container mb-2 mb-lg-0">
+                <table class="table mb-0 text-center align-middle">
+                  <thead class="table-header text-white sticky-top border-0">
+                  <tr>
+                    <th>Klasse</th>
+                  </tr>
+                  </thead>
+                  <tbody id="tableBody" class="overflow-y-scroll">
+                  </tbody>
+                </table>
+              </div>
 
+              <div class="dropdown col-12 col-sm-10 col-md-8 col-lg-7 col-xl-4 col-xxl-3 text-truncate mt-xl-0 mt-2 px-0 px-sm-2">
 
+                <button id="halfYearButton" class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Halbjahr auswählen:
+                </button>
 
+                <ul id="halfYearDropdown" class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item active" data-value="0">Bitte auswählen...</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" data-value="1.Hj"><button class="btn bg-transparent text-white m-0 p-0 w-100 border-0">1. Halbjahr</button></a></li>
+                  <li><a class="dropdown-item" data-value="2.Hj"><button class="btn bg-transparent text-white m-0 p-0 w-100 border-0">2. Halbjahr</button></a></li>
+                </ul>
 
-    <div class="row d-flex justify-content-center">
-      <div class="col-12 col-sm-5 col-md-4 col-lg-4 col-xl-3 col-xxl-2 table-responsive table-container">
-        <table class="table mb-0 text-center align-middle shadow">
-          <thead class="table-header text-white sticky-top border-0">
-            <tr>
-              <th>Klasse</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody" class="overflow-y-scroll">
-          </tbody>
-        </table>
-      </div>
+                <div class="col-12 flex-column gap-2">
+                  <form id="searchForm">
+                    <input id="searchInput" class="mt-2 form-control py-3 text-center" placeholder="Suche Klassen..." />
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <div class="dropdown col-12 col-sm-7 col-md-5 col-lg-3 col-xl-2">
-
-        <button id="halfYearButton" class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Halbjahr auswählen:
-        </button>
-
-        <ul id="halfYearDropdown" class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item active" data-value="0">Bitte auswählen...</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" data-value="1.Hj"><button class="btn bg-transparent text-white m-0 p-0 w-100 border-0">1. Halbjahr</button></a></li>
-          <li><a class="dropdown-item" data-value="2.Hj"><button class="btn bg-transparent text-white m-0 p-0 w-100 border-0">2. Halbjahr</button></a></li>
-        </ul>
-
-        <div class="col-12 flex-column gap-2">
-          <form id="searchForm">
-            <input id="searchInput" class="mt-2 form-control py-3 text-center" placeholder="Suche Klassen..." />
-          </form>
         </div>
+
       </div>
+
     </div>
+
   </main>
   <!-- Skripte -->
   <script src="../static/bootstrap/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
