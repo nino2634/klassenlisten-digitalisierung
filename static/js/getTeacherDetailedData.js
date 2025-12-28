@@ -38,7 +38,7 @@ document.addEventListener("click", function(e) {
         const half_year = document.getElementById('halfYearButton').dataset.value;
         console.log("Weitergeleitet!", class_name, half_year);
         if(half_year === "1.Hj" || half_year === "2.Hj"){
-            window.location.href = `/teacherDetailedView?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`;
+            window.location.href = `/classViewDetailed?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`;
         }else{
             showAlert("❌ Bitte zuerst das Halbjahr auswählen!")
         }
@@ -49,7 +49,7 @@ export async function getTeacherDetailedData(class_name, half_year) {
     console.log("klasse: " + class_name + " halbjahr: " + half_year);
     try {
         const response = await fetch(
-            `${API_BASE_URL}/api/teacherDetailed?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`
+            `${API_BASE_URL}/api/classViewDetailed?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`
         );
 
         if (!response.ok) {

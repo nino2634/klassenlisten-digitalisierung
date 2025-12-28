@@ -4,6 +4,26 @@
             "className": "11",
             "checkboxState": "t",
             "savedHalfYear": "t"
+        },
+        {
+            "className": "01AFSPb",
+            "checkboxState": "True",
+            "savedHalfYear": "1.Hj"
+        },
+        {
+            "className": "01TSFR",
+            "checkboxState": "False",
+            "savedHalfYear": "1.Hj"
+        },
+        {
+            "className": "02TSAP",
+            "checkboxState": "True",
+            "savedHalfYear": "2.Hj"
+        },
+        {
+            "className": "02TSFR",
+            "checkboxState": "True",
+            "savedHalfYear": "2.Hj"
         }
     ]
 }

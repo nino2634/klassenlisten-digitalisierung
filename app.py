@@ -46,9 +46,9 @@ def home():
 def filter_teacher():
     return render_template('classView.html')
 
-@app.route('/api/teacherDetailed', methods=["GET"])
+@app.route('/api/classViewDetailed', methods=["GET"])
 @login_required
-def table_teacher_detailed():
+def get_class_view_detailed_data():
     """
     Liefert die detaillierten Daten für eine bestimmte Klasse zurück.
     Parameter: "class_name": string
@@ -79,10 +79,10 @@ def table_teacher_detailed():
         "Sum_KuK": Sum_KuK
     })
 
-@app.route("/teacherDetailedView")
+@app.route("/classViewDetailed")
 @login_required
-def teacher_detailed_view():
-    return render_template("teacherDetailed.html")
+def class_view_detailed():
+    return render_template("classViewDetailed.html")
 
 #Methode gibt eine Liste der angefragten Klassen zurück
 @app.route("/api/classes",methods=["GET"])
