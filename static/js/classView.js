@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     await getClassList();
     searchClass();
 
-    if (userData === "teacher") {
+    if (userData === "lusd") {
         const tableTd = document.querySelectorAll('.tdBtn');
 
         tableTd.forEach(el => {
