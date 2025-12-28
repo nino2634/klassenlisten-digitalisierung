@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             checkbox.addEventListener('change', () => {
                 const checkboxState = checkbox.checked;
                 const className = el.firstElementChild.innerText;
+                const savedHalfYear = sessionStorage.getItem('selectedHalfYear');
+                console.log(savedHalfYear);
                 saveProgressState(checkboxState, className, savedHalfYear);
             });
 
@@ -52,7 +54,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
         });
 
-        // Funktion auslagern
         function updateCheckboxes(value) {
             const tableTd = document.querySelectorAll('.tdBtn');
             tableTd.forEach(el => {

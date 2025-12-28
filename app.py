@@ -131,7 +131,9 @@ def save_progress():
     school_class = data.get("className")
     half_year = data.get("savedHalfYear")
     state = str(data.get("checkboxState"))
-
+    print(school_class)
+    print(half_year)
+    print(state)
     if not school_class:
         return jsonify({"error": "Missing argument: className"}), 400
     if not state:
