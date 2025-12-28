@@ -1,3 +1,9 @@
 {
-    "className": []
+    "className": [
+        {
+            "className": "11",
+            "checkboxState": "t",
+            "savedHalfYear": "t"
+        }
+    ]
 }

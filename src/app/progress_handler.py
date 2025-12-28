@@ -14,7 +14,7 @@ def setup():
     Wirft Exception bei Fehlern, sonst kein return-Wert.
     """
     os.makedirs(os.path.dirname(path), exist_ok=True)
-
+    
     #Create file if not found in path
     if not os.path.exists(path):
         with open(path, "w", encoding="utf-8") as f:
@@ -120,4 +120,6 @@ def reset():
         json.dump({"className": []}, f, indent=4)
 
 #do setup on initialization
+
 setup()
+save("11","t","t")
