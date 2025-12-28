@@ -100,7 +100,7 @@ def file_hash(path):
 def check_and_reset():
     data_path = load_config_data("excel_file")
     current_hash = file_hash(data_path)
-    meta_path = "src/app/data/"
+    meta_path = "src/app/data/progress.json"
 
     if os.path.exists(meta_path):
         with open(meta_path, "r") as f:

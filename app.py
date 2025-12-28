@@ -111,12 +111,12 @@ def get_school_classes():
 @login_required  
 def load_progress():
     progress_handler.check_and_reset()
-
     data = request.get_json()
     term = data.get("half_year")
+    print(term)
 
     if not term:
-       return jsonify("Error: Missing argument in authentification Code:term")
+       return jsonify("Error: Missing argument in authentification Code: savedHalfYear")
 
     try:
         return jsonify(load_all(term))
@@ -125,27 +125,26 @@ def load_progress():
 
 
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
-@app.route("/api/save_progress",methods=["POST"])
+@app.route("/api/save_progress", methods=["POST"])
 def save_progress():
     data = request.get_json()
     school_class = data.get("className")
     half_year = data.get("savedHalfYear")
     state = str(data.get("checkboxState"))
-    print(data)
+
     if not school_class:
-       return jsonify("Error: Missing argument in authentification Code:school_class")
-
+        return jsonify({"error": "Missing argument: className"}), 400
     if not state:
-       return jsonify("Error: Missing argument in authentification Code:state")
-
+        return jsonify({"error": "Missing argument: checkboxState"}), 400
     if not half_year:
-       return jsonify("Error: Missing argument in authentification Code:term")
+        return jsonify({"error": "Missing argument: savedHalfYear"}), 400
 
     try:
         save(school_class, state, half_year)
-        return jsonify("saved data succesfully")
-    except:
-        return jsonify("Error: something went wrong when saving")
+        return jsonify({"success": "Saved data successfully"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Something went wrong when saving"}), 500
 
 #Methode gibt simple,advanced zurück wenn benutzer valide ist. Ansonsten fehler
 @app.route("/api/verify_user",methods=["POST"])

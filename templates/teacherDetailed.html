@@ -56,91 +56,9 @@
   <script src="../static/bootstrap/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
   <script  type="module" src="../static/js/getTeacherDetailedData.js" defer></script>
   <script type="module" src="../static/js/teacherDetailed.js" defer></script>
   <script src="../static/js/alerts.js" defer></script>
 </body>
 </html>
-
-<script>
-async function exportExcel() {
-  // Tabellendaten in array sammeln
-  const table = document.getElementById("lessons_table");
-  const rows = Array.from(table.tBodies[0].rows);
-
-  const data = rows.map(row => ({
-    nr: row.cells[0].innerText,
-    fach: row.cells[1].innerText,
-    stunden_schueler: row.cells[2].innerText,
-    lehrer: row.cells[3].innerText,
-    stunden_lehrer: row.cells[4].innerText,
-    bemerkung: row.cells[5].querySelector('input')?.value || ''
-  }));
-
-  // weiterleiten zu export endpoint
-  const response = await fetch("/api/export", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
-
-  if (!response.ok) {
-    alert("Export fehlgeschlagen");
-    return;
-  }
-
-  // Datei-Download starten
-  const blob = await response.blob();
-  const url = window.URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "export.xlsx";
-  document.body.appendChild(a);
-  a.click();
-
-  a.remove();
-  window.URL.revokeObjectURL(url);
-
-  // Modal schließen
-  const modalEl = document.getElementById('exportModal');
-  const modal = bootstrap.Modal.getInstance(modalEl);
-  if (modal) modal.hide();
-}
-
-async function exportPDF() {
-  // Tabelle als Bild erfassen
-  const table = document.getElementById("lessons_table");
-  const canvas = await html2canvas(table);
-  const imgData = canvas.toDataURL("image/png");
-
-  // PDF erzeugen
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF({
-      orientation: 'landscape', // <-- quer
-      unit: 'mm',
-      format: 'a4'
-  });
-
-  // Styling Variablen
-  const imgProps = pdf.getImageProperties(imgData);
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = pdf.internal.pageSize.getHeight();
-
-  const imgWidth = pdfWidth * 0.95; // Bildbreite auf 80% der Seite
-  const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
-
-  // Zentrieren
-  const x = (pdfWidth - imgWidth) / 2;
-  const y = (pdfHeight - imgHeight) / 2;
-
-  // Bild zum PDF hinzufügen und speichern
-  pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
-  pdf.save("export.pdf");
-
-  // Modal schließen
-  const modalEl = document.getElementById('exportModal');
-  const modal = bootstrap.Modal.getInstance(modalEl);
-  if (modal) modal.hide();
-}
-</script>

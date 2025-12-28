@@ -73,7 +73,117 @@ function renderTableDetailed(data) {
         adjustHeight(textarea);
         textarea.addEventListener('input', () => adjustHeight(textarea));
     });
-
-    console.log("Tabelle erfolgreich aktualisiert.");
 }
 
+async function exportExcel() {
+    // Tabellendaten in array sammeln
+    const table = document.getElementById("lessons_table");
+    const rows = Array.from(table.tBodies[0].rows);
+
+    const data = rows.map(row => ({
+        nr: row.cells[0].innerText,
+        fach: row.cells[1].innerText,
+        stunden_schueler: row.cells[2].innerText,
+        lehrer: row.cells[3].innerText,
+        stunden_lehrer: row.cells[4].innerText,
+        bemerkung: row.cells[5].querySelector('input')?.value || ''
+    }));
+
+    // Weiterleiten zu export endpoint
+    const response = await fetch("/api/export", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+        alert("Export fehlgeschlagen");
+        return;
+    }
+
+    // Datei-Download starten
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "export.xlsx";
+    document.body.appendChild(a);
+    a.click();
+
+    a.remove();
+    window.URL.revokeObjectURL(url);
+
+    // Modal schließen
+    const modalEl = document.getElementById('exportModal');
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    if (modal) modal.hide();
+}
+
+function exportPDF() {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("landscape", "mm", "a4");
+
+    const rows = [];
+    const tableRows = document.querySelectorAll("#detailBody tr");
+
+    tableRows.forEach(tr => {
+        const cells = tr.querySelectorAll("td");
+        if (cells.length === 0) return;
+
+        rows.push([
+            cells[0]?.innerText || "",
+            cells[1]?.innerText || "",
+            cells[2]?.innerText || "",
+            cells[3]?.innerText || "",
+            cells[4]?.innerText || "",
+            cells[5]?.querySelector("textarea")?.value || cells[5]?.innerText || ""
+        ]);
+    });
+
+    pdf.autoTable({
+        startY: 40,
+        head: [[
+            "Nr.",
+            "Fach",
+            "Std./SuS",
+            "Lehrer",
+            "Std./KuK",
+            "Bemerkung"
+        ]],
+        body: rows,
+
+        theme: "grid", // 🔑 Gitter überall
+
+        headStyles: {
+            fillColor: '#29235c', // weiß
+            textColor: '#ffffff',
+            lineWidth: 0.2
+        },
+
+        styles: {
+            fontSize: 9,
+            cellPadding: 3,
+            valign: "top",
+            lineWidth: 0.1,        // Linienbreite
+            lineColor: [0, 0, 0]   // schwarz
+        },
+
+        columnStyles: {
+            5: { cellWidth: 80 }
+        },
+        // Gerade Zeilen einfärben
+        didParseCell: function (data) {
+            if (data.section === 'body' && data.row.index % 2 === 1) {
+                data.cell.styles.fillColor = [200, 230, 250]; // RGB
+                data.cell.styles.fillOpacity = 0.1; // entspricht 71 in Hex (71/255 ≈ 0.278)
+            }
+        }
+    });
+
+
+    pdf.save("export.pdf");
+}
+
+window.exportPDF = exportPDF;
+window.exportExcel = exportExcel;
