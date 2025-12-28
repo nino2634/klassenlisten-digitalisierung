@@ -110,9 +110,9 @@ def get_school_classes():
 @app.route("/api/load_progress",methods=["POST"])
 @login_required  
 def load_progress():
-    #progress_handler.check_and_reset()
+    progress_handler.check_and_reset()
     data = request.get_json()
-    term = data.get()
+    term = data.get("savedHalfYear")
     print(term)
 
     if not term:
