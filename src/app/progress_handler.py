@@ -122,4 +122,3 @@ def reset():
 #do setup on initialization
 
 setup()
-save("11","t","t")
