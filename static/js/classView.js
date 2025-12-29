@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     await getClassList();
     searchClass();
 
-    if (userData === "teacher") {
+    if (userData === "lusd") {
         const tableTd = document.querySelectorAll('.tdBtn');
 
         tableTd.forEach(el => {
@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             checkbox.addEventListener('change', () => {
                 const checkboxState = checkbox.checked;
                 const className = el.firstElementChild.innerText;
+                const savedHalfYear = sessionStorage.getItem('selectedHalfYear');
+                console.log(savedHalfYear);
                 saveProgressState(checkboxState, className, savedHalfYear);
             });
 
@@ -40,14 +42,18 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // EventListener für Dropdown
         dropdownItems.forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', async function() {
                 const value = item.dataset.value;
                 sessionStorage.setItem('selectedHalfYear', value);
+                // Checkboxen aktiv / deaktivieren
                 updateCheckboxes(value);
+                // alle Checkboxen erst zurücksetzen
+                resetCheckboxes();
+                // neuen Status laden
+                await getProgressState(value);
             });
         });
 
-        // Funktion auslagern
         function updateCheckboxes(value) {
             const tableTd = document.querySelectorAll('.tdBtn');
             tableTd.forEach(el => {
@@ -56,6 +62,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                     checkbox.disabled = (value === "0");
                 }
             });
+        }
+
+        function resetCheckboxes() {
+            const checkboxes = document.querySelectorAll('.checkbox-item');
+            checkboxes.forEach(cb => cb.checked = false);
         }
 
         // Progress speichern/abrufen
@@ -81,16 +92,39 @@ document.addEventListener('DOMContentLoaded', async function () {
                     credentials: 'include',
                     body: JSON.stringify({ savedHalfYear })
                 });
+
                 if (!response.ok) {
-                    console.error('Fehler bei der Speicherung des Checkbox-Status');
+                    console.error('Fehler beim Laden des Fortschritts');
                     return;
                 }
-                const data = await response.json();
-                console.log('Meldung:', data);
+
+                const data = await response.json(); // <-- Array!
+
+                if (!Array.isArray(data)) return;
+
+                const tableTd = document.querySelectorAll('.tdBtn');
+
+                tableTd.forEach(el => {
+                    const className = el.firstElementChild.innerText.trim();
+                    const checkbox = el.querySelector('input[type="checkbox"]');
+
+                    if (!checkbox) return;
+
+                    // passenden Eintrag aus der DB suchen
+                    const entry = data.find(
+                        item =>
+                            item.className === className &&
+                            item.checkboxState === "True"
+                    );
+
+                    checkbox.checked = !!entry;
+                });
+
             } catch (error) {
                 console.error('Netzwerk- oder Parsing-Fehler:', error);
             }
         }
+
         await getProgressState(savedHalfYear);
     }
 });
