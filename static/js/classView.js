@@ -2,12 +2,21 @@ import {getClassList, searchClass} from "./getClassList.js";
 import {API_BASE_URL} from "./config.js";
 
 const userDataRaw = localStorage.getItem('userData');
-const userData = userDataRaw ? JSON.parse(userDataRaw).state : null;
+let userData = userDataRaw ? JSON.parse(userDataRaw).state : null;
 
-// Beim Browser schließen, storage mit userData entfernen (teacher/lusd)
-window.addEventListener('beforeunload', () => {
-    localStorage.removeItem('userData');
-});
+if (!userData) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/userMode`, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+        });
+
+        userData = await response.text();
+    }catch(error) {
+        console.error(error);
+    }
+}
 
 const dropdownItems = document.querySelectorAll('#halfYearDropdown .dropdown-item');
 const savedHalfYear = sessionStorage.getItem('selectedHalfYear') || (dropdownItems[0]?.dataset.value || "0");

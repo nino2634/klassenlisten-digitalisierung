@@ -41,6 +41,11 @@ def home():
     else:
         return render_template('index.html')
 
+@app.route('/api/userMode')
+@login_required
+def user_mode():
+    return current_user.mode
+
 @app.route('/classView')
 @login_required
 def filter_teacher():
