@@ -24,7 +24,7 @@ app = Flask(__name__, static_url_path="/static", static_folder="static")
 CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
 
 # secret key for authentication
-app.secret_key = "supergeheim-und-einzigartig"  
+app.secret_key = "010011010100100101001110010001010100001101010010010000010100011001010100"  
 classes = get_classes("")
 
 
