@@ -76,7 +76,6 @@ function renderTableDetailed(data) {
 }
 
 async function exportExcel() {
-    // Tabellendaten in array sammeln
     const table = document.getElementById("lessons_table");
     const rows = Array.from(table.tBodies[0].rows);
 
@@ -88,8 +87,6 @@ async function exportExcel() {
         stunden_lehrer: row.cells[4].innerText,
         bemerkung: row.cells[5].querySelector('input')?.value || ''
     }));
-
-    // Weiterleiten zu export endpoint
     const response = await fetch("/api/export", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -101,7 +98,7 @@ async function exportExcel() {
         return;
     }
 
-    // Datei-Download starten
+    // 🔽 Datei-Download erzwingen
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
 
