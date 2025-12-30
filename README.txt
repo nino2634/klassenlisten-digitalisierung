@@ -10,7 +10,7 @@ Sie wird als Webanwendung betrieben und über einen Python-Webserver gestartet.
 Voraussetzungen
 -------------------------------------------------
 Python, siehe requirments.txt
-Zugriff auf einen eine Serverumgebung
+Zugriff auf eine Serverumgebung
 Netzwerkzugriff auf den konfigurierten Port (Standard: 8443)
 
 
@@ -18,14 +18,14 @@ Installation
 -------------------------------------------------
 Repository klonen oder Projektdateien bereitstellen
 Abhängigkeiten installieren
-Sicherstellen, dass Python korrekt installiert ist
+In der config.js muss die Server IP eingetragen werden. (Standard localhost)
 
 
 Start der Webanwendung
 -------------------------------------------------
 Die Anwendung wird im Terminal gestartet:
 Im Terminal den Ordner klassenlisten-digitalisierung öffnen
-python -m app
+Ausführen mit "python -m app"
 Nach dem Start ist die Weboberfläche erreichbar über:
 http://<server-ip>:8443
 
@@ -33,13 +33,12 @@ http://<server-ip>:8443
 Konfiguration
 -------------------------------------------------
 Für Konfigurationsänderungen und administrative Aufgaben steht ein separates Konfigurationstool zur Verfügung:
-python -m src.configurator
+"python -m src.configurator"
 
 Mit diesem Tool können folgende Einstellungen vorgenommen werden:
 Festlegen oder Ändern des Pfads zur Datenquelle
 Anpassung der Formatierung der Datenquelle
 Ändern von Passwörtern
-Benutzerkonten und Ersteinrichtung
 
 
 Benutzer
@@ -50,7 +49,6 @@ Lehrer
 
 Wichtiger Hinweis:
 Die zugehörigen Passwörter müssen bei der Ersteinrichtung der Anwendung zwingend geändert werden.
-Der Betrieb der Anwendung mit den Standardpasswörtern stellt ein erhebliches Sicherheitsrisiko dar.
 
 Die Passwortänderung erfolgt über das Konfigurationstool:
 python -m src.configurator
