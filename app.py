@@ -217,6 +217,7 @@ def export():
     return send_file(output, download_name="export.xlsx", as_attachment=True)
 
 if __name__ == '__main__':
-#     app.run(host='0.0.0.0', debug=True, port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
+    #Für HTTPS entkommentieren
+#     app.run(host='0.0.0.0', debug=False, port=8443,ssl_context=("src/app/certificate/cert.pem", "src/app/certificate/key.pem")
 #     )
-    app.run(host='0.0.0.0', debug=True, port=8443)
+    app.run(host='0.0.0.0', debug=False, port=8443)
