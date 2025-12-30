@@ -53,7 +53,6 @@ def save(target_school_class: str, state: str, term: str):
         data["className"] = []
 
     school_classes = data["className"]
-    print(school_classes)
 
     #structure for new entry
     new_entry = {
@@ -66,7 +65,6 @@ def save(target_school_class: str, state: str, term: str):
 
     #changes entry if one exsists
     for school_class_json in school_classes:
-        print(school_class_json["className"])
         if (school_class_json["className"] == target_school_class and
             school_class_json["savedHalfYear"] == term):
             school_class_json["checkboxState"] = state
@@ -96,7 +94,6 @@ def file_hash(path):
         for chunk in iter(lambda: f.read(4096), b""):
             h.update(chunk)
 
-    print(h.hexdigest())
     return h.hexdigest()
 
 def check_and_reset():
@@ -136,7 +133,6 @@ def update_save_file(current_hash):
 
 #resets all progress
 def reset():
-    print("file was reset")
     os.makedirs(os.path.dirname(progress_path), exist_ok=True)
     with open(progress_path, "w", encoding="utf-8") as f:
         json.dump({"className": []}, f, indent=4)
