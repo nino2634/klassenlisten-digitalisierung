@@ -24,6 +24,7 @@ Sicherstellen, dass Python korrekt installiert ist
 Start der Webanwendung
 -------------------------------------------------
 Die Anwendung wird im Terminal gestartet:
+Im Terminal den Ordner klassenlisten-digitalisierung öffnen
 python -m app
 Nach dem Start ist die Weboberfläche erreichbar über:
 http://<server-ip>:8443
