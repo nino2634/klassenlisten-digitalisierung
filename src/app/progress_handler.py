@@ -138,5 +138,4 @@ def reset():
         json.dump({"className": []}, f, indent=4)
 
 #do setup on initialization
-check_and_reset()
 setup()
