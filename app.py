@@ -24,7 +24,7 @@ app = Flask(__name__, static_url_path="/static", static_folder="static")
 CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": "*"}})
 
 # secret key for authentication
-app.secret_key = "supergeheim-und-einzigartig"  
+app.secret_key = "010011010100100101001110010001010100001101010010010000010100011001010100"  
 classes = get_classes("")
 
 
@@ -110,7 +110,7 @@ def get_school_classes():
 @app.route("/api/load_progress",methods=["POST"])
 @login_required  
 def load_progress():
-    #progress_handler.check_and_reset()
+    progress_handler.check_and_reset()
     data = request.get_json()
     term = data.get("savedHalfYear")
     print(term)
@@ -131,9 +131,8 @@ def save_progress():
     school_class = data.get("className")
     half_year = data.get("savedHalfYear")
     state = str(data.get("checkboxState"))
-    print(school_class)
-    print(half_year)
-    print(state)
+
+
     if not school_class:
         return jsonify({"error": "Missing argument: className"}), 400
     if not state:

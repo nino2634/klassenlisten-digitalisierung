@@ -29,7 +29,8 @@ DEFAULT_CONFIG = {
     "teacher_column_name": "Lehrer",
     "classes_column_name": "Klasse(n)",
     "odd_week_value": "u-Wo",
-    "even_week_value": "g-Wo"
+    "even_week_value": "g-Wo",
+    "last_hash_value": "0"
 }
 
 def create_path(path, file_name):
