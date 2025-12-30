@@ -10,7 +10,7 @@ Sie wird als Webanwendung betrieben und über einen Python-Webserver gestartet.
 Voraussetzungen
 -------------------------------------------------
 Python, siehe requirments.txt
-Zugriff auf einen Webserver bzw. eine Serverumgebung
+Zugriff auf einen eine Serverumgebung
 Netzwerkzugriff auf den konfigurierten Port (Standard: 8443)
 
 
