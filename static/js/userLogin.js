@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 // Erfolgreich → Weiterleitung
-                sessionStorage.setItem('userData', JSON.stringify(data));
+                localStorage.setItem('userData', JSON.stringify(data));
                 window.location.href = "/classView";
 
             } else {

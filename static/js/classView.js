@@ -1,8 +1,16 @@
 import {getClassList, searchClass} from "./getClassList.js";
 import {API_BASE_URL} from "./config.js";
 
-const userData = JSON.parse(sessionStorage.getItem('userData')).state
-const savedHalfYear = sessionStorage.getItem('selectedHalfYear');
+const userDataRaw = localStorage.getItem('userData');
+const userData = userDataRaw ? JSON.parse(userDataRaw).state : null;
+
+// Beim Browser schließen, storage mit userData entfernen (teacher/lusd)
+window.addEventListener('beforeunload', () => {
+    localStorage.removeItem('userData');
+});
+
+const dropdownItems = document.querySelectorAll('#halfYearDropdown .dropdown-item');
+const savedHalfYear = sessionStorage.getItem('selectedHalfYear') || (dropdownItems[0]?.dataset.value || "0");
 
 document.addEventListener('DOMContentLoaded', async function () {
     await getClassList();
@@ -27,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const checkboxState = checkbox.checked;
                 const className = el.firstElementChild.innerText;
                 const savedHalfYear = sessionStorage.getItem('selectedHalfYear');
-                console.log(savedHalfYear);
                 saveProgressState(checkboxState, className, savedHalfYear);
             });
 
