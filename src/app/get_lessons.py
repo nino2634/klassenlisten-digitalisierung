@@ -8,7 +8,7 @@ from .config.config_handler import load_config_data
 # encode ist für Windows Kompatibilität notwendig, ansonsten gibt es Probleme mit Umlauten
 classes_column_name = load_config_data("classes_column_name")
 weekly_hrs_column_name = load_config_data("weekly_hrs_column_name")
-half_year_column_name = load_config_data("half_year_column_name").encode("latin-1").decode("utf-8")
+half_year_column_name = load_config_data("half_year_column_name")#.encode("latin-1").decode("utf-8")
 subject_column_name = load_config_data("subject_column_name")
 teacher_column_name = load_config_data("teacher_column_name")
 
