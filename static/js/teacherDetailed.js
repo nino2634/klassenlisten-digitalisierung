@@ -146,13 +146,20 @@ async function exportExcel() {
     const modal = bootstrap.Modal.getInstance(modalEl);
     if (modal) modal.hide();
 }
+const params = new URLSearchParams(window.location.search);
+const class_name = params.get("class_name");
 
 function exportPDF() {
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF("landscape", "mm", "a4");
 
+    const title = `Detailansicht ${class_name}`;
     const rows = [];
     const tableRows = document.querySelectorAll("#detailBody tr");
+
+    pdf.text(title, pdf.internal.pageSize.getWidth() / 2, 20, {
+        align: "center"
+    });
 
     tableRows.forEach(tr => {
         const cells = tr.querySelectorAll("td");
@@ -207,7 +214,6 @@ function exportPDF() {
             }
         }
     });
-
 
     pdf.save("export.pdf");
 }
