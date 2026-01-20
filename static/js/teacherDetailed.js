@@ -16,19 +16,47 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("❌ Fehlende Parameter in der URL.");
         return;
     }
-
+    const tableBody = document.getElementById('detailBody');
     try {
+        tableBody.innerHTML = `
+        <tr>
+          <td colspan="6" class="text-center py-4">
+            ${spinner()}
+          </td>
+        </tr>
+        `;
         const data = await getTeacherDetailedData(class_name, half_year);
+        hideSpinner(tableBody)
         renderTableDetailed(data, class_name);
     } catch (err) {
+        hideSpinner(tableBody);
+        tableBody.innerHTML = `
+        <tr>
+            <td colspan="6" class="text-danger text-center">
+                Fehler beim Laden der Daten
+            </td>
+        </tr>
+    `;
         console.error("Fehler beim Laden der Detaildaten:", err);
     }
 });
 
+function spinner() {
+    return `
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    `;
+}
+
+function hideSpinner(tableBody) {
+    tableBody.innerHTML = "";
+}
+
 function renderTableDetailed(data, class_name) {
     const tbody = document.getElementById("detailBody");
     const classNameHeader = document.getElementById("header_detailed_class_name");
-    classNameHeader.innerHTML += ' ' + class_name ;
+    classNameHeader.textContent = 'Detailansicht ' + class_name ;
     if (!tbody) return;
 
     tbody.innerHTML = "";
@@ -100,7 +128,7 @@ async function exportExcel() {
         return;
     }
 
-    // 🔽 Datei-Download erzwingen
+    // Datei-Download erzwingen
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
 
