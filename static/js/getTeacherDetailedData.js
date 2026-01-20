@@ -46,7 +46,6 @@ document.addEventListener("click", function(e) {
 });
 
 export async function getTeacherDetailedData(class_name, half_year) {
-    console.log("klasse: " + class_name + " halbjahr: " + half_year);
     try {
         const response = await fetch(
             `${API_BASE_URL}/api/classViewDetailed?class_name=${encodeURIComponent(class_name)}&half_year=${encodeURIComponent(half_year)}`

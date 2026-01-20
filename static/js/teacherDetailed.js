@@ -19,14 +19,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         const data = await getTeacherDetailedData(class_name, half_year);
-        renderTableDetailed(data);
+        renderTableDetailed(data, class_name);
     } catch (err) {
         console.error("Fehler beim Laden der Detaildaten:", err);
     }
 });
 
-function renderTableDetailed(data) {
+function renderTableDetailed(data, class_name) {
     const tbody = document.getElementById("detailBody");
+    const classNameHeader = document.getElementById("header_detailed_class_name");
+    classNameHeader.innerHTML += ' ' + class_name ;
     if (!tbody) return;
 
     tbody.innerHTML = "";
