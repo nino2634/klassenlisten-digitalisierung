@@ -1,15 +1,15 @@
 README 
 Klassenlisten-Digitalisierungsanwendung
 
-Übersicht
+Ãœbersicht
 -------------------------------------------------
 Diese Anwendung dient der Digitalisierung und Verwaltung von Klassenlisten.
-Sie wird als Webanwendung betrieben und über einen Python-Webserver gestartet.
+Sie wird als Webanwendung betrieben und Ã¼ber einen Python-Webserver gestartet.
 
 
 Voraussetzungen
 -------------------------------------------------
-Python, siehe requirments.txt
+Python, siehe requirements.txt
 Zugriff auf eine Serverumgebung
 Netzwerkzugriff auf den konfigurierten Port (Standard: 8443)
 
@@ -17,51 +17,55 @@ Netzwerkzugriff auf den konfigurierten Port (Standard: 8443)
 Installation
 -------------------------------------------------
 Repository klonen oder Projektdateien bereitstellen
-Abhängigkeiten installieren
+AbhÃ¤ngigkeiten installieren
 In der config.js muss die Server IP eingetragen werden. (Standard localhost)
-
+Windows: 
+    Kommentar in src/app/get_lessons Zeile 11 vor ".encode..." entfernen.
+Linux: 
+    Kommentar in src/app/get_lessons Zeile 11 vor ".encode..." hinzufÃ¼gen.
 
 Start der Webanwendung
 -------------------------------------------------
 Die Anwendung wird im Terminal gestartet:
-Im Terminal den Ordner klassenlisten-digitalisierung öffnen
-Ausführen mit "python -m app"
-Nach dem Start ist die Weboberfläche erreichbar über:
+Im Terminal den Ordner klassenlisten-digitalisierung Ã¶ffnen
+AusfÃ¼hren mit "python -m app" aus der Root des Projektordners.
+Nach dem Start ist die WeboberflÃ¤che erreichbar Ã¼ber:
 http://<server-ip>:8443
 
 
 Konfiguration
 -------------------------------------------------
-Für Konfigurationsänderungen und administrative Aufgaben steht ein separates Konfigurationstool zur Verfügung:
+FÃ¼r KonfigurationsÃ¤nderungen und administrative Aufgaben steht ein separates Konfigurationstool zur VerfÃ¼gung:
 "python -m src.configurator"
 
-Mit diesem Tool können folgende Einstellungen vorgenommen werden:
-Festlegen oder Ändern des Pfads zur Datenquelle
+Mit diesem Tool kÃ¶nnen folgende Einstellungen vorgenommen werden:
+Festlegen oder Ã¤ndern des Pfads zur Datenquelle
 Anpassung der Formatierung der Datenquelle
-Ändern von Passwörtern
+Ã„ndern von PasswÃ¶rtern
 
 
 Benutzer
 -------------------------------------------------
-Die Anwendung verfügt standardmäßig über die folgenden Benutzerkonten:
+Die Anwendung verfÃ¼gt standardmÃ¤ÃŸig Ã¼ber die folgenden Benutzerkonten:
 LUSD
 Lehrer
 
 Wichtiger Hinweis:
-Die zugehörigen Passwörter müssen bei der Ersteinrichtung der Anwendung zwingend geändert werden.
+Die zugehÃ¶rigen PasswÃ¶rter mÃ¼ssen bei der Ersteinrichtung der Anwendung zwingend geÃ¤ndert werden.
 
-Die Passwortänderung erfolgt über das Konfigurationstool:
+Die PasswortÃ¤nderung erfolgt Ã¼ber das Konfigurationstool.
+AusgefÃ¼hrt aus Root des Projektordners:
 python -m src.configurator
 
 
 Netzwerk und Protokoll
 -------------------------------------------------
-Standardmäßig läuft die Anwendung über HTTP
+StandardmÃ¤ÃŸig lÃ¤uft die Anwendung Ã¼ber HTTP
 Verwendeter Port: 8443
 Umstellung auf HTTPS
 
-Um die Anwendung über HTTPS mit selbstsignierten Zertifikaten zu betreiben:
-Datei app.py öffnen
+Um die Anwendung Ã¼ber HTTPS mit selbstsignierten Zertifikaten zu betreiben:
+Datei app.py Ã¶ffnen
 Zeile 215 entkommentieren
 Zeile 217 kommentieren
 Anwendung neu starten
